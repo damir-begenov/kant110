@@ -766,7 +766,7 @@ public class MyService {
                 addressInfo.setRnRegAddress(address.get(0).getRnAddressRu());
             }
             System.out.println(addressInfo.getRnRegAddress());
-            List<MvFlAddress> mvFlAddresses = mvFlAddressRepository.getMvFlAddressByRnAddress(addressInfo.getRnRegAddress());
+            List<MvFlAddress> mvFlAddresses = mvFlAddressRepository.getMvFlAddressByRnAddress(addressInfo.getRnRegAddress(), iin);
             List<MvFl> fls = new ArrayList<>();
             for (MvFlAddress ad : mvFlAddresses) {
                 try {
@@ -1356,6 +1356,9 @@ public class MyService {
                         .distinct()
                         .collect(Collectors.toList());
 
+                double knp010sum = 0.0;
+                double knp012sum = 0.0;
+
                 for (String year : distinctPayDates) {
                     if (year != null) {
                         name = name + year.replace(".0", "") + ", ";
@@ -1372,7 +1375,7 @@ public class MyService {
 
                         pensionListEntity.setSum010(knp010);
 
-                        name = name + "Общая сумма (010): " + knp010;
+                        knp010sum = knp010sum + knp010;
 
                     } catch (Exception e) {
 
@@ -1384,15 +1387,14 @@ public class MyService {
                         .sum();
 
                         pensionListEntity.setSum012(knp012);
-                        name = name + "Общая сумма (012): " + knp012;
+                        knp012sum = knp012sum + knp012;
                     } catch (Exception e) {
 
                     }
-
-
                     pensions.add(pensionListEntity);
                     group.add(pensionListEntity);
                 }
+                name = name + "общая сумма КНП(010): " + knp010sum + ", общая сумма КНП(012): " + knp012sum;
                 obj.setName(name);
                 obj.setList(group);
                 result.add(obj);

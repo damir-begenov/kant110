@@ -6,12 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8d850808-ce4f-49b1-890f-5cdffe4168fe" name="Changes" comment="aadx">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsDossier/ChangeFio.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsDossier/ChangeFio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/FlPensionContrRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/FlPensionContrRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/FlRiskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/FlRiskServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsDossier/MvFl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsDossier/MvFl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/MvFlAddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/MvFlAddressRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/MyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/MyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/modelsDossier/ChangeFio.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/modelsDossier/ChangeFio.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/MyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/MyService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,7 +183,7 @@
       <workItem from="1722228963502" duration="5693000" />
       <workItem from="1722337947445" duration="17208000" />
       <workItem from="1722357772121" duration="5979000" />
-      <workItem from="1722408625529" duration="2169000" />
+      <workItem from="1722408625529" duration="2712000" />
     </task>
     <task id="LOCAL-00001" summary="jk">
       <option name="closed" value="true" />

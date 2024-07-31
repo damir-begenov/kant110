@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "mv_fl_iin_2", schema = "imp_kfm_fl")
+@Table(name = "mv_fl", schema = "imp_kfm_fl")
 
 public class MvFl {
     @Nullable
