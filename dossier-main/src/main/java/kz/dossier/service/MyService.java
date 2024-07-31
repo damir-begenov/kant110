@@ -1339,6 +1339,8 @@ public class MyService {
         
             List<PensionListDTO> pensions = new ArrayList<>();
             List<PensionGroupDTO> result = new ArrayList<>();
+            DecimalFormat df = new DecimalFormat("#");
+            df.setMaximumFractionDigits(0);
             for (String bin : companyBins) {
                 List<Map<String, Object>> fl_pension_contrss = new ArrayList<>();
                 fl_pension_contrss = flPensionContrRepo.getAllByCompanies(iin,bin);
@@ -1394,7 +1396,7 @@ public class MyService {
                     pensions.add(pensionListEntity);
                     group.add(pensionListEntity);
                 }
-                name = name + "общая сумма КНП(010): " + knp010sum + ", общая сумма КНП(012): " + knp012sum;
+                name = name + "общая сумма КНП(010): " + df.format(knp010sum) + ", общая сумма КНП(012): " + df.format(knp012sum);
                 obj.setName(name);
                 obj.setList(group);
                 result.add(obj);
