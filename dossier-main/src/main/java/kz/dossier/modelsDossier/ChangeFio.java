@@ -9,11 +9,11 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "change_fio", schema = "imp_zags")
 public class ChangeFio {
-    @Id
     private String iin;
 
     @Column(name = "SOURCE_INFO")
     private String source;
+    @Id
 
     private String number_akt;
 

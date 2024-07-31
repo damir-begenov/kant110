@@ -1372,6 +1372,8 @@ public class MyService {
 
                         pensionListEntity.setSum010(knp010);
 
+                        name = name + "Общая сумма (010): " + knp010;
+
                     } catch (Exception e) {
 
                     }
@@ -1382,6 +1384,7 @@ public class MyService {
                         .sum();
 
                         pensionListEntity.setSum012(knp012);
+                        name = name + "Общая сумма (012): " + knp012;
                     } catch (Exception e) {
 
                     }

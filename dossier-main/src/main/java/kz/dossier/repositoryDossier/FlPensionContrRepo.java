@@ -55,15 +55,15 @@ public interface FlPensionContrRepo extends JpaRepository<FlPensionContr, Long> 
             "    SUM(\"AMOUNT\") AS \"AMOUNT\"\n" +
             "    FROM imp_kfm_fl.fl_pension_contr \n" +
             "    WHERE \"IIN\" = ?1 and \"P_RNN\" = ?2 \n" +
-            "    GROUP BY EXTRACT(YEAR FROM \"PAY_DATE\"), \"P_NAME\", \"KNP\"  ", nativeQuery = true)
+            "    GROUP BY EXTRACT(YEAR FROM \"PAY_DATE\"), \"P_NAME\", \"KNP\" ORDER BY EXTRACT(YEAR FROM \"PAY_DATE\") DESC", nativeQuery = true)
     List<Map<String,Object>> getAllByCompanies(String iin , String bin);
 
     @Query(value = "SELECT TO_CHAR(DATE_TRUNC('month', \"PAY_DATE\"), 'YYYY-MM') AS PAY_MONTH,\"P_NAME\",\n" + //
                     "       SUM(\"AMOUNT\") AS \"AMOUNT\"\n" + //
                     "FROM imp_kfm_fl.fl_pension_contr\n" + //
-                    "WHERE \"IIN\" = ?1 and \"P_RNN\" = ?2\n" + //
+                    "WHERE \"IIN\" = ?1 and \"KNP\" = '010' and \"P_RNN\" = ?2\n" + //
                     "AND EXTRACT(YEAR FROM \"PAY_DATE\") = ?3\n" + //
-                    "GROUP BY TO_CHAR(DATE_TRUNC('month', \"PAY_DATE\"), 'YYYY-MM'), \"P_NAME\"", nativeQuery = true)
+                    "GROUP BY TO_CHAR(DATE_TRUNC('month', \"PAY_DATE\"), 'YYYY-MM'), \"P_NAME\" ORDER BY TO_CHAR(DATE_TRUNC('month', \"PAY_DATE\") DESC", nativeQuery = true)
         List<Map<String,Object>> getAllByCompanies(String iin, String bin, int year);
 
     @Query(value = "SELECT distinct (extract(year from \"PAY_DATE\"))\n" +

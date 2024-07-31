@@ -89,6 +89,10 @@ public class FlRiskServiceImpl {
             flRiskDto.setCriminals(criminalsRepo.getcriminalsByByIIN(iin));
         } catch (Exception e) {
             // Catch block left empty
+        }  try {
+            flRiskDto.setBeneficiariesLists(beneficiariesListRepo.getBenByIIN(iin));
+        } catch (Exception e) {
+            // Catch block left empty
         }
         try {
             flRiskDto.setUnemployeds(unemployedRepo.getUnemployedByIIN(iin));
@@ -204,6 +208,7 @@ public class FlRiskServiceImpl {
                 (Optional.ofNullable(flRiskDto.getDrugAddicts()).orElse(Collections.emptyList()).size() > 0 ? 1 : 0) +
                 (Optional.ofNullable(flRiskDto.getWantedListEntities()).orElse(Collections.emptyList()).size() > 0 ? 1 : 0) +
                 (Optional.ofNullable(flRiskDto.getOpgEntities()).orElse(Collections.emptyList()).size() > 0 ? 1 : 0) +
+                (Optional.ofNullable(flRiskDto.getBeneficiariesLists()).orElse(Collections.emptyList()).size() > 0 ? 1 : 0) +
                 (Optional.ofNullable(flRiskDto.getOmns()).orElse(Collections.emptyList()).size() > 0 ? 1 : 0) +
                 (Optional.ofNullable(flRiskDto.getSudispols()).orElse(Collections.emptyList()).size() > 0 ? 1 : 0) +
                 (Optional.ofNullable(flRiskDto.getConvictsJustifieds()).orElse(Collections.emptyList()).size() > 0 ? 1 : 0) +
