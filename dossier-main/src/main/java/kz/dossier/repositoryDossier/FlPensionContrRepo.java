@@ -63,7 +63,7 @@ public interface FlPensionContrRepo extends JpaRepository<FlPensionContr, Long> 
                     "FROM imp_kfm_fl.fl_pension_contr\n" + //
                     "WHERE \"IIN\" = ?1 and \"KNP\" = '010' and \"P_RNN\" = ?2\n" + //
                     "AND EXTRACT(YEAR FROM \"PAY_DATE\") = ?3\n" + //
-                    "GROUP BY TO_CHAR(DATE_TRUNC('month', \"PAY_DATE\"), 'YYYY-MM'), \"P_NAME\" ORDER BY TO_CHAR(DATE_TRUNC('month', \"PAY_DATE\") DESC", nativeQuery = true)
+                    "GROUP BY TO_CHAR(DATE_TRUNC('month', \"PAY_DATE\"), 'YYYY-MM'), \"P_NAME\" ORDER BY PAY_MONTH DESC", nativeQuery = true)
         List<Map<String,Object>> getAllByCompanies(String iin, String bin, int year);
 
     @Query(value = "SELECT distinct (extract(year from \"PAY_DATE\"))\n" +
