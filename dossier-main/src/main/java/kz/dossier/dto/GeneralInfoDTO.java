@@ -70,7 +70,7 @@ public class GeneralInfoDTO {
     }
 
     private List<Lawyers> lawyers;
-    private List<ChangeFioDTO> changeFio;
+    private List<ChangeFio> changeFio;
 
     private List<Pdl> pdls;
 
@@ -91,13 +91,11 @@ public class GeneralInfoDTO {
         this.pdls = pdls;
     }
 
-    public List<ChangeFioDTO> getChangeFio() {
+    public List<ChangeFio> getChangeFio() {
         return changeFio;
     }
 
-
-
-    public void setChangeFio(List<ChangeFioDTO> changeFio) {
+    public void setChangeFio(List<ChangeFio> changeFio) {
         this.changeFio = changeFio;
     }
 

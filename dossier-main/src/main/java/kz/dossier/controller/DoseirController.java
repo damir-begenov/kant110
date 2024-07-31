@@ -222,7 +222,7 @@ public class DoseirController {
 
     @GetMapping("/iin")
     public List<SearchResultModelFL> getByIIN(@RequestParam String iin, @RequestParam String email) throws IOException {
-        List<SearchResultModelFL> fl = myService.getByIIN_photo(iin);
+//        List<SearchResultModelFL> fl = myService.getByIIN_photo(iin);
         log log = new log();
         log.setDate(LocalDateTime.now());
         log.setObwii("Искал в досье " + email + ": " + iin);

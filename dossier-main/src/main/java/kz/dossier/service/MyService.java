@@ -1145,25 +1145,25 @@ public class MyService {
             System.out.println(e);
         }
         try {
-            List<ChangeFioDTO> changeFioDTOS = new ArrayList<>();
+//            List<ChangeFioDTO> changeFioDTOS = new ArrayList<>();
             List<ChangeFio> changeFio = changeFioRepo.getByIin(iin);
-            changeFio.forEach(x -> {
-                ChangeFioDTO obj = new ChangeFioDTO();
-                obj.setDateOfChange(x.getTo_date());
-                String name = "";
-                if (x.getSurname_before() != null) {
-                    name = x.getSurname_before() + " ";
-                }
-                if (x.getName_before() != null) {
-                    name = x.getName_before() + " ";
-                }
-                if (x.getSecondname_before() != null) {
-                    name = x.getSecondname_before();
-                }
-                obj.setHistoricalFIO(name);
-                obj.setReasonOfChange(x.getRemarks() != null ? x.getRemarks() : "");
-            });
-            generalInfoDTO.setChangeFio(changeFioDTOS);
+//            changeFio.forEach(x -> {
+//                ChangeFioDTO obj = new ChangeFioDTO();
+//                obj.setDateOfChange(x.getTo_date());
+//                String name = "";
+//                if (x.getSurname_before() != null) {
+//                    name = x.getSurname_before() + " ";
+//                }
+//                if (x.getName_before() != null) {
+//                    name = x.getName_before() + " ";
+//                }
+//                if (x.getSecondname_before() != null) {
+//                    name = x.getSecondname_before();
+//                }
+//                obj.setHistoricalFIO(name);
+//                obj.setReasonOfChange(x.getRemarks() != null ? x.getRemarks() : "");
+//            });
+            generalInfoDTO.setChangeFio(changeFio);
         } catch (Exception e) {
             System.out.println(e);
         }
