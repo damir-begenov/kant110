@@ -1,6 +1,6 @@
-/Users/damirbegenov/Desktop/farhatMultiV1/dossier-multi-test/dossier-app/src/main/java/kz/dossier/DossierApplication.java
-/Users/damirbegenov/Desktop/farhatMultiV1/dossier-multi-test/dossier-app/src/main/java/kz/dossier/config/DossierDataSourceConfiguration.java
-/Users/damirbegenov/Desktop/farhatMultiV1/dossier-multi-test/dossier-app/src/main/java/kz/dossier/config/MainDataSourceConfiguration.java
-/Users/damirbegenov/Desktop/farhatMultiV1/dossier-multi-test/dossier-app/src/main/java/kz/dossier/config/Neo4j1Configuration.java
-/Users/damirbegenov/Desktop/farhatMultiV1/dossier-multi-test/dossier-app/src/main/java/kz/dossier/config/Neo4j2Configuration.java
-/Users/damirbegenov/Desktop/farhatMultiV1/dossier-multi-test/dossier-app/src/main/java/kz/dossier/config/WebSecurity.java
+/Users/damirbegenov/Desktop/kantortemir/kantorBY/dossier-app/src/main/java/kz/dossier/DossierApplication.java
+/Users/damirbegenov/Desktop/kantortemir/kantorBY/dossier-app/src/main/java/kz/dossier/config/DossierDataSourceConfiguration.java
+/Users/damirbegenov/Desktop/kantortemir/kantorBY/dossier-app/src/main/java/kz/dossier/config/MainDataSourceConfiguration.java
+/Users/damirbegenov/Desktop/kantortemir/kantorBY/dossier-app/src/main/java/kz/dossier/config/Neo4j1Configuration.java
+/Users/damirbegenov/Desktop/kantortemir/kantorBY/dossier-app/src/main/java/kz/dossier/config/Neo4j2Configuration.java
+/Users/damirbegenov/Desktop/kantortemir/kantorBY/dossier-app/src/main/java/kz/dossier/config/WebSecurity.java
