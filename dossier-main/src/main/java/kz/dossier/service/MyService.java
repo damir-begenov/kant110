@@ -180,6 +180,8 @@ public class MyService {
     private QoldauRepo qoldauRepo;
 
 
+
+
     public ULGeneralInfoDTO getUlGeneral(String bin){
         int total = 6;
         int actual = 0;

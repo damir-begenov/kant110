@@ -5,7 +5,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "mv_auto_fl", schema = "ser")
+@Table(name = "mv_auto_fl", schema = "imp_kfm_db")
 public class MvAutoFl {
 
     private String iin;
@@ -29,6 +29,8 @@ public class MvAutoFl {
     private String release_year_tc;
     private boolean is_registered;
     private String special_marks;
+
+
 
     public String getIin() {
         return iin;

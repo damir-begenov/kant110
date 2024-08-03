@@ -13,13 +13,11 @@ import kz.dossier.repositoryDossier.NewPhotoRepo;
 import kz.dossier.security.models.log;
 import kz.dossier.security.repository.LogRepo;
 import kz.dossier.security.services.LogsService;
-import kz.dossier.service.FlRiskServiceImpl;
-import kz.dossier.service.MyService;
-import kz.dossier.service.RnService;
-import kz.dossier.service.ULAdditionalService;
-import kz.dossier.service.UlRiskServiceImpl;
+import kz.dossier.service.*;
 import kz.dossier.tools.DocxGenerator;
 import kz.dossier.tools.PdfGenerator;
+import kz.dossier.tools.ULExportPDFService;
+import kz.dossier.tools.UlDocxGenerator;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -65,10 +63,13 @@ public class DoseirController {
     @Autowired
     RnService rnService;
     @Autowired
-    ULAdditionalService ulAdditionalService;
+    ULService ulAdditionalService;
     @Autowired
     LogsService logsService;
-
+    @Autowired
+    ULExportPDFService ulExportPDFService;
+    @Autowired
+    UlDocxGenerator ulDocxGenerator;
     @GetMapping("/additionalInfoUL")
     public ULAdditionalInfoDTO getAdditionalUL(String bin, Principal principal) {
         String email = principal.getName();
@@ -315,20 +316,18 @@ public class DoseirController {
         String headerkey = "Content-Disposition";
         String headervalue = "attachment; filename=doc" + ".pdf";
         response.setHeader(headerkey, headervalue);
-        NodesUL r =  myService.getNodeUL(bin);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        pdfGenerator.generate(r, baos);
+        ulExportPDFService.generate(bin, baos);
         return baos.toByteArray();
     }
     @GetMapping(value = "/downloadUlDoc/{bin}")
-    public byte[] generateUlWordFile(HttpServletResponse response, @PathVariable("bin")String bin) throws IOException, DocumentException {
+    public byte[] generateUlWordFile(HttpServletResponse response, @PathVariable("bin")String bin) throws IOException {
         response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
         String headerkey = "Content-Disposition";
         String headervalue = "attachment; filename=document.docx";
         response.setHeader(headerkey,headervalue);
-        NodesUL r =  myService.getNodeUL(bin);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        docxGenerator.generateUl(r, baos);
+        ulDocxGenerator.generateUl(bin, baos);
         return baos.toByteArray();
     }
 }

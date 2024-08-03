@@ -14,7 +14,6 @@ public class Adm {
     private String two;
     @Nullable
     private String org_identify_crime;
-    @Nullable
     private String authority_detected;
     @Nullable
     private String divisions_ovd;
@@ -23,11 +22,9 @@ public class Adm {
 
     @Nullable
     private String language_prod;
-    @Nullable
     private String reg_date;
     @Id
 
-    @Nullable
     private String protocol_num;
     @Nullable
     private String protocol_date;
@@ -83,7 +80,6 @@ public class Adm {
     @Nullable
 
     private String iin;
-    @Nullable
     private String work_place;
     @Nullable
     private String phone_num;
@@ -99,19 +95,14 @@ public class Adm {
     private String vehicle_brand;
     @Nullable
     private String state_auto_num;
-    @Nullable
     private String qualification;
-    @Nullable
     private String enforcement;
     @Nullable
     private String id;
     @Nullable
     private String maim_measure;
-    @Nullable
     private String end_date;
-    @Nullable
     private String fine_amount;
-    @Nullable
     private String teminate_reason;
     @Nullable
     private String source;

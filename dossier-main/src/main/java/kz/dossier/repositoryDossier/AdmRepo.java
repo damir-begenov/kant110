@@ -12,4 +12,7 @@ public interface AdmRepo extends JpaRepository<Adm, Long> {
     @Query(value= "select * from imp_kfm_fl.adm  where bin = ?1 ", nativeQuery = true)
     List<Adm> getUsersByLikeBin(String iin);
 
+    @Query(value = "select name_ru from dictionary.d_adm_qualification where code = ?1", nativeQuery = true)
+    String findQualificationByCode(String code);
+
 }

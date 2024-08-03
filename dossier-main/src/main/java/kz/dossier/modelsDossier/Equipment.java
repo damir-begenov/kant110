@@ -69,11 +69,13 @@ public class Equipment {
     @Nullable
     private Float power_hp;
     @Nullable
-    private boolean is_first_reg;
+    private Boolean is_first_reg;
     @Nullable
-    private boolean is_pledge;
+    private Boolean is_pledge;
     @Nullable
-    private boolean is_arrest;
+    private Boolean is_arrest;
+
+
 
     @Nullable
     public String getOwner_iin_bin() {
@@ -309,27 +311,27 @@ public class Equipment {
         this.power_hp = power_hp;
     }
 
-    public boolean isIs_first_reg() {
+    public Boolean isIs_first_reg() {
         return is_first_reg;
     }
 
-    public void setIs_first_reg(boolean is_first_reg) {
+    public void setIs_first_reg(Boolean is_first_reg) {
         this.is_first_reg = is_first_reg;
     }
 
-    public boolean isIs_pledge() {
+    public Boolean isIs_pledge() {
         return is_pledge;
     }
 
-    public void setIs_pledge(boolean is_pledge) {
+    public void setIs_pledge(Boolean is_pledge) {
         this.is_pledge = is_pledge;
     }
 
-    public boolean isIs_arrest() {
+    public Boolean isIs_arrest() {
         return is_arrest;
     }
 
-    public void setIs_arrest(boolean is_arrest) {
+    public void setIs_arrest(Boolean is_arrest) {
         this.is_arrest = is_arrest;
     }
 }

@@ -1,6 +1,7 @@
 package kz.dossier.repositoryDossier;
 
 import kz.dossier.modelsDossier.MvFl;
+import org.apache.batik.css.engine.value.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -23,4 +24,7 @@ public interface MvFlRepo extends JpaRepository<MvFl, Long> {
 
     @Query(value= "select * from imp_kfm_fl.mv_fl_iin_2 mv_fl0_ where first_name like ?1 and  patronymic like ?2 and last_name like ?3", nativeQuery = true)
     List<MvFl> getUsersByFIO(String name, String patronimic, String last);
+
+    @Query(value = "SELECT CONCAT(last_name, ' ', first_name, ' ', patronymic) FROM imp_kfm_fl.mv_fl where iin = ?1", nativeQuery = true)
+    String getNameByIIN(String iin);
 }
