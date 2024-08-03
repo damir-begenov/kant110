@@ -4,55 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d850808-ce4f-49b1-890f-5cdffe4168fe" name="Changes" comment="aadx">
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/AccountantDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/AutoTransportDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/CommodityProducersDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/ContactDetailDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/DubaiRnDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/EquipmentDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/FPGDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/MvAutoDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/MvTaxDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/PdlDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/PensionDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/RealEstateRegistryDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/RegAddressULDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/SameULRegAddressDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/ULDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsDossier/DubaiRn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsDossier/Fno240.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsDossier/Fno250.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsDossier/Fno250Avto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsDossier/Fno250Company.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsDossier/Fno250Deposit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsDossier/MvTaxByBin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/DubaiRnRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/Fno240Repo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/Fno250AvtoRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/Fno250CompanyRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/Fno250DepositRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/Fno250Repo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/MvTaxByBinRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/TaxService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/TransportService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/tools/ULExportPDFService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/tools/UlDocxGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="8d850808-ce4f-49b1-890f-5cdffe4168fe" name="Changes" comment="Pdf and Docx got ul are made">
+      <change afterPath="$PROJECT_DIR$/pandora_backend.service" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-app/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-app/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/controller/DoseirController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/controller/DoseirController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsDossier/Equipment.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsDossier/Equipment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsDossier/MvAutoFl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsDossier/MvAutoFl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsDossier/WaterTransport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsDossier/WaterTransport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsRisk/Adm.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsRisk/Adm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/AdmRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/AdmRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/FlPensionContrRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/FlPensionContrRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/MvAutoFlRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/MvAutoFlRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/MvFlRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/MvFlRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/MyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/MyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/RnService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/RnService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/ULAdditionalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/ULService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/controller/DoseirController.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/controller/DoseirController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +185,7 @@
       <workItem from="1722337947445" duration="17208000" />
       <workItem from="1722357772121" duration="5979000" />
       <workItem from="1722408625529" duration="4897000" />
-      <workItem from="1722591724571" duration="34658000" />
+      <workItem from="1722591724571" duration="35848000" />
     </task>
     <task id="LOCAL-00001" summary="jk">
       <option name="closed" value="true" />
@@ -256,7 +211,23 @@
       <option name="project" value="LOCAL" />
       <updated>1722265586788</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Pdf and Docx got ul are made">
+      <option name="closed" value="true" />
+      <created>1722715558302</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1722715558303</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Pdf and Docx got ul are made">
+      <option name="closed" value="true" />
+      <created>1722715630505</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1722715630505</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -289,7 +260,8 @@
     <MESSAGE value="jk" />
     <MESSAGE value="Some Changes from" />
     <MESSAGE value="aadx" />
-    <option name="LAST_COMMIT_MESSAGE" value="aadx" />
+    <MESSAGE value="Pdf and Docx got ul are made" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pdf and Docx got ul are made" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

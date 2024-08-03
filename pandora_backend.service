@@ -1,0 +1,15 @@
+[Unit]
+Description=Pandora
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/path/to/your/application
+ExecStart=/usr/bin/java -jar /path/to/your/application/myapp.jar
+Restart=always
+RestartSec=10
+Environment="JAVA_OPTS=-Xms512m -Xmx1024m"
+
+[Install]
+WantedBy=multi-user.target
