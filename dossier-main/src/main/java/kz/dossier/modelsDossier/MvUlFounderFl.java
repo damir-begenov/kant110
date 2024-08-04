@@ -1,13 +1,21 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package kz.dossier.modelsDossier;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import java.util.UUID;
 
 @Entity
-@Table(name = "ul_founder_fl", schema = "imp_kfm_fl")
-
+@Table(
+        name = "ul_founder_fl",
+        schema = "imp_kfm_fl"
+)
 public class MvUlFounderFl {
     @Id
     private UUID id;
@@ -20,9 +28,22 @@ public class MvUlFounderFl {
     private String deposit;
     private String share;
     private boolean is_curr;
+    @Transient
+    private String binName;
+
+    public MvUlFounderFl() {
+    }
+
+    public String getBinName() {
+        return this.binName;
+    }
+
+    public void setBinName(String binName) {
+        this.binName = binName;
+    }
 
     public UUID getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(UUID id) {
@@ -30,7 +51,7 @@ public class MvUlFounderFl {
     }
 
     public String getReg_date() {
-        return reg_date;
+        return this.reg_date;
     }
 
     public void setReg_date(String reg_date) {
@@ -38,7 +59,7 @@ public class MvUlFounderFl {
     }
 
     public boolean isIs_curr() {
-        return is_curr;
+        return this.is_curr;
     }
 
     public void setIs_curr(boolean is_curr) {
@@ -46,7 +67,7 @@ public class MvUlFounderFl {
     }
 
     public String getBin_org() {
-        return bin_org;
+        return this.bin_org;
     }
 
     public void setBin_org(String bin_org) {
@@ -54,7 +75,7 @@ public class MvUlFounderFl {
     }
 
     public String getIin() {
-        return iin;
+        return this.iin;
     }
 
     public void setIin(String iin) {
@@ -62,7 +83,7 @@ public class MvUlFounderFl {
     }
 
     public String getLastname() {
-        return lastname;
+        return this.lastname;
     }
 
     public void setLastname(String lastname) {
@@ -70,7 +91,7 @@ public class MvUlFounderFl {
     }
 
     public String getFirstname() {
-        return firstname;
+        return this.firstname;
     }
 
     public void setFirstname(String firstname) {
@@ -78,7 +99,7 @@ public class MvUlFounderFl {
     }
 
     public String getPatronymic() {
-        return patronymic;
+        return this.patronymic;
     }
 
     public void setPatronymic(String patronymic) {
@@ -86,7 +107,7 @@ public class MvUlFounderFl {
     }
 
     public String getDeposit() {
-        return deposit;
+        return this.deposit;
     }
 
     public void setDeposit(String deposit) {
@@ -94,12 +115,10 @@ public class MvUlFounderFl {
     }
 
     public String getShare() {
-        return share;
+        return this.share;
     }
 
     public void setShare(String share) {
         this.share = share;
     }
-
-
 }
