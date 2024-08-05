@@ -139,17 +139,29 @@ public class ULService {
         Optional<MvUl> ul = mv_ul_repo.getUlByBin(bin);
         RegAddressUlEntity address = regAddressUlEntityRepo.findByBin(bin);
         ULDto ulDto = new ULDto();
-        ulDto.setBin(bin);
-        if (!ul.isPresent()) {
-            return ulDto;
+        if (ul.isPresent()) {
+            MvUl ulEntity = ul.get();
+            ulDto.setBin(bin);
+            ulDto.setFullName(ulEntity.getFull_name_rus());
+            ulDto.setStatus(ulEntity.getUl_status());
+            ulDto.setRegDate(ulEntity.getOrg_reg_date());
+            ulDto.setResident(ulEntity.getIs_resident() != null ? ulEntity.getIs_resident().equals("1") ? true : false : false);
+        } else {
+            return null;
         }
-        MvUl ulEntity = ul.get();
-        ulDto.setFullName(ulEntity.getFull_name_rus());
-        ulDto.setOked(address.getOkedNameRu());
-        ulDto.setStatus(ulEntity.getUl_status());
+        if (address != null) {
+            ulDto.setOked(address.getOkedNameRu());
+        } else {
+            ulDto.setOked("Нет");
+        }
+
 
         return ulDto;
     }
+
+//    public Double countInfoPercentageForUl(String bin) {
+//
+//    }
 
     public List<CommodityProducersDTO> getComProducersByBin(String bin) {
         List<CommodityProducer> list = commodityProducerRepo.getiin_binByIIN(bin);

@@ -300,7 +300,7 @@ public class ULExportPDFService {
 
         document.add(table);
     }
-    private void addSamrukGosZakupTable(String bin, Document document, Font font, Boolean isSamruk) throws DocumentException {
+    public void addSamrukGosZakupTable(String bin, Document document, Font font, Boolean isSamruk) throws DocumentException {
         if (isSamruk) {
             SamrukKazynaForAll result = flService.samrukByBin(bin);
             if (!result.getWhenSupplier().isEmpty()) {

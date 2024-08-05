@@ -9,9 +9,9 @@ import jakarta.persistence.Table;
 @Table(name = "mv_rn", schema = "imp_rn")
 public class MvRnOld {
     @Nullable
+    @Id
 
     private String cadastral_number;
-    @Id
     @Nullable
     private String rka_code;
 

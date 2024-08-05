@@ -1,166 +1,173 @@
-package kz.dossier.modelsDossier;
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
 
-import org.jetbrains.annotations.Nullable;
+package kz.dossier.modelsDossier;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import java.util.Date;
+import org.jetbrains.annotations.Nullable;
 
 @Entity
-@Table(name = "imp_kfm_ul_old.mv_ul_leader")
+@Table(
+        name = "imp_kfm_ul.mv_ul_leader"
+)
 public class MvUlLeaderEntity {
     @Id
-    @Nullable
-    private String id;
-    @Nullable
+    private @Nullable String id;
+    @Column(
+            name = "bin_org"
+    )
+    private @Nullable String binOrg;
+    @Column(
+            name = "reg_date"
+    )
+    private @Nullable String regDate;
+    @Column(
+            name = "iin"
+    )
+    private @Nullable String iin;
+    @Column(
+            name = "lastname"
+    )
+    private @Nullable String lastName;
+    @Column(
+            name = "firstname"
+    )
+    private @Nullable String firstName;
+    @Column(
+            name = "patronymic"
+    )
+    private @Nullable String patronymic;
+    @Column(
+            name = "position_id"
+    )
+    private @Nullable Integer positionId;
+    @Column(
+            name = "appointment_date"
+    )
+    private @Nullable Date appointmentDate;
+    @Column(
+            name = "removal_date"
+    )
+    private @Nullable Date removalDate;
+    @Column(
+            name = "is_curr"
+    )
+    private @Nullable Boolean isCurrent;
+    @Column(
+            name = "ul_status"
+    )
+    private @Nullable String ulStatus;
+    @Transient
+    private String binName;
 
-    @Column(name = "bin_org")
-    private String binOrg;
-    @Nullable
+    public MvUlLeaderEntity() {
+    }
 
-    @Column(name = "reg_date")
-    private String regDate;
-    @Nullable
+    public String getBinName() {
+        return this.binName;
+    }
 
-    @Column(name = "iin")
-    private String iin;
-    @Nullable
+    public void setBinName(String binName) {
+        this.binName = binName;
+    }
 
-    @Column(name = "lastname")
-    private String lastName;
-    @Nullable
-
-    @Column(name = "firstname")
-    private String firstName;
-    @Nullable
-
-    @Column(name = "patronymic")
-    private String patronymic;
-    @Nullable
-
-    @Column(name = "position_id")
-    private Integer positionId;
-    @Nullable
-
-    @Column(name = "appointment_date")
-    private Date appointmentDate;
-    @Nullable
-
-    @Column(name = "removal_date")
-    private Date removalDate;
-    @Nullable
-
-    @Column(name = "is_curr")
-    private Boolean isCurrent;
-    @Nullable
-
-    @Column(name = "ul_status")
-    private String ulStatus;
-
-    @Nullable
-    public String getId() {
-        return id;
+    public @Nullable String getId() {
+        return this.id;
     }
 
     public void setId(@Nullable String id) {
         this.id = id;
     }
 
-    @Nullable
-    public String getBinOrg() {
-        return binOrg;
+    public @Nullable String getBinOrg() {
+        return this.binOrg;
     }
 
     public void setBinOrg(@Nullable String binOrg) {
         this.binOrg = binOrg;
     }
 
-    @Nullable
-    public String getRegDate() {
-        return regDate;
+    public @Nullable String getRegDate() {
+        return this.regDate;
     }
 
     public void setRegDate(@Nullable String regDate) {
         this.regDate = regDate;
     }
 
-    @Nullable
-    public String getIin() {
-        return iin;
+    public @Nullable String getIin() {
+        return this.iin;
     }
 
     public void setIin(@Nullable String iin) {
         this.iin = iin;
     }
 
-    @Nullable
-    public String getLastName() {
-        return lastName;
+    public @Nullable String getLastName() {
+        return this.lastName;
     }
 
     public void setLastName(@Nullable String lastName) {
         this.lastName = lastName;
     }
 
-    @Nullable
-    public String getFirstName() {
-        return firstName;
+    public @Nullable String getFirstName() {
+        return this.firstName;
     }
 
     public void setFirstName(@Nullable String firstName) {
         this.firstName = firstName;
     }
 
-    @Nullable
-    public String getPatronymic() {
-        return patronymic;
+    public @Nullable String getPatronymic() {
+        return this.patronymic;
     }
 
     public void setPatronymic(@Nullable String patronymic) {
         this.patronymic = patronymic;
     }
 
-    @Nullable
-    public Integer getPositionId() {
-        return positionId;
+    public @Nullable Integer getPositionId() {
+        return this.positionId;
     }
 
     public void setPositionId(@Nullable Integer positionId) {
         this.positionId = positionId;
     }
 
-    @Nullable
-    public Date getAppointmentDate() {
-        return appointmentDate;
+    public @Nullable Date getAppointmentDate() {
+        return this.appointmentDate;
     }
 
     public void setAppointmentDate(@Nullable Date appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
 
-    @Nullable
-    public Date getRemovalDate() {
-        return removalDate;
+    public @Nullable Date getRemovalDate() {
+        return this.removalDate;
     }
 
     public void setRemovalDate(@Nullable Date removalDate) {
         this.removalDate = removalDate;
     }
 
-    @Nullable
-    public Boolean getCurrent() {
-        return isCurrent;
+    public @Nullable Boolean getCurrent() {
+        return this.isCurrent;
     }
 
     public void setCurrent(@Nullable Boolean current) {
-        isCurrent = current;
+        this.isCurrent = current;
     }
 
-    @Nullable
-    public String getUlStatus() {
-        return ulStatus;
+    public @Nullable String getUlStatus() {
+        return this.ulStatus;
     }
 
     public void setUlStatus(@Nullable String ulStatus) {

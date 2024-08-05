@@ -6,12 +6,24 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface MvTaxByBinRepo extends JpaRepository<MvTaxByBin, Integer> {
     @Query(value = "select * from imp_tax_out.taxes_out where bin = ?1", nativeQuery = true)
     List<MvTaxByBin> findAllByBin(String bin);
 
+    @Query(value = "select * from imp_tax_out.taxes_out where bin = ?1 order by budget_enrollment_date desc limit 20 offset ?2", nativeQuery = true)
+    List<MvTaxByBin> findAllByBin(String bin, Integer page);
+
+    @Query(value = "select tx.year, bc.code,  sum(tx.amount) as totalSum\n" +
+            "\tfrom imp_tax_out.taxes_out tx\n" +
+            "\tinner join imp_tax_out.d_budget_classification_code bc \n" +
+            "\t\t\ton tx.budget_classification_code_id = bc.id\n" +
+            "\twhere bin = ?1 \n" +
+            "\tgroup by year, bc.code\n" +
+            "\torder by tx.year asc", nativeQuery = true)
+    List<Map<String, Object>> getTaxViewPreMode(String bin);
 
     @Query(value = "select name_rus from imp_tax_out.d_budget_classification_code where id = ?1", nativeQuery = true)
     String findBudgetClassById(Integer id);

@@ -8,13 +8,13 @@ import jakarta.persistence.Table;
 @Table(name = "photo", schema = "import_fl")
 
 public class PhotoDb {
-    @Id
 
     private String iin;
 
     private String document_type_id;
 
     private byte[] photo;
+    @Id
     private String date;
 
     public String getIin() {
