@@ -37,7 +37,7 @@ public interface MvFlRepo extends JpaRepository<MvFl, Long> {
     Optional<MvFl> getByIin(String iin);
 
     @Query(
-            value = "select * from imp_kfm_fl.mv_fl_iin_2 mv_fl0_ where first_name like ?1 and  patronymic like ?2 and last_name like ?3",
+            value = "select * from imp_kfm_fl.mv_fl where first_name like ?1 and  patronymic like ?2 and last_name like ?3",
             nativeQuery = true
     )
     List<MvFl> getUsersByFIO(String name, String patronimic, String last);
