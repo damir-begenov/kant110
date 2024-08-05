@@ -20,18 +20,18 @@ public interface MvFlRepo extends JpaRepository<MvFl, Long> {
 
     @Query(
             nativeQuery = true,
-            value = "SELECT EXISTS(SELECT 1 FROM imp_kfm_fl.mv_fl_iin_2 WHERE iin = ?1 AND gender = 1)"
+            value = "SELECT EXISTS(SELECT 1 FROM imp_kfm_fl.mv_fl WHERE iin = ?1 AND gender = 1)"
     )
     Boolean getGender(String iin);
 
     @Query(
-            value = "select * from imp_kfm_fl.mv_fl_iin_2 mv_fl0_ where mv_fl0_.iin = ?1 limit 1",
+            value = "select * from imp_kfm_fl.mv_fl mv_fl0_ where mv_fl0_.iin = ?1 limit 1",
             nativeQuery = true
     )
     MvFl getUserByIin(String iin);
 
     @Query(
-            value = "select * from imp_kfm_fl.mv_fl_iin_2 mv_fl0_ where mv_fl0_.iin = ?1 limit 1",
+            value = "select * from imp_kfm_fl.mv_fl mv_fl0_ where mv_fl0_.iin = ?1 limit 1",
             nativeQuery = true
     )
     Optional<MvFl> getByIin(String iin);
