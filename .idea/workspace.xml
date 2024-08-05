@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d850808-ce4f-49b1-890f-5cdffe4168fe" name="Changes" comment="Pdf and Docx got ul are made">
-      <change afterPath="$PROJECT_DIR$/pandora_backend.service" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/controller/DoseirController.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/controller/DoseirController.class" afterDir="false" />
-    </list>
+    <list default="true" id="8d850808-ce4f-49b1-890f-5cdffe4168fe" name="Changes" comment="Pdf and Docx got ul are made" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -185,7 +181,7 @@
       <workItem from="1722337947445" duration="17208000" />
       <workItem from="1722357772121" duration="5979000" />
       <workItem from="1722408625529" duration="4897000" />
-      <workItem from="1722591724571" duration="35848000" />
+      <workItem from="1722591724571" duration="36118000" />
     </task>
     <task id="LOCAL-00001" summary="jk">
       <option name="closed" value="true" />
