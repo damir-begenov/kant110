@@ -1286,7 +1286,7 @@ public class PdfGenerator {
             document.add(addresses);
         }
         List<Adm> adms = admRepo.getUsersByLike(result.getMvFls().get(0).getIin());
-        if (adms != null && !adms.isEmpty()) {
+        if (adms != null && adms.size() != 0) {
             PdfPTable docTable = new PdfPTable(10);
             docTable.setWidthPercentage(100f);
             docTable.setWidths(new float[] {1, 1, 1, 1, 1, 1,1,1,1,1});
@@ -1317,7 +1317,7 @@ public class PdfGenerator {
             int number = 1;
             for (Adm r : adms) {
                 docTable.addCell(new Phrase(String.valueOf(number), font));
-                docTable.addCell(new Phrase(r.getAuthority_detected(), font));
+                docTable.addCell(new Phrase(r.getAuthority_detected() != null ? r.getAuthority_detected() : "", font));
                 docTable.addCell(new Phrase(r.getReg_date(), font));
                 docTable.addCell(new Phrase(r.getProtocol_num(), font));
                 docTable.addCell(new Phrase(r.getWork_place(), font));
@@ -2054,7 +2054,7 @@ public class PdfGenerator {
             }
             document.add(ipgoTable);
         }
-        List<FlRelativiesDTO> flRelativiesDTOS = myService.getRelativesInfo(result.getMvIinDocs().get(0).getIin());
+        List<FlRelativiesDTO> flRelativiesDTOS = myService.getRelativesInfo(result.getMvFls().get(0).getIin());
         if (flRelativiesDTOS != null && !flRelativiesDTOS.isEmpty()) {
             PdfPTable docTable = new PdfPTable(7);
             docTable.setWidthPercentage(100f);
