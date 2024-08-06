@@ -358,7 +358,24 @@ public class ULService {
         }
         return result;
     }
+    public UlAddressInfo getUlAddresses(String bin) {
+        RegAddressUlEntity address = regAddressUlEntityRepo.findByBin(bin);
+        UlAddressInfo ulAddressInfo = new UlAddressInfo();
+        if (address != null) {
+            ulAddressInfo.setReg_addr_region_ru(address.getRegAddrRegionRu());
+            ulAddressInfo.setReg_addr_district_ru(address.getRegAddrRegionRu());
+            ulAddressInfo.setReg_addr_rural_district_ru(address.getRegAddrRuralDistrictRu());
+            ulAddressInfo.setReg_addr_locality_ru(address.getRegAddrLocalityRu());
+            ulAddressInfo.setReg_addr_street_ru(address.getRegAddrStreetRu());
+            ulAddressInfo.setReg_addr_bulding_num(address.getRegAddrBuildingNum());
+            ulAddressInfo.setReg_addr_block_num(address.getRegAddrBlockNum());
+            ulAddressInfo.setReg_addr_builing_body_num(address.getRegAddrBuildingBodyNum());
+            ulAddressInfo.setReg_addr_office(address.getRegAddrOffice());
+            ulAddressInfo.setOked(address.getOkedNameRu());
+        }
 
+        return ulAddressInfo;
+    }
 
     public ULAdditionalInfoDTO additionalByBin(String bin) {
         ULAdditionalInfoDTO result = new ULAdditionalInfoDTO();

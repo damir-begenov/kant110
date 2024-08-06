@@ -75,6 +75,24 @@ public class UlDossierController {
                     .body(null);
         }
     }
+    @GetMapping("/ul/address")
+    public ResponseEntity<UlAddressInfo> getUlAddresses(@RequestParam String bin) {
+        try {
+            if (bin == null || bin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            UlAddressInfo dto = ulService.getUlAddresses(bin);
+            if (dto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching UlAddressInfo by bin: " + bin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
     //Отечественные товаропроизводители
     @GetMapping("/ul/get-commodity-producers-by-iinBin")
     public ResponseEntity<List<CommodityProducersDTO>> ulCommodProducersByBin(@RequestParam String bin) {
@@ -459,15 +477,6 @@ public class UlDossierController {
 //    @GetMapping("/getRiskByBin")
 //    public UlRiskDTO getRiskBin(@RequestParam String bin){
 //        return ulRiskService.findULRiskByIin(bin);
-//    }
-//    @GetMapping("/bin")
-//    public List<SearchResultModelUl> findByBin(@RequestParam String bin, @RequestParam String email) {
-//        log log = new log();
-//        log.setDate(LocalDateTime.now());
-//        log.setObwii("Искал в досье " + email + ": " + bin);
-//        log.setUsername(email);
-//        logRepo.save(log);
-//        return myService.searchResultUl(bin);
 //    }
 //
 //    @GetMapping("/binname")

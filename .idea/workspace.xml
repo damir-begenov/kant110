@@ -5,24 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d850808-ce4f-49b1-890f-5cdffe4168fe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/RnListDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/controller/DoseirController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/controller/DoseirController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/controller/UlDossierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/controller/UlDossierController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/TaxViewDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/TaxViewDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsRisk/Adm.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/modelsRisk/Adm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/MvRnOldRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/MvRnOldRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/MvTaxByBinRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/MvTaxByBinRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/RnService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/RnService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/TaxService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/TaxService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/tools/KbkGroupingForTaxes.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/tools/KbkGroupingForTaxes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/tools/UlDocxGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/tools/UlDocxGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/GoszkupRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/GoszkupRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/SamrukRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/SamrukRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/MyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/MyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/ULService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/ULService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/controller/DoseirController.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/controller/DoseirController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/controller/UlDossierController.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/controller/UlDossierController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/dto/TaxViewDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/dto/TaxViewDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/modelsRisk/Adm.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/modelsRisk/Adm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/repositoryDossier/MvTaxByBinRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/repositoryDossier/MvTaxByBinRepo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/RnService.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/RnService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/TaxService.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/TaxService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/tools/KbkGroupingForTaxes.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/tools/KbkGroupingForTaxes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/MyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/MyService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/ULService.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/ULService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +197,7 @@
       <workItem from="1722357772121" duration="5979000" />
       <workItem from="1722408625529" duration="4897000" />
       <workItem from="1722591724571" duration="35848000" />
-      <workItem from="1722920811878" duration="15667000" />
+      <workItem from="1722920811878" duration="18583000" />
     </task>
     <task id="LOCAL-00001" summary="jk">
       <option name="closed" value="true" />

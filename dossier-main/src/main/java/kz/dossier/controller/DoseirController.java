@@ -19,6 +19,7 @@ import kz.dossier.tools.PdfGenerator;
 import kz.dossier.tools.ULExportPDFService;
 import kz.dossier.tools.UlDocxGenerator;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.xpath.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
@@ -158,7 +159,15 @@ public class DoseirController {
     public FlRelativesLevelDto hierarchy(@RequestParam String iin) throws SQLException {
         return myService.createHierarchyObject(iin);
     }
-
+    @GetMapping("/bin")
+    public List<SearchResultModelUl> findByBin(@RequestParam String bin, @RequestParam String email) {
+        log log = new log();
+        log.setDate(LocalDateTime.now());
+        log.setObwii("Искал в досье " + email + ": " + bin);
+        log.setUsername(email);
+        logRepo.save(log);
+        return myService.searchResultUl(bin);
+    }
     @GetMapping("/iin")
     public List<SearchResultModelFL> getByIIN(@RequestParam String iin, @RequestParam String email) throws IOException {
 //        List<SearchResultModelFL> fl = myService.getByIIN_photo(iin);
@@ -219,11 +228,11 @@ public class DoseirController {
     }
 
     @GetMapping("/goszakup-page")
-    public List<GosZakupDetailsDTO> getGoszakupDetails(@RequestParam String bin, @RequestParam Integer year, @RequestParam String isSupplier) {
+    public List<GosZakupDetailsDTO> getGoszakupDetails(@RequestParam String bin, @RequestParam Integer year, @RequestParam String isSupplier, @RequestParam Integer page) {
         if (isSupplier.equals("true")) {
-            return myService.getGosZakupDetails(bin, year, true);
+            return myService.getGosZakupDetails(bin, year, true, page);
         } else {
-            return myService.getGosZakupDetails(bin, year, false);
+            return myService.getGosZakupDetails(bin, year, false, page);
         }
     }
     @GetMapping("/samruk-sum-by-year")
@@ -232,11 +241,11 @@ public class DoseirController {
     }
 
     @GetMapping("/samruk-page")
-    public List<SamrukDetailsDTO> getSamrukDetails(@RequestParam String bin, @RequestParam Integer year, @RequestParam String isSupplier) {
+    public List<SamrukDetailsDTO> getSamrukDetails(@RequestParam String bin, @RequestParam Integer year, @RequestParam String isSupplier, @RequestParam Integer page) {
         if (isSupplier.equals("true")) {
-            return myService.getSamrukDetailsBySupplier(bin, year);
+            return myService.getSamrukDetailsBySupplier(bin, year, page);
         } else {
-            return myService.getSamrukDetailsByCustomer(bin, year);
+            return myService.getSamrukDetailsByCustomer(bin, year, page);
         }
     }
 
