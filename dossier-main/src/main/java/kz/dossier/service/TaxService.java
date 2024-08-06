@@ -8,28 +8,50 @@ import kz.dossier.tools.KbkGroupingForTaxes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class TaxService {
     @Autowired
     private MvTaxByBinRepo mvTaxByBinRepo;
-    KbkGroupingForTaxes kbkGroupingForTaxes;
+    KbkGroupingForTaxes kbkGroupingForTaxes = new KbkGroupingForTaxes();
 
     public List<TaxViewDto> getTaxView(String bin) {
         List<Map<String, Object>> preProductionTaxes = mvTaxByBinRepo.getTaxViewPreMode(bin);
-        List<TaxViewDto> taxViewList = new ArrayList<>();
-
-        for (Map<String, Object> entry : preProductionTaxes) {
-            String year = (String) entry.get("year");
-            String kbk = (String) entry.get("code");
-            long totalSum = (Long) entry.get("totalSum");
 
 
-        }
+        Map<Integer, Map<Integer, BigDecimal>> groupedData = preProductionTaxes.stream()
+                .collect(Collectors.groupingBy(
+                        record -> (Integer) record.get("year"),
+                        Collectors.groupingBy(
+                                record -> kbkGroupingForTaxes.getGroupOfKbk((String) record.get("code")),
+                                Collectors.reducing(
+                                        BigDecimal.ZERO,
+                                        record -> (BigDecimal) record.get("totalSum"),
+                                        BigDecimal::add
+                                )
+                        )
+                ));
+
+        List<TaxViewDto> taxViewList = groupedData.entrySet().stream()
+                .map(entry -> {
+                    String year = String.valueOf(entry.getKey());
+                    Map<Integer, BigDecimal> groupSums = entry.getValue();
+
+                    BigDecimal byEmployees = groupSums.getOrDefault(0, BigDecimal.ZERO);
+                    BigDecimal byOwning = groupSums.getOrDefault(1, BigDecimal.ZERO);
+                    BigDecimal byImport = groupSums.getOrDefault(2, BigDecimal.ZERO);
+                    BigDecimal total = byEmployees.add(byOwning).add(byImport);
+
+
+                    return new TaxViewDto(year, total, byEmployees, byOwning, byImport);
+                })
+                .sorted(Comparator.comparing(TaxViewDto::getYear))
+                .collect(Collectors.toList());
+
+
 
         return taxViewList;
     }
@@ -85,14 +107,24 @@ public class TaxService {
         return result;
     }
 
-    public List<MvTaxDto> getTaxesWithPages(String bin, Integer page) {
+    public Integer getNumberOfTaxPages(String bin, Integer year) {
+        try {
+            Integer number = mvTaxByBinRepo.countByYearAndBin(bin, year);
+
+            return number;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    public List<MvTaxDto> getTaxesWithPages(String bin, Integer year, Integer page) {
         if (page == null || page == 0) {
             return null;
         } else {
-            page = page * 20 - 20;
+            page = page * 10 - 10;
         }
 
-        List<MvTaxByBin> list = mvTaxByBinRepo.findAllByBin(bin, page);
+        List<MvTaxByBin> list = mvTaxByBinRepo.findAllByBin(bin, year, page);
         List<MvTaxDto> result = new ArrayList<>();
 
         for (MvTaxByBin mvTaxByBin : list) {

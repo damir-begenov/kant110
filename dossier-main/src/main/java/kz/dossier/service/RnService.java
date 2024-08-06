@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kz.dossier.dto.DubaiRnDto;
+import kz.dossier.dto.RnListDto;
 import kz.dossier.modelsDossier.*;
 import kz.dossier.repositoryDossier.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,59 @@ public class RnService {
         return result;
     }
 
+    public List<RnListDto> getRnPages(String bin, Integer page) {
+        if (page == null || page == 0) {
+            return null;
+        } else {
+            page = page * 10 - 10;
+        }
+        List<MvRnOld> rns = mvRnOldRepo.getUsersByLike(bin, page);
+        List<RnListDto> rnDTOs = new ArrayList<>();
+        for (MvRnOld rn: rns) {
+            if (rn  == null) {
+                continue;
+            }
+            RnListDto rnDTO = new RnListDto();
+            String header = "Наименование вида недвижимости: ";
+            header += rn.getIntended_use_rus();
+            if (rn.getRegister_end_date() != null) {
+                header += ", Статус: \"исторический\"";
+            } else {
+                header += ", Статус: \"текущий\"";
+            }
+            String date = "";
+            if (rn.getRegister_reg_date() != null && rn.getRegister_reg_date().length() > 10) {
+                date += rn.getRegister_reg_date().substring(0, 10) + " - ";
+            }
+            if (rn.getRegister_end_date() != null && rn.getRegister_end_date().length() > 10) {
+                date += rn.getRegister_end_date().substring(0, 10);
+            }
+            rnDTO.setHeader(header + ", " + date);
+            rnDTO.setCadastrial(rn.getCadastral_number());
+            rnDTO.setRightOwner("");
+            rnDTO.setAddress(rn.getAddress_rus());
+            rnDTO.setFloorness(rn.getFloor());
+            rnDTO.setSum(rn.getRegister_transaction_amount());
+            rnDTO.setAreaTotal(rn.getArea_total());
+            rnDTO.setLivingArea(rn.getArea_useful());
+            rnDTO.setTypeOfDoc("");
+            rnDTO.setNumberOfDoc(rn.getRegister_emergence_rights_rus());
+            if (rn.getRegister_reg_date() != null && rn.getRegister_reg_date().length() > 10) {
+                rnDTO.setDateOfReg(rn.getRegister_reg_date().substring(0, 10));
+            }
+            if (rn.getRegister_end_date() != null && rn.getRegister_end_date().length() > 10) {
+                rnDTO.setDateOfStop(rn.getRegister_end_date().substring(0, 10));
+            }
+            rnDTO.setDateOfDoc(rn.getRegister_reg_date());
+            rnDTO.setNumberOfSostav("");
+            rnDTO.setIinBin(rn.getOwner_iin_bin());
+            rnDTO.setNameOfIinBin(rn.getOwner_full_name());
+
+            rnDTOs.add(rnDTO);
+        }
+        return rnDTOs;
+    }
+
     public List<RnDTO> getRns(String bin) {
         List<MvRnOld> rns = mvRnOldRepo.getUsersByLike(bin);
         List<RnDTO> rnDTOs = new ArrayList<>();
@@ -73,7 +127,7 @@ public class RnService {
             }
             RnDTO rnDTO = new RnDTO();
 
-            rnDTO.setNameOfKind("");
+            rnDTO.setNameOfKind(rn.getIntended_use_rus());
             rnDTO.setCadastrialNumber(rn.getCadastral_number());
             rnDTO.setRightOwner("");
             rnDTO.setAddress(rn.getAddress_rus());
@@ -91,7 +145,14 @@ public class RnService {
             }
             rnDTO.setInOfOwner(rn.getOwner_iin_bin());
             rnDTO.setOwnerName(rn.getOwner_full_name());
-            rnDTO.setDateOfRegistration(rn.getRegister_reg_date() + " - " + rn.getRegister_end_date());
+            String date = "";
+            if (rn.getRegister_reg_date() != null && rn.getRegister_reg_date().length() > 10) {
+                date += rn.getRegister_reg_date().substring(0, 10) + " - ";
+            }
+            if (rn.getRegister_end_date() != null && rn.getRegister_end_date().length() > 10) {
+                date += rn.getRegister_end_date().substring(0, 10);
+            }
+            rnDTO.setDateOfRegistration(date);
 
             rnDTOs.add(rnDTO);
         }
@@ -105,7 +166,7 @@ public class RnService {
 
             RnDTO rnDTO = new RnDTO();
 
-            rnDTO.setNameOfKind("");
+            rnDTO.setNameOfKind(rn.getIntended_use_rus());
             rnDTO.setCadastrialNumber(cadastrial_number);
             rnDTO.setRightOwner("");
             rnDTO.setAddress(address);
@@ -123,7 +184,14 @@ public class RnService {
             }
             rnDTO.setInOfOwner(rn.getOwner_iin_bin());
             rnDTO.setOwnerName(rn.getOwner_full_name());
-            rnDTO.setDateOfRegistration(rn.getRegister_reg_date() + " - " + rn.getRegister_end_date());
+            String date = "";
+            if (rn.getRegister_reg_date() != null && rn.getRegister_reg_date().length() > 10) {
+                date += rn.getRegister_reg_date().substring(0, 10) + " - ";
+            }
+            if (rn.getRegister_end_date() != null && rn.getRegister_end_date().length() > 10) {
+                date += rn.getRegister_end_date().substring(0, 10);
+            }
+            rnDTO.setDateOfRegistration(date);
 
             rnDTOs.add(rnDTO);
         }

@@ -5,10 +5,7 @@
 
 package kz.dossier.modelsRisk;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.jetbrains.annotations.Nullable;
 
 @Entity
@@ -141,6 +138,7 @@ public class Adm {
             name = "56"
     )
     private @Nullable String fifty_six;
+    @Transient
     private String qualification_name;
 
     public Adm() {

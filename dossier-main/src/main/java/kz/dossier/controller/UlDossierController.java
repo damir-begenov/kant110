@@ -358,13 +358,28 @@ public class UlDossierController {
                     .body(null);
         }
     }
-    @GetMapping("/ul/get-tax-by-bin")
-    public ResponseEntity<List<MvTaxDto>> getTaxes(@RequestParam String bin, @RequestParam Integer page) {
+    @GetMapping("/ul/tax-pages-num")
+    public ResponseEntity<Integer> getNumberOfTaxPages(@RequestParam String bin, @RequestParam Integer year) {
         try {
-            if (bin == null || bin.isEmpty()) {
+            if (bin == null || bin.isEmpty() || year == null ) {
                 return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
             }
-            List<MvTaxDto> dto = taxService.getTaxesWithPages(bin, page);
+            Integer number = taxService.getNumberOfTaxPages(bin, year);
+            return ResponseEntity.ok(number);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching number by bin: " + bin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+    @GetMapping("/ul/get-tax-by-bin")
+    public ResponseEntity<List<MvTaxDto>> getTaxes(@RequestParam String bin,  @RequestParam Integer year,  @RequestParam Integer page) {
+        try {
+            if (bin == null || bin.isEmpty() || year == null ) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<MvTaxDto> dto = taxService.getTaxesWithPages(bin, year, page);
             if (dto == null) {
                 return ResponseEntity.notFound().build(); // Return 404 Not Found
             }
@@ -376,6 +391,45 @@ public class UlDossierController {
                     .body(null);
         }
     }
+
+    @GetMapping("/ul/get-adm-fines")
+    public ResponseEntity<List<AdmRightsBreakerDTO>> getAdmsFines(@RequestParam String bin) {
+        try {
+            if (bin == null || bin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<AdmRightsBreakerDTO> dto = ulService.getAdmsFines(bin);
+            if (dto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching AdmRightsBreakerDTO by bin: " + bin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+    @GetMapping("/ul/rn-pages")
+    public ResponseEntity<List<RnListDto>> getRnPages(@RequestParam String bin, @RequestParam Integer page) {
+        try {
+            if (bin == null || bin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<RnListDto> dto = rnService.getRnPages(bin, page);
+            if (dto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching AdmRightsBreakerDTO by bin: " + bin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
 
 
 

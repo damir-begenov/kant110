@@ -69,14 +69,14 @@ public class UlDocxGenerator {
             addSamrukGosZakupTable(bin, doc, false);
             addAccountantTable(bin, doc);
             addPdlTable(bin, doc);
-            addPensionTable(bin, doc);
+            addPensionTable(bin, doc); //
             addContactsTable(bin, doc);
             addEquipmentTable(bin, doc);
             addTransportTable(bin, doc);
             addAutoTransportTable(bin, doc);
             addAnotherTransport(bin, doc);
             addTaxTable(bin, doc);
-            addSubsidyTable(bin, doc);
+            addSubsidyTable(bin, doc); //
             addAdministrativeFinesTable(bin, doc);
             addRealEstateRegistryTable(bin, doc);
             addDubaiPropertyTable(bin, doc);

@@ -77,13 +77,18 @@ public class KbkGroupingForTaxes {
             "105283"
     ));
 
+    public KbkGroupingForTaxes() {
+    }
+
     public Integer getGroupOfKbk(String code) {
         if (forEmployees.contains(code)) {
             return 0;
         } else if (forOwning.contains(code)) {
             return 1;
-        } else {
+        } else if (forImport.contains(code)) {
             return 2;
+        } else {
+            return -1;
         }
     }
 }
