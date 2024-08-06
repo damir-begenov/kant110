@@ -486,9 +486,9 @@ public class MyService {
         List<Samruk> samruks = new ArrayList<>();
         try {
             if (year == 0) {
-                samruks = samrukRepo.getByCustomerAndNullYear(bin);
+                samruks = samrukRepo.getByCustomerAndNullYear(bin, page);
             } else {
-                samruks = samrukRepo.getByCustomerAndYear(bin, year);
+                samruks = samrukRepo.getByCustomerAndYear(bin, year, page);
             }
         } catch (Exception e) {
             return new ArrayList<>();
