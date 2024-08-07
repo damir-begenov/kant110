@@ -10,6 +10,9 @@ public interface MvRnOldRepo extends JpaRepository<MvRnOld, Long> {
     @Query(value= "select * from imp_rn.mv_rn where owner_iin_bin = ?1", nativeQuery = true)
     List<MvRnOld> getUsersByLike(String iin);
 
+    @Query(value= "select * from imp_rn.mv_rn where owner_iin_bin = ?1 limit 10 offset ?2", nativeQuery = true)
+    List<MvRnOld> getUsersByLike(String iin, Integer page);
+
     @Query(value= "select * from imp_rn.mv_rn where (cadastral_number = ?1 and address_rus = ?2) or (cadastral_number = ?1 and address_kaz = ?2) ORDER BY register_reg_date desc", nativeQuery = true)
     List<MvRnOld> getRowsByCadAndAddress(String cad, String address);
 }

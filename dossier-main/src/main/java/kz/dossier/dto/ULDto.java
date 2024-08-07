@@ -5,6 +5,42 @@ public class ULDto {
     private String fullName;
     private String oked;
     private String status;
+    private String regDate;
+    private Double infoPercentage;
+    private Double riskPercentage;
+    private Boolean isResident;
+
+    public Boolean getResident() {
+        return isResident;
+    }
+
+    public void setResident(Boolean resident) {
+        isResident = resident;
+    }
+
+    public String getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(String regDate) {
+        this.regDate = regDate;
+    }
+
+    public Double getInfoPercentage() {
+        return infoPercentage;
+    }
+
+    public void setInfoPercentage(Double infoPercentage) {
+        this.infoPercentage = infoPercentage;
+    }
+
+    public Double getRiskPercentage() {
+        return riskPercentage;
+    }
+
+    public void setRiskPercentage(Double riskPercentage) {
+        this.riskPercentage = riskPercentage;
+    }
 
     public String getBin() {
         return bin;

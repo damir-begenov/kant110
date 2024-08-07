@@ -139,17 +139,29 @@ public class ULService {
         Optional<MvUl> ul = mv_ul_repo.getUlByBin(bin);
         RegAddressUlEntity address = regAddressUlEntityRepo.findByBin(bin);
         ULDto ulDto = new ULDto();
-        ulDto.setBin(bin);
-        if (!ul.isPresent()) {
-            return ulDto;
+        if (ul.isPresent()) {
+            MvUl ulEntity = ul.get();
+            ulDto.setBin(bin);
+            ulDto.setFullName(ulEntity.getFull_name_rus());
+            ulDto.setStatus(ulEntity.getUl_status());
+            ulDto.setRegDate(ulEntity.getOrg_reg_date());
+            ulDto.setResident(ulEntity.getIs_resident() != null ? ulEntity.getIs_resident().equals("1") ? true : false : false);
+        } else {
+            return null;
         }
-        MvUl ulEntity = ul.get();
-        ulDto.setFullName(ulEntity.getFull_name_rus());
-        ulDto.setOked(address.getOkedNameRu());
-        ulDto.setStatus(ulEntity.getUl_status());
+        if (address != null) {
+            ulDto.setOked(address.getOkedNameRu());
+        } else {
+            ulDto.setOked("Нет");
+        }
+
 
         return ulDto;
     }
+
+//    public Double countInfoPercentageForUl(String bin) {
+//
+//    }
 
     public List<CommodityProducersDTO> getComProducersByBin(String bin) {
         List<CommodityProducer> list = commodityProducerRepo.getiin_binByIIN(bin);
@@ -346,7 +358,24 @@ public class ULService {
         }
         return result;
     }
+    public UlAddressInfo getUlAddresses(String bin) {
+        RegAddressUlEntity address = regAddressUlEntityRepo.findByBin(bin);
+        UlAddressInfo ulAddressInfo = new UlAddressInfo();
+        if (address != null) {
+            ulAddressInfo.setReg_addr_region_ru(address.getRegAddrRegionRu());
+            ulAddressInfo.setReg_addr_district_ru(address.getRegAddrRegionRu());
+            ulAddressInfo.setReg_addr_rural_district_ru(address.getRegAddrRuralDistrictRu());
+            ulAddressInfo.setReg_addr_locality_ru(address.getRegAddrLocalityRu());
+            ulAddressInfo.setReg_addr_street_ru(address.getRegAddrStreetRu());
+            ulAddressInfo.setReg_addr_bulding_num(address.getRegAddrBuildingNum());
+            ulAddressInfo.setReg_addr_block_num(address.getRegAddrBlockNum());
+            ulAddressInfo.setReg_addr_builing_body_num(address.getRegAddrBuildingBodyNum());
+            ulAddressInfo.setReg_addr_office(address.getRegAddrOffice());
+            ulAddressInfo.setOked(address.getOkedNameRu());
+        }
 
+        return ulAddressInfo;
+    }
 
     public ULAdditionalInfoDTO additionalByBin(String bin) {
         ULAdditionalInfoDTO result = new ULAdditionalInfoDTO();

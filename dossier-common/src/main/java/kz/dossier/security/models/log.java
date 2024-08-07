@@ -37,4 +37,7 @@ public class log {
 
     private String approvement_data;
 
+    public static void error(String s, Exception e) {
+        System.out.println(s + " Error: " + e );
+    }
 }

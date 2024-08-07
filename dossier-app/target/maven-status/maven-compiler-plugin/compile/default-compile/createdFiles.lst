@@ -1,0 +1,6 @@
+kz/dossier/config/DossierDataSourceConfiguration.class
+kz/dossier/config/WebSecurity.class
+kz/dossier/config/MainDataSourceConfiguration.class
+kz/dossier/config/Neo4j1Configuration.class
+kz/dossier/config/Neo4j2Configuration.class
+kz/dossier/DossierApplication.class

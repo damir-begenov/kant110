@@ -291,51 +291,56 @@ public class PdfGenerator {
             }
             document.add(addresses);
         }
-        List<Adm> adms = admRepo.getUsersByLike(result.getMvFls().get(0).getIin());
-        if (adms != null && adms.size() != 0) {
-            PdfPTable docTable = new PdfPTable(10);
-            docTable.setWidthPercentage(100f);
-            docTable.setWidths(new float[] {1, 1, 1, 1, 1, 1,1,1,1,1});
-            docTable.setSpacingBefore(5);
-            heading.setColspan(10);
-            heading.setPhrase(new Phrase("Наименование коллапса: \"Административные штрафы\" Количество найденных инф: " + adms.size(), font));
-            docTable.addCell(heading);
-            cell.setPhrase(new Phrase("№", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("Орган выявивший правонарушение", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("Дата заведения", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("Номер протокола", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("Место работы", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("Квалификация", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("Принудительное исполенеия", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("На срок до", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("Размер наложенного штрафа", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("Основания прекращения", font));
-            docTable.addCell(cell);
-            int number = 1;
-            for (Adm r : adms) {
-                docTable.addCell(new Phrase(String.valueOf(number), font));
-                docTable.addCell(new Phrase(r.getAuthority_detected(), font));
-                docTable.addCell(new Phrase(r.getReg_date(), font));
-                docTable.addCell(new Phrase(r.getProtocol_num().toString(), font));
-                docTable.addCell(new Phrase(r.getWork_place().toString(), font));
-                docTable.addCell(new Phrase(r.getQualification_name(), font));
-                docTable.addCell(new Phrase(r.getEnforcement(), font));
-                docTable.addCell(new Phrase(r.getEnd_date(), font));
-                docTable.addCell(new Phrase(r.getFine_amount(), font));
-                docTable.addCell(new Phrase(r.getTeminate_reason(), font));
-                number++;
+        try {
+            List<Adm> adms = admRepo.getUsersByLike(result.getMvFls().get(0).getIin());
+            if (adms != null && adms.size() != 0) {
+                PdfPTable docTable = new PdfPTable(10);
+                docTable.setWidthPercentage(100f);
+                docTable.setWidths(new float[] {1, 1, 1, 1, 1, 1,1,1,1,1});
+                docTable.setSpacingBefore(5);
+                heading.setColspan(10);
+                heading.setPhrase(new Phrase("Наименование коллапса: \"Административные штрафы\" Количество найденных инф: " + adms.size(), font));
+                docTable.addCell(heading);
+                cell.setPhrase(new Phrase("№", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("Орган выявивший правонарушение", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("Дата заведения", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("Номер протокола", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("Место работы", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("Квалификация", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("Принудительное исполенеия", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("На срок до", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("Размер наложенного штрафа", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("Основания прекращения", font));
+                docTable.addCell(cell);
+                int number = 1;
+                for (Adm r : adms) {
+                    docTable.addCell(new Phrase(String.valueOf(number), font));
+                    docTable.addCell(new Phrase(r.getAuthority_detected() != null ? r.getAuthority_detected() : "", font));
+                    docTable.addCell(new Phrase(r.getReg_date(), font));
+                    docTable.addCell(new Phrase(r.getProtocol_num().toString(), font));
+                    docTable.addCell(new Phrase(r.getWork_place().toString(), font));
+                    docTable.addCell(new Phrase(r.getQualification_name(), font));
+                    docTable.addCell(new Phrase(r.getEnforcement(), font));
+                    docTable.addCell(new Phrase(r.getEnd_date(), font));
+                    docTable.addCell(new Phrase(r.getFine_amount(), font));
+                    docTable.addCell(new Phrase(r.getTeminate_reason(), font));
+                    number++;
+                }
+                document.add(docTable);
             }
-            document.add(docTable);
+        }catch (Exception e){
+            System.out.println(e);
         }
+
         List<FlContacts> flContacts = flContactsRepo.findAllByIin(result.getMvIinDocs().get(0).getIin());
         if (flContacts != null && !flContacts.isEmpty()) {
             PdfPTable docTable = new PdfPTable(7);
@@ -1285,51 +1290,56 @@ public class PdfGenerator {
             }
             document.add(addresses);
         }
-        List<Adm> adms = admRepo.getUsersByLike(result.getMvFls().get(0).getIin());
-        if (adms != null && !adms.isEmpty()) {
-            PdfPTable docTable = new PdfPTable(10);
-            docTable.setWidthPercentage(100f);
-            docTable.setWidths(new float[] {1, 1, 1, 1, 1, 1,1,1,1,1});
-            docTable.setSpacingBefore(5);
-            heading.setColspan(10);
-            heading.setPhrase(new Phrase("Наименование коллапса: \"Административные штрафы\" Количество найденных инф: " + adms.size(), font));
-            docTable.addCell(heading);
-            cell.setPhrase(new Phrase("№", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("Орган выявивший правонарушение", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("Дата заведения", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("Номер протокола", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("Место работы", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("Квалификация", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("Принудительное исполенеия", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("На срок до", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("Размер наложенного штрафа", font));
-            docTable.addCell(cell);
-            cell.setPhrase(new Phrase("Основания прекращения", font));
-            docTable.addCell(cell);
-            int number = 1;
-            for (Adm r : adms) {
-                docTable.addCell(new Phrase(String.valueOf(number), font));
-                docTable.addCell(new Phrase(r.getAuthority_detected(), font));
-                docTable.addCell(new Phrase(r.getReg_date(), font));
-                docTable.addCell(new Phrase(r.getProtocol_num(), font));
-                docTable.addCell(new Phrase(r.getWork_place(), font));
-                docTable.addCell(new Phrase(r.getQualification_name(), font));
-                docTable.addCell(new Phrase(r.getEnforcement(), font));
-                docTable.addCell(new Phrase(r.getEnd_date(), font));
-                docTable.addCell(new Phrase(r.getFine_amount(), font));
-                docTable.addCell(new Phrase(r.getTeminate_reason(), font));
-                number++;
+        try {
+            List<Adm> adms = admRepo.getUsersByLike(result.getMvFls().get(0).getIin());
+            if (adms != null && adms.size() != 0) {
+                PdfPTable docTable = new PdfPTable(10);
+                docTable.setWidthPercentage(100f);
+                docTable.setWidths(new float[] {1, 1, 1, 1, 1, 1,1,1,1,1});
+                docTable.setSpacingBefore(5);
+                heading.setColspan(10);
+                heading.setPhrase(new Phrase("Наименование коллапса: \"Административные штрафы\" Количество найденных инф: " + adms.size(), font));
+                docTable.addCell(heading);
+                cell.setPhrase(new Phrase("№", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("Орган выявивший правонарушение", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("Дата заведения", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("Номер протокола", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("Место работы", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("Квалификация", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("Принудительное исполенеия", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("На срок до", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("Размер наложенного штрафа", font));
+                docTable.addCell(cell);
+                cell.setPhrase(new Phrase("Основания прекращения", font));
+                docTable.addCell(cell);
+                int number = 1;
+                for (Adm r : adms) {
+                    docTable.addCell(new Phrase(String.valueOf(number), font));
+                    docTable.addCell(new Phrase(r.getAuthority_detected() != null ? r.getAuthority_detected() : "", font));
+                    docTable.addCell(new Phrase(r.getReg_date(), font));
+                    docTable.addCell(new Phrase(r.getProtocol_num(), font));
+                    docTable.addCell(new Phrase(r.getWork_place(), font));
+                    docTable.addCell(new Phrase(r.getQualification_name(), font));
+                    docTable.addCell(new Phrase(r.getEnforcement(), font));
+                    docTable.addCell(new Phrase(r.getEnd_date(), font));
+                    docTable.addCell(new Phrase(r.getFine_amount(), font));
+                    docTable.addCell(new Phrase(r.getTeminate_reason(), font));
+                    number++;
+                }
+                document.add(docTable);
             }
-            document.add(docTable);
+        }catch (Exception e){
+            System.out.println(e);
         }
+
         List<FlContacts> flContacts = flContactsRepo.findAllByIin(result.getMvFls().get(0).getIin());
         if (flContacts != null && !flContacts.isEmpty()) {
             PdfPTable docTable = new PdfPTable(7);
@@ -2054,7 +2064,7 @@ public class PdfGenerator {
             }
             document.add(ipgoTable);
         }
-        List<FlRelativiesDTO> flRelativiesDTOS = myService.getRelativesInfo(result.getMvIinDocs().get(0).getIin());
+        List<FlRelativiesDTO> flRelativiesDTOS = myService.getRelativesInfo(result.getMvFls().get(0).getIin());
         if (flRelativiesDTOS != null && !flRelativiesDTOS.isEmpty()) {
             PdfPTable docTable = new PdfPTable(7);
             docTable.setWidthPercentage(100f);

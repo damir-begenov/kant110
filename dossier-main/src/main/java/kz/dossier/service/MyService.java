@@ -367,18 +367,23 @@ public class MyService {
         return result;
     }
 
-    public List<GosZakupDetailsDTO> getGosZakupDetails(String bin, Integer year, Boolean isSupplier) {
+    public List<GosZakupDetailsDTO> getGosZakupDetails(String bin, Integer year, Boolean isSupplier, Integer page) {
+        if (page == null || page == 0) {
+            return null;
+        } else {
+            page = page * 10 - 10;
+        }
         List<Goszakup> goszakups = new ArrayList<>();
         if(isSupplier) {
             try {
-                goszakups = goszkupRepo.getBySupplierBinAndYear(bin, year);
+                goszakups = goszkupRepo.getBySupplierBinAndYear(bin, year, page);
             } catch (Exception e) {
                 return new ArrayList<>();
             }
             return tranformToGosZakupDetails(goszakups, false);
         } else {
             try {
-                goszakups = goszkupRepo.getByCustomerBinAndYear(bin, year);
+                goszakups = goszkupRepo.getByCustomerBinAndYear(bin, year, page);
             } catch (Exception e) {
                 return new ArrayList<>();
             }
@@ -457,13 +462,18 @@ public class MyService {
         });
         return result;
     }
-    public List<SamrukDetailsDTO> getSamrukDetailsBySupplier(String bin, Integer year) {
+    public List<SamrukDetailsDTO> getSamrukDetailsBySupplier(String bin, Integer year, Integer page) {
+        if (page == null || page == 0) {
+            return null;
+        } else {
+            page = page * 10 - 10;
+        }
         List<Samruk> samruks = new ArrayList<>();
         try {
             if (year == 0) {
-                samruks = samrukRepo.getBySupplierAndNullYear(bin);
+                samruks = samrukRepo.getBySupplierAndNullYear(bin, page);
             } else {
-                samruks = samrukRepo.getBySupplierAndYear(bin, year);
+                samruks = samrukRepo.getBySupplierAndYear(bin, year, page);
             }
         } catch (Exception e) {
             return new ArrayList<>();
@@ -472,7 +482,7 @@ public class MyService {
         return tranformToSamrukDetails(samruks, false);
     }
 
-    public List<SamrukDetailsDTO> getSamrukDetailsByCustomer(String bin, Integer year) {
+    public List<SamrukDetailsDTO> getSamrukDetailsByCustomer(String bin, Integer year, Integer page) {
         List<Samruk> samruks = new ArrayList<>();
         try {
             if (year == 0) {
@@ -495,6 +505,7 @@ public class MyService {
             }
         } catch (Exception e) {
             System.out.println(e);
+            result.setWhenSupplier(new ArrayList<>());
         }
         try {
             List<Samruk> samruks = samrukRepo.getByCustomer(bin);
@@ -504,6 +515,7 @@ public class MyService {
             }
         } catch (Exception e) {
             System.out.println(e);
+            result.setWhenCustomer(new ArrayList<>());
         }
 
 
@@ -530,24 +542,6 @@ public class MyService {
     }
 
 
-    public UlAddressInfo getUlAddresses(String bin) {
-        RegAddressUlEntity address = regAddressUlEntityRepo.findByBin(bin);
-        UlAddressInfo ulAddressInfo = new UlAddressInfo();
-        if (address != null) {
-            ulAddressInfo.setReg_addr_region_ru(address.getRegAddrRegionRu());
-            ulAddressInfo.setReg_addr_district_ru(address.getRegAddrRegionRu());
-            ulAddressInfo.setReg_addr_rural_district_ru(address.getRegAddrRuralDistrictRu());
-            ulAddressInfo.setReg_addr_locality_ru(address.getRegAddrLocalityRu());
-            ulAddressInfo.setReg_addr_street_ru(address.getRegAddrStreetRu());
-            ulAddressInfo.setReg_addr_bulding_num(address.getRegAddrBuildingNum());
-            ulAddressInfo.setReg_addr_block_num(address.getRegAddrBlockNum());
-            ulAddressInfo.setReg_addr_builing_body_num(address.getRegAddrBuildingBodyNum());
-            ulAddressInfo.setReg_addr_office(address.getRegAddrOffice());
-            ulAddressInfo.setOked(address.getOkedNameRu());
-        }
-
-        return ulAddressInfo;
-    }
 
     public List<FlRelativiesDTO> getRelativesInfo(String iin){
         List<Object[]> flRelativesObj;
