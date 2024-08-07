@@ -10,6 +10,8 @@ import java.util.List;
 
 @Repository
 public interface WaterTransportRepo extends JpaRepository<WaterTransport, Long> {
-    @Query(value = "select * from imp_kfm_fl.water_transport where iin_bin = ?1 limit 100", nativeQuery = true)
+    @Query(value = "select * from imp_kfm_fl.water_transport where iin_bin = ?1", nativeQuery = true)
     List<WaterTransport> getWaterByIin(String iin);
+    @Query(value = "select count(*) from imp_kfm_fl.water_transport where iin_bin = ?1 limit 1", nativeQuery = true)
+    Integer countByBin(String iin);
 }

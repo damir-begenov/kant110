@@ -35,6 +35,11 @@ public class TaxService {
                         )
                 ));
 
+        BigDecimal totalTotal = BigDecimal.ZERO;
+        BigDecimal totalByEmployees = BigDecimal.ZERO;
+        BigDecimal totalByOwning = BigDecimal.ZERO;
+        BigDecimal totalByImport = BigDecimal.ZERO;
+
         List<TaxViewDto> taxViewList = groupedData.entrySet().stream()
                 .map(entry -> {
                     String year = String.valueOf(entry.getKey());
@@ -51,8 +56,15 @@ public class TaxService {
                 .sorted(Comparator.comparing(TaxViewDto::getYear))
                 .collect(Collectors.toList());
 
+        for (TaxViewDto a : taxViewList) {
+            totalByImport = totalByImport.add(a.getByImport());
+            totalByEmployees = totalByEmployees.add(a.getByEmployees());
+            totalByOwning = totalByOwning.add(a.getByOwning());
+            totalTotal = totalTotal.add(a.getTotalSum());
+        }
 
-
+        TaxViewDto total = new TaxViewDto("Общая сумма", totalTotal, totalByEmployees, totalByOwning, totalByImport);
+        taxViewList.add(total);
         return taxViewList;
     }
 
@@ -105,6 +117,16 @@ public class TaxService {
         }
 
         return result;
+    }
+
+    public Integer countTaxes(String bin) {
+        try {
+            Integer number = mvTaxByBinRepo.countByBin(bin);
+
+            return number;
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     public Integer getNumberOfTaxPages(String bin, Integer year) {

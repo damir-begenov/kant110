@@ -14,8 +14,10 @@ public interface FlContactsRepo extends JpaRepository<FlContacts, Long> {
 
     @Query(value = "SELECT iin from imp_kfm_fl.contacts where email = ?1 limit 1", nativeQuery = true)
     List<String> getByEmail(String email);
-    @Query(value = "SELECT * FROM imp_kfm_fl.contacts WHERE iin = ? ORDER BY id DESC LIMIT 1\n", nativeQuery = true)
-
+    @Query(value = "SELECT * FROM imp_kfm_fl.contacts WHERE iin = ? ORDER BY id DESC", nativeQuery = true)
     List<FlContacts> findAllByIin(String iin);
+
+    @Query(value = "SELECT count(*) FROM imp_kfm_fl.contacts WHERE iin = ? limit 1", nativeQuery = true)
+    Integer countByBin(String iin);
 
 }

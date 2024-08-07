@@ -118,6 +118,10 @@ public class RnService {
         return rnDTOs;
     }
 
+    public Integer countRns(String bin) {
+        return mvRnOldRepo.countByBin(bin);
+
+    }
     public List<RnDTO> getRns(String bin) {
         List<MvRnOld> rns = mvRnOldRepo.getUsersByLike(bin);
         List<RnDTO> rnDTOs = new ArrayList<>();

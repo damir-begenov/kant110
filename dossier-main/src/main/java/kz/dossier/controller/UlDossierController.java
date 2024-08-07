@@ -51,6 +51,25 @@ public class UlDossierController {
     TaxService taxService;
 
     //Сведения о ЮЛ надо посчитать проценты сведении и рисков
+    @GetMapping("/ul/get-percentages")
+    public ResponseEntity<Double> getUlPercentages(@RequestParam String bin) {
+        try {
+            if (bin == null || bin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            Double ulDto = ulService.getSvedenyaPercentage(bin);
+            if (ulDto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(ulDto);
+
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+
+    }
     @GetMapping("/ul/get")
     public ResponseEntity<ULDto> ulDtoByBin(@RequestParam String bin, Principal principal) {
         try {
@@ -410,24 +429,6 @@ public class UlDossierController {
         }
     }
 
-    @GetMapping("/ul/get-adm-fines")
-    public ResponseEntity<List<AdmRightsBreakerDTO>> getAdmsFines(@RequestParam String bin) {
-        try {
-            if (bin == null || bin.isEmpty()) {
-                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
-            }
-            List<AdmRightsBreakerDTO> dto = ulService.getAdmsFines(bin);
-            if (dto == null) {
-                return ResponseEntity.notFound().build(); // Return 404 Not Found
-            }
-            return ResponseEntity.ok(dto);
-        } catch (Exception e) {
-            log.error("Error occurred while fetching AdmRightsBreakerDTO by bin: " + bin, e);
-
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(null);
-        }
-    }
 
     @GetMapping("/ul/rn-pages")
     public ResponseEntity<List<RnListDto>> getRnPages(@RequestParam String bin, @RequestParam Integer page) {

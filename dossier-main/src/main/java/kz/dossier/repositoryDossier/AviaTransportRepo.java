@@ -10,6 +10,9 @@ import java.util.List;
 
 @Repository
 public interface AviaTransportRepo extends JpaRepository<AviaTransport, Long> {
-    @Query(value = "select * from imp_kfm_fl.avia_transport where iin = ?1 limit 100", nativeQuery = true)
+    @Query(value = "select * from imp_kfm_fl.avia_transport where iin = ?1", nativeQuery = true)
     List<AviaTransport> getAviaByIin(String iin);
+
+    @Query(value = "select count(*) from imp_kfm_fl.avia_transport where iin = ?1 limit 1", nativeQuery = true)
+    Integer countByBin(String iin);
 }

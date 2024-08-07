@@ -6,7 +6,10 @@ import kz.dossier.modelsDossier.*;
 import kz.dossier.modelsRisk.Adm;
 import kz.dossier.modelsRisk.Pdl;
 import kz.dossier.repositoryDossier.*;
+import kz.dossier.security.models.log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
@@ -65,6 +68,170 @@ public class ULService {
     private QoldauRepo qoldauRepo;
     @Autowired
     private AdmRepo admRepo;
+    @Autowired
+    private TransportService transportService;
+    @Autowired
+    private RnService rnService;
+    @Autowired
+    private TaxService taxService;
+
+    public Double getSvedenyaPercentage(String bin) {
+        Integer count = 1;
+        try {
+            Integer dto = commodityProducerRepo.countByBin(bin);
+            if (dto > 0) {
+                count++; // Return 404 Not Found
+            }
+        } catch (Exception e) {
+            log.error("ERROR: ", e);
+        }
+        try {
+            Integer dto = mvUlFounderFlRepo.countByBin(bin);
+            if (dto > 0) {
+                count++; // Return 404 Not Found
+            }
+        } catch (Exception e) {
+            log.error("ERROR: ", e);
+
+        }
+        try {
+            Integer dto = regAddressUlEntityRepo.countByBin(bin);
+            if (dto > 0) {
+                count++; // Return 404 Not Found
+            }
+        } catch (Exception e) {
+            log.error("ERROR: ", e);
+
+        }
+        try {
+            Integer dto = fpgTempEntityRepo.countByBin(bin);
+            if (dto > 0) {
+                count++; // Return 404 Not Found
+            }
+        } catch (Exception e) {
+            log.error("ERROR: ", e);
+
+        }
+        try {
+            Integer dto = accountantListEntityRepo.countByBin(bin);
+            if (dto > 0) {
+                count++; // Return 404 Not Found
+            }
+        } catch (Exception e) {
+            log.error("ERROR: ", e);
+
+        }
+        try {
+            Integer dto = pdlRepo.countByBin(bin);
+            if (dto > 0) {
+                count++; // Return 404 Not Found
+            }
+        } catch (Exception e) {
+            log.error("ERROR: ", e);
+
+        }
+        try {
+            Integer dto = flPensionContrRepo.countByBin(bin);
+            if (dto > 0) {
+                count++; // Return 404 Not Found
+            }
+        } catch (Exception e) {
+            log.error("ERROR: ", e);
+
+        }
+        try {
+            Integer dto = flContactsRepo.countByBin(bin);
+            if (dto > 0) {
+                count++; // Return 404 Not Found
+            }
+        } catch (Exception e) {
+            log.error("ERROR: ", e);
+
+        }
+        try {
+            Integer dto = transportService.countEquipments(bin);
+            if (dto > 0) {
+                count++; // Return 404 Not Found
+            }
+        } catch (Exception e) {
+            log.error("ERROR: ", e);
+
+        }
+        try {
+            Integer dto = transportService.countTransport(bin);
+            if (dto > 0) {
+                count++; // Return 404 Not Found
+            }
+        } catch (Exception e) {
+            log.error("ERROR: ", e);
+
+        }
+        try {
+            Integer dto = transportService.countAutoTransport(bin);
+            if (dto > 0) {
+                count++; // Return 404 Not Found
+            }
+        } catch (Exception e) {
+            log.error("ERROR: ", e);
+
+        }
+        try {
+            Integer dto = transportService.countTrains(bin);
+            if (dto > 0) {
+                count++; // Return 404 Not Found
+            }
+        } catch (Exception e) {
+            log.error("ERROR: ", e);
+
+        }
+        try {
+            Integer dto = transportService.countAviaTransport(bin);
+            if (dto > 0) {
+                count++; // Return 404 Not Found
+            }
+        } catch (Exception e) {
+            log.error("ERROR: ", e);
+
+        }
+        try {
+            Integer dto = transportService.countWaterTransport(bin);
+            if (dto > 0) {
+                count++; // Return 404 Not Found
+            }
+        } catch (Exception e) {
+            log.error("ERROR: ", e);
+
+        }
+        try {
+            Integer dto = taxService.countTaxes(bin);
+            if (dto > 0) {
+                count++; // Return 404 Not Found
+            }
+        } catch (Exception e) {
+            log.error("ERROR: ", e);
+
+        }
+        try {
+            Integer dto = admRepo.countByBin(bin);
+            if (dto > 0) {
+                count++; // Return 404 Not Found
+            }
+        } catch (Exception e) {
+            log.error("ERROR: ", e);
+
+        }
+        try {
+            Integer dto = rnService.countRns(bin);
+            if (dto > 0) {
+                count++; // Return 404 Not Found
+            }
+        } catch (Exception e) {
+            log.error("ERROR: ", e);
+
+        }
+        Double percentage = count.doubleValue() * 100 / 18; //count * 100% / totalNumber of exs;
+        return percentage;
+    }
 
 
     public List<AdmRightsBreakerDTO> getAdmsFines(String bin) {
@@ -76,6 +243,7 @@ public class ULService {
                 continue;
             }
             AdmRightsBreakerDTO admRightsBreakerDTO = new AdmRightsBreakerDTO();
+            admRightsBreakerDTO.setIin(bin);
             admRightsBreakerDTO.setOrgan(a.getAuthority_detected());
             admRightsBreakerDTO.setDateOfStart(a.getReg_date());
             admRightsBreakerDTO.setNumberOfProtocol(a.getProtocol_num());
@@ -146,6 +314,7 @@ public class ULService {
             ulDto.setStatus(ulEntity.getUl_status());
             ulDto.setRegDate(ulEntity.getOrg_reg_date());
             ulDto.setResident(ulEntity.getIs_resident() != null ? ulEntity.getIs_resident().equals("1") ? true : false : false);
+//            ulDto.setInfoPercentage(getSvedenyaPercentage(bin));
         } else {
             return null;
         }
@@ -184,17 +353,19 @@ public class ULService {
         try {
             List<MvUlFounderUl> ulFounders = mvUlFounderUlRepo.getUsersByLike(bin);
             ulFounders.forEach(x -> {
-                ULULMemberDTO obj = new ULULMemberDTO();
-                obj.setDate(x.getRegDate());
-                obj.setBinIin(x.getFounderBin());
-                obj.setName(x.getFounderNameRu());
-                if (x.isCurrent()) {
-                    obj.setPosition("Учредитель ЮЛ");
-                } else {
-                    obj.setPosition("Учредитель ЮЛ (Исторический)");
-                }
+                if (x.getFounderBin()!=null) {
+                    ULULMemberDTO obj = new ULULMemberDTO();
+                    obj.setDate(x.getRegDate());
+                    obj.setBinIin(x.getFounderBin());
+                    obj.setName(x.getFounderNameRu());
+                    if (x.isCurrent()) {
+                        obj.setPosition("Учредитель ЮЛ");
+                    } else {
+                        obj.setPosition("Учредитель ЮЛ (Исторический)");
+                    }
 //                obj.setRisksNumber();
-                ululMemberDTOS.add(obj);
+                    ululMemberDTOS.add(obj);
+                }
             });
         } catch (Exception e) {
             System.out.println(e);
@@ -202,22 +373,24 @@ public class ULService {
         try {
             List<MvUlFounderFl> ulFounders = mvUlFounderFlRepo.getUsersByLike(bin);
             ulFounders.forEach(x -> {
-                ULULMemberDTO obj = new ULULMemberDTO();
-                obj.setDate(x.getReg_date());
-                obj.setBinIin(x.getIin());
-                try {
-                    String name = x.getLastname() + " " + x.getFirstname() + " " + x.getPatronymic();
-                    obj.setName(name);
-                } catch (Exception e) {
+                if (x.getIin() != null) {
+                    ULULMemberDTO obj = new ULULMemberDTO();
+                    obj.setDate(x.getReg_date());
+                    obj.setBinIin(x.getIin());
+                    try {
+                        String name = x.getLastname() + " " + x.getFirstname() + " " + x.getPatronymic();
+                        obj.setName(name);
+                    } catch (Exception e) {
 
-                }
-                if (x.isIs_curr()) {
-                    obj.setPosition("Учредитель ФЛ");
-                } else {
-                    obj.setPosition("Учредитель ФЛ (Исторический)");
-                }
+                    }
+                    if (x.isIs_curr()) {
+                        obj.setPosition("Учредитель ФЛ");
+                    } else {
+                        obj.setPosition("Учредитель ФЛ (Исторический)");
+                    }
 //                obj.setRisksNumber();
-                ululMemberDTOS.add(obj);
+                    ululMemberDTOS.add(obj);
+                }
             });
         } catch (Exception e) {
             System.out.println(e);
@@ -269,6 +442,9 @@ public class ULService {
 
         List<SameULRegAddressDto> list = new ArrayList<>();
         for (RegAddressUlEntity l: units) {
+            if (l == null) {
+                continue;
+            }
             if (l.getActive()) {
                 Optional<MvUl> ul = mv_ul_repo.getUlByBin(l.getBin());
                 if (ul.isPresent()) {

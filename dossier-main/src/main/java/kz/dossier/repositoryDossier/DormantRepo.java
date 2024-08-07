@@ -11,4 +11,7 @@ public interface DormantRepo extends JpaRepository<Dormant, Long> {
     @Query(value= "select * from imp_risk.dormant dormant0_ where dormant0_.iin_bin = ?1 ", nativeQuery = true)
     List<Dormant> getUsersByLike(String iin);
 
+    @Query(value= "select count(*) from imp_risk.dormant dormant0_ where dormant0_.iin_bin = ?1 limit 1", nativeQuery = true)
+    Integer countByBin(String iin);
+
 }

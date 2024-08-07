@@ -11,4 +11,7 @@ public interface AccountantListEntityRepo extends JpaRepository<AccountantListEn
     List<AccountantListEntity> getUsersByLike(String iin);
     @Query(value = "select * from imp_notary.accountant_list  where bin = ?1", nativeQuery = true)
     List<AccountantListEntity> getUsersByLikeBIN(String iin);
+
+    @Query(value = "select count(*) from imp_notary.accountant_list  where bin = ?1 limit 1", nativeQuery = true)
+    Integer countByBin(String iin);
 }

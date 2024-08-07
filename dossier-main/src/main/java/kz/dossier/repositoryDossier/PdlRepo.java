@@ -11,4 +11,7 @@ public interface PdlRepo extends JpaRepository<Pdl, String> {
     List<Pdl> getByIIN(String iin);
     @Query(value = "select * FROM imp_kfm_fl.pdl where bin = ?1", nativeQuery = true)
     List<Pdl> getByBin(String iin);
+
+    @Query(value = "select count(*) FROM imp_kfm_fl.pdl where bin = ?1 limit 1", nativeQuery = true)
+    Integer countByBin(String iin);
 }

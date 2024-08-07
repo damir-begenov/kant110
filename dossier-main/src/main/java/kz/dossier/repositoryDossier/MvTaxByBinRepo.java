@@ -17,7 +17,8 @@ public interface MvTaxByBinRepo extends JpaRepository<MvTaxByBin, Integer> {
     List<MvTaxByBin> findAllByBin(String bin, Integer year, Integer page);
     @Query(value = "select count(*) from imp_tax_out.taxes_out where bin = ?1 and year = ?2", nativeQuery = true)
     Integer countByYearAndBin(String bin, Integer year);
-
+    @Query(value = "select count(*) from imp_tax_out.taxes_out where bin = ?1 limit 1", nativeQuery = true)
+    Integer countByBin(String bin);
     @Query(value = "select tx.year, bc.code,  sum(tx.amount) as totalSum\n" +
             "\tfrom imp_tax_out.taxes_out tx\n" +
             "\tinner join imp_tax_out.d_budget_classification_code bc \n" +

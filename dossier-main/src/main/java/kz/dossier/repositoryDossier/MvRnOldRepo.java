@@ -9,7 +9,8 @@ import java.util.List;
 public interface MvRnOldRepo extends JpaRepository<MvRnOld, Long> {
     @Query(value= "select * from imp_rn.mv_rn where owner_iin_bin = ?1", nativeQuery = true)
     List<MvRnOld> getUsersByLike(String iin);
-
+    @Query(value= "select count(*) from imp_rn.mv_rn where owner_iin_bin = ?1 limit 1", nativeQuery = true)
+    Integer countByBin(String iin);
     @Query(value= "select * from imp_rn.mv_rn where owner_iin_bin = ?1 limit 10 offset ?2", nativeQuery = true)
     List<MvRnOld> getUsersByLike(String iin, Integer page);
 

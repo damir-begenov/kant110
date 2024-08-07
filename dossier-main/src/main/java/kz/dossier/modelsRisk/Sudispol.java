@@ -18,4 +18,16 @@ public class Sudispol {
     private String category_requirements;
     private String addition_category;
     private String amount;
+    private String debtor_iin;
+    private String debtor_lastname;
+    private String debtor_firstname;
+    private String debtor_middlename;
+    private String over_proceeding;
+    private String grounds_termination;
+    private String return_doc;
+    private String protest;
+    private String date_termination;
+    private String suspended;
+    private String denied_initiation;
+
 }

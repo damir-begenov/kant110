@@ -1,6 +1,7 @@
 package kz.dossier.dto;
 
 public class EquipmentDto {
+    private String nameOfCollapse;
     private String ownerIinBin;
     private String ownerName;
     private String proprietorIinBin;
@@ -20,6 +21,14 @@ public class EquipmentDto {
     private Boolean isPledge;
     private Boolean isArrest;
     private Boolean isFirstReg;
+
+    public String getNameOfCollapse() {
+        return nameOfCollapse;
+    }
+
+    public void setNameOfCollapse(String nameOfCollapse) {
+        this.nameOfCollapse = nameOfCollapse;
+    }
 
     public String getOwnerIinBin() {
         return ownerIinBin;

@@ -30,6 +30,26 @@ public class TransportService {
     @Autowired
     private AviaTransportRepo aviaTransportRepo;
 
+    public Integer countEquipments(String bin) {
+        return equipment_repo.countByBin(bin);
+    }
+    public Integer countTransport(String bin) {
+        return mvAutoFlRepo.countByBin(bin);
+    }
+    public Integer countAutoTransport(String bin) {
+        return autoTransportRepo.countByBin(bin);
+    }
+    public Integer countTrains(String bin) {
+        return trainsRepo.countByBin(bin);
+    }
+    public Integer countAviaTransport(String bin) {
+        return aviaTransportRepo.countByBin(bin);
+    }
+    public Integer countWaterTransport(String bin) {
+        return waterTransportRepo.countByBin(bin);
+    }
+
+
     public List<EquipmentDto> getEquimpentByBin(String bin) {
         List<Equipment> equipments = equipment_repo.getUsersByLike(bin);
         List<EquipmentDto> result = new ArrayList<>();
@@ -38,6 +58,17 @@ public class TransportService {
                 continue;
             }
             EquipmentDto dto = new EquipmentDto();
+            String name = "/ Специализация: ";
+            if (equipment.getEquipment_spec() != null) {
+                name += equipment.getEquipment_spec();
+            }
+            if (equipment.getEquipment_type() != null) {
+                name += "/ Тип: " + equipment.getEquipment_type();
+            }
+            if (equipment.getEquipment_form() != null) {
+                name += "/ Вид: " + equipment.getEquipment_form();
+            }
+            dto.setNameOfCollapse(name);
             dto.setOwnerIinBin(equipment.getOwner_iin_bin());
             dto.setOwnerName(equipment.getOwner_name());
             dto.setProprietorIinBin(equipment.getProprietor_name_iin_bin());
