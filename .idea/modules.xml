@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/dossier-common/dossier-common.iml" filepath="$PROJECT_DIR$/dossier-common/dossier-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/kant110.iml" filepath="$PROJECT_DIR$/.idea/kant110.iml" />
     </modules>
   </component>
 </project>
