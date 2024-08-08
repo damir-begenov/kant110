@@ -139,17 +139,18 @@ public class RiskService {
     }
 
     public OweULGroupPage getOweUl(String bin, Integer page) {
-        if (page == null || page == 0) {
-            return null;
-        } else {
-            page = page * 10 - 10;
-        }
         OweULGroupPage fin = new OweULGroupPage();
         if (page == 1) {
             Integer pages = sudispolRepo.countByBin(bin);
             Integer res = (pages + 10 - 1) / 10;
             fin.setPages(res);
         }
+        if (page == null || page == 0) {
+            return null;
+        } else {
+            page = page * 10 - 10;
+        }
+    
         List<Sudispol> list = sudispolRepo.pageableByBin(bin, page);
         List<OweDlDto> result = new ArrayList<>();
         for (Sudispol a: list) {
