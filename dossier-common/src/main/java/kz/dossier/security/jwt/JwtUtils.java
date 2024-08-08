@@ -2,9 +2,12 @@ package kz.dossier.security.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import kz.dossier.security.models.User;
+import kz.dossier.security.repository.UserRepository;
 import kz.dossier.security.services.UserDetailsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -16,20 +19,49 @@ import java.util.Date;
 public class JwtUtils {
   private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-  @Value("Y2Fubm90cm9hbF9leGFtcGxlX2tleV9zdHJpbmc6Y2Fubm90cm9hbF9leGFtcGxlX2tleV9zdHJpbmc6Y2Fubm90cm9hbF9leGFtcGxlX2tleV9zdHJpbmc6Y2Fubm90cm9hbF9leGFtcGxlX2tleV9zdHJpbmc=")
+  @Autowired
+  UserRepository userRepository;
+  // @Value("Y2Fubm90cm9hbF9leGFtcGxlX2tleV9zdHJpbmc6Y2Fubm90cm9hbF9leGFtcGxlX2tleV9zdHJpbmc6Y2Fubm90cm9hbF9leGFtcGxlX2tleV9zdHJpbmc6Y2Fubm90cm9hbF9leGFtcGxlX2tleV9zdHJpbmc=")
+  // private String jwtSecret;
+
+  // @Value("89000000")
+  // private int jwtExpirationMs;
+
+
+  // @Value("108000000")
+  // private int refreshTokenExpirationMs;
+  @Value("${bezkoder.app.jwtSecret}")
   private String jwtSecret;
 
-  @Value("89000000")
+  @Value("${bezkoder.app.jwtExpirationMs}")
   private int jwtExpirationMs;
 
-  public String generateJwtToken(Authentication authentication) {
+  @Value("${bezkoder.app.refreshTokenExpirationMs}")
+  private int refreshTokenExpirationMs;
+
+  public String generateJwtToken(Authentication authentication, Integer tokenVersion) {
     UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+    int expiration = jwtExpirationMs;
+    if (userPrincipal.getUsername().equals("derzeet@gmail.com")) {
+      expiration = 8600000;
+    }
 
     return Jwts.builder()
             .setSubject(userPrincipal.getUsername())
+            .claim("tokenVersion", tokenVersion) // Add token version to JWT
             .setIssuedAt(new Date())
-            .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+            .setExpiration(new Date((new Date()).getTime() + expiration))
             .signWith(getSigningKey(), SignatureAlgorithm.HS256)
+            .compact();
+  }
+  public String generateRefreshToken(Authentication authentication, Integer tokenVersion) {
+    UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+    return Jwts.builder()
+            .setSubject((userPrincipal.getUsername()))
+            .claim("tokenVersion", tokenVersion) // Add token version to JWT
+            .setIssuedAt(new Date())
+            .setExpiration(new Date((new Date()).getTime() + refreshTokenExpirationMs))
+            .signWith(getSigningKey(), SignatureAlgorithm.HS512)
             .compact();
   }
 
@@ -54,9 +86,20 @@ public class JwtUtils {
 
   public boolean validateJwtToken(String authToken) {
     try {
-      Jwts.parser().setSigningKey(getSigningKey())
+      Claims claims = Jwts.parser().setSigningKey(getSigningKey())
               .build()
-              .parseClaimsJws(authToken);
+              .parseClaimsJws(authToken)
+              .getBody();
+
+      Integer tokenVersion = (Integer) claims.get("tokenVersion");
+      String username = getUserNameFromJwtToken(authToken);
+      User user = userRepository.findByUsernameTwo(username);// ... get from database
+      Integer currentTokenVersion = user.getTokenVersion();
+      if (tokenVersion == null || !tokenVersion.equals(currentTokenVersion)) {
+        logger.error("Invalid token version");
+        return false;
+      }
+
       return true;
     } catch (SignatureException e) {
       logger.error("Invalid JWT signature: {}", e.getMessage());

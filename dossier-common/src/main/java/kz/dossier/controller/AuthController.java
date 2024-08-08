@@ -19,12 +19,16 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -52,21 +56,64 @@ public class AuthController {
 
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-    Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-    SecurityContextHolder.getContext().setAuthentication(authentication);
-    String jwt = jwtUtils.generateJwtToken(authentication);
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User user = userRepository.findByUsernameTwo(userDetails.getUsername()); // Assuming you have a method to get the User object
+        Integer newTokenVersion = user.getTokenVersion() != null ? user.getTokenVersion() + 1 : 1; // Increment token version
+        user.setTokenVersion(newTokenVersion);
+        userRepository.save(user);
 
-    UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-    List<String> roles = userDetails.getAuthorities().stream()
-            .map(item -> item.getAuthority())
-            .collect(Collectors.toList());
-    return ResponseEntity.ok(new JwtResponse(jwt,
-            userDetails.getId(),
-            userDetails.getUsername(),
-            userDetails.getEmail(),
-            roles));
+        String jwt = jwtUtils.generateJwtToken(authentication, newTokenVersion);
+        String refreshToken = jwtUtils.generateRefreshToken(authentication, newTokenVersion);
+        List<String> roles = userDetails.getAuthorities().stream()
+                .map(item -> item.getAuthority())
+                .collect(Collectors.toList());
+    
+        return ResponseEntity.ok(new JwtResponse(jwt,
+                refreshToken,
+                userDetails.getUsername(),
+                userDetails.getEmail(),
+                roles));
   }
+
+  @PostMapping("/refreshtoken")
+public ResponseEntity<?> refreshToken(@Valid @RequestParam String request) {
+    String requestRefreshToken = request;
+    if (jwtUtils.validateJwtToken(requestRefreshToken)) {
+        String username = jwtUtils.getUserNameFromJwtToken(requestRefreshToken);
+        UserDetailsImpl userDetails = (UserDetailsImpl) userDetailsService.loadUserByUsername(username);
+        User user = userRepository.findByUsernameTwo(userDetails.getUsername()); // Assuming you have a method to get the User object
+        Integer newTokenVersion = user.getTokenVersion() + 1; // Increment token version
+        user.setTokenVersion(newTokenVersion);
+        userRepository.save(user);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                userDetails, null, userDetails.getAuthorities());
+
+        String newAccessToken = jwtUtils.generateJwtToken(authentication, newTokenVersion);
+        String newRefreshToken = jwtUtils.generateRefreshToken(authentication, newTokenVersion);
+        Map<String, String> result = new HashMap<>();
+        result.put("accessToken", newAccessToken);
+        result.put("refreshToken", newRefreshToken);
+        return ResponseEntity.ok(result);
+    } else {
+        return ResponseEntity.badRequest().body("Invalid refresh token");
+    }
+}
+@PostMapping("/logout")
+    @Transactional
+    public ResponseEntity<?> logoutUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User user = userRepository.findByUsernameTwo(userDetails.getUsername());
+        // Increment token version to invalidate all previous tokens
+        user.setTokenVersion(user.getTokenVersion() + 1);
+        userRepository.save(user);
+
+        return ResponseEntity.ok(new MessageResponse("User logged out successfully!"));
+    }
+
   @PostMapping("/changePassword")
   public void changePassword( @RequestParam String password, Principal principal, @RequestParam String username){
     Optional<User> user = userRepository.findByUsername(username);

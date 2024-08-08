@@ -26,6 +26,19 @@ public class User {
   @Size(max = 120)
   private String password;
   private boolean active;
+  // Add token version field
+  @Column(name = "token_version")
+  private Integer tokenVersion = 0;
+
+  public Integer getTokenVersion() {
+      return tokenVersion;
+  }
+  public void setTokenVersion(Integer tokenVersion) {
+      this.tokenVersion = tokenVersion;
+  }
+
+
+
   public boolean isActive() {
     return active;
   }
