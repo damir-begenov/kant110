@@ -439,6 +439,7 @@ public class UlDossierController {
             List<RnListDto> dto = rnService.getRnPages(bin, page);
             if (dto == null) {
                 return ResponseEntity.notFound().build(); // Return 404 Not Found
+
             }
             return ResponseEntity.ok(dto);
         } catch (Exception e) {
