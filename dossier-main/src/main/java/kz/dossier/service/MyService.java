@@ -392,6 +392,52 @@ public class MyService {
         }
     }
 
+    public Integer countGoszakupDetails(String bin, Integer year, Boolean isSupplier, Integer page ) {
+        Integer goszakups = 0;
+        if(isSupplier) {
+            try {
+                goszakups = goszkupRepo.countBySupplierBinAndYear(bin, year, page);
+            } catch (Exception e) {
+                return 0;
+            }
+            return goszakups;
+        } else {
+            try {
+                goszakups = goszkupRepo.countByCustomerBinAndYear(bin, year, page);
+            } catch (Exception e) {
+                return 0;
+            }
+            return goszakups;
+
+        }
+    }
+    public Integer countSamrukDetails(String bin, Integer year, Boolean isSupplier, Integer page) {
+        Integer pages = 0;
+        if(isSupplier) {
+            try {
+                if (year == 0) {
+                    pages = samrukRepo.countBySupplierAndNullYear(bin, page);
+                } else {
+                    pages = samrukRepo.countBySupplierAndYear(bin, year, page);
+                }
+            } catch (Exception e) {
+                return 0;
+            }
+            return pages;
+        } else {
+            try {
+                if (year == 0) {
+                    pages = samrukRepo.countByCustomerAndNullYear(bin, page);
+                } else {
+                    pages = samrukRepo.countByCustomerAndYear(bin, year, page);
+                }            } catch (Exception e) {
+                return 0;
+            }
+            return pages;
+
+        }
+    }
+
     private List<SamrukDTO> tranformToSamrukDTO(List<Samruk> samruks, Boolean countSupplier) {
         List<SamrukDTO> result = new ArrayList<>();
 
@@ -483,6 +529,11 @@ public class MyService {
     }
 
     public List<SamrukDetailsDTO> getSamrukDetailsByCustomer(String bin, Integer year, Integer page) {
+        if (page == null || page == 0) {
+            return null;
+        } else {
+            page = page * 10 - 10;
+        }
         List<Samruk> samruks = new ArrayList<>();
         try {
             if (year == 0) {

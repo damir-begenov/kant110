@@ -56,15 +56,18 @@ public class TaxService {
                 .sorted(Comparator.comparing(TaxViewDto::getYear))
                 .collect(Collectors.toList());
 
-        for (TaxViewDto a : taxViewList) {
-            totalByImport = totalByImport.add(a.getByImport());
-            totalByEmployees = totalByEmployees.add(a.getByEmployees());
-            totalByOwning = totalByOwning.add(a.getByOwning());
-            totalTotal = totalTotal.add(a.getTotalSum());
+        if (taxViewList.size() > 0) {
+            for (TaxViewDto a : taxViewList) {
+                totalByImport = totalByImport.add(a.getByImport());
+                totalByEmployees = totalByEmployees.add(a.getByEmployees());
+                totalByOwning = totalByOwning.add(a.getByOwning());
+                totalTotal = totalTotal.add(a.getTotalSum());
+            }
+    
+            TaxViewDto total = new TaxViewDto("Общая сумма", totalTotal, totalByEmployees, totalByOwning, totalByImport);
+            taxViewList.add(total);
         }
-
-        TaxViewDto total = new TaxViewDto("Общая сумма", totalTotal, totalByEmployees, totalByOwning, totalByImport);
-        taxViewList.add(total);
+    
         return taxViewList;
     }
 

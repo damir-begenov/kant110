@@ -470,9 +470,9 @@ public class UlDossierController {
     public ResponseEntity<Map<String, Object>> getTaxes(@RequestParam String bin,
                                                    @RequestParam Integer year,
                                                    @RequestParam(required = false,defaultValue = "1") Integer page,
-                                                   @RequestParam(required = false,defaultValue = "1") Integer size) {
+                                                   @RequestParam(required = false,defaultValue = "10") Integer size) {
         try {
-            if (bin == null || bin.isEmpty() || year == null ) {
+            if (bin == null || bin.isEmpty() || year == null || page < 0 || size < 0 ) {
                 return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
             }
 
@@ -506,7 +506,7 @@ public class UlDossierController {
                                                           @RequestParam(required = false,defaultValue = "1") Integer page,
                                                           @RequestParam(required = false,defaultValue = "10") Integer size) {
         try {
-            if (bin == null || bin.isEmpty()) {
+            if (bin == null || bin.isEmpty() || page < 0 || size < 0) {
                 return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
             }
             List<RnListDto> dto = rnService.getRnPages(bin, page, size);

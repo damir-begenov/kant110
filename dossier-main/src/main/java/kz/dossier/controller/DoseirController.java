@@ -23,6 +23,7 @@ import org.apache.xpath.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayOutputStream;
@@ -228,24 +229,61 @@ public class DoseirController {
     }
 
     @GetMapping("/goszakup-page")
-    public List<GosZakupDetailsDTO> getGoszakupDetails(@RequestParam String bin, @RequestParam Integer year, @RequestParam String isSupplier, @RequestParam Integer page) {
+    public ResponseEntity<Map<String, Object>> getGoszakupDetails(@RequestParam String bin, @RequestParam Integer year, @RequestParam String isSupplier, @RequestParam Integer page) {
+        if (bin == null || bin.isEmpty() || page < 0 || isSupplier.isEmpty()) {
+            return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+        }
+        Integer pages = myService.countGoszakupDetails(bin, year, true, page);
+        Integer res = (pages + 10 - 1) / 10;
+        if (page < 0 || page > res) {
+            return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+        }
+        Map<String, Object> result = new HashMap<>();
+        result.put("pages", res);
         if (isSupplier.equals("true")) {
-            return myService.getGosZakupDetails(bin, year, true, page);
+            List<GosZakupDetailsDTO> dto = myService.getGosZakupDetails(bin, year, true, page);
+            result.put("list", dto);
+            return ResponseEntity.ok(result);
         } else {
-            return myService.getGosZakupDetails(bin, year, false, page);
+            List<GosZakupDetailsDTO> dto = myService.getGosZakupDetails(bin, year, false, page);
+            result.put("list", dto);
+            return ResponseEntity.ok(result);
         }
     }
     @GetMapping("/samruk-sum-by-year")
     public SamrukKazynaForAll getSamrukByBin(@RequestParam String bin) {
+        if (bin == null) {
+            return null;
+        }
         return myService.samrukByBin(bin);
     }
 
     @GetMapping("/samruk-page")
-    public List<SamrukDetailsDTO> getSamrukDetails(@RequestParam String bin, @RequestParam Integer year, @RequestParam String isSupplier, @RequestParam Integer page) {
+    public ResponseEntity<Map<String, Object>> getSamrukDetails(@RequestParam String bin, @RequestParam Integer year, @RequestParam String isSupplier, @RequestParam Integer page) {
+        if (bin == null || bin.isEmpty() || page < 0 || isSupplier.isEmpty()) {
+            return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+        }
+        Map<String, Object> result = new HashMap<>();
         if (isSupplier.equals("true")) {
-            return myService.getSamrukDetailsBySupplier(bin, year, page);
+            List<SamrukDetailsDTO> dto = myService.getSamrukDetailsBySupplier(bin, year, page);
+            Integer pages = myService.countSamrukDetails(bin, year, true, page);
+            Integer res = (pages + 10 - 1) / 10;
+            if (page < 0 || page > res) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            result.put("pages", res);
+            result.put("list", dto);
+            return ResponseEntity.ok(result);
         } else {
-            return myService.getSamrukDetailsByCustomer(bin, year, page);
+            List<SamrukDetailsDTO> dto = myService.getSamrukDetailsByCustomer(bin, year, page);
+            Integer pages = myService.countSamrukDetails(bin, year, false, page);
+            Integer res = (pages + 10 - 1) / 10;
+            if (page < 0 || page > res) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            result.put("pages", res);
+            result.put("list", dto);
+            return ResponseEntity.ok(result);
         }
     }
 
