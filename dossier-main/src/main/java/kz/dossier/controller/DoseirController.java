@@ -22,6 +22,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.xpath.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -74,12 +75,533 @@ public class DoseirController {
     UlDocxGenerator ulDocxGenerator;
     @Autowired
     UlRiskServiceImpl ulRiskService;
+    @Autowired
+    FlService flService;
+    @Autowired
+    TransportService transportService;
+    @Autowired
+    ULService ulService;
+    @GetMapping("/fl/get-commodity-producers-by-iinBin")
+    public ResponseEntity<List<CommodityProducersDTO>> ulCommodProducersByBin(@RequestParam String iin) {
+        try {
+            if (iin == null || iin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<CommodityProducersDTO> dto = ulService.getComProducersByBin(iin);
+            if (dto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching Commodity Producers by bin: " + iin, e);
 
-    @GetMapping("/sameAddressFl")
-    public List<SearchResultModelFL> sameAddressFls(@RequestParam String iin) {
-        System.out.println(iin);
-        return myService.getByAddressUsingIin(iin);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    } @GetMapping("/fl/get-fl-auto-transport")
+    public ResponseEntity<List<AutoTransportDto>> getAutoTransportByBinfl(@RequestParam String iin) {
+        try {
+            if (iin == null || iin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<AutoTransportDto> dto = transportService.getAutoTransportByBin(iin);
+            if (dto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching AutoTransportDto by bin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
     }
+    @GetMapping("/fl/get-trains")
+    public ResponseEntity<List<Trains>> getTrainsfl(@RequestParam String iin) {
+        try {
+            if (iin == null || iin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<Trains> dto = transportService.getTrains(iin);
+            if (dto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching Trains by bin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+    @GetMapping("/fl/get-avia-transport")
+    public ResponseEntity<List<AviaTransport>> getAviaTransportfl(@RequestParam String iin) {
+        try {
+            if (iin == null || iin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<AviaTransport> dto = transportService.getAviaTransport(iin);
+            if (dto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching AviaTransport by bin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+    @GetMapping("/fl/get-water-transport")
+    public ResponseEntity<List<WaterTransport>> getWaterTransportfl(@RequestParam String iin) {
+        try {
+            if (iin == null || iin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<WaterTransport> dto = transportService.getWaterTransport(iin);
+            if (dto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching WaterTransport by bin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+    @GetMapping("/get-fl-by-iin")
+    public ResponseEntity<MvFlWithPhotoDto> getMvFl(@RequestParam String iin){
+        try {
+            if (iin == null || iin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            MvFlWithPhotoDto dto = flService.getMvFl(iin);
+            if (dto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching MvFl by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+    @GetMapping("/get-fl-doc-iin")
+    public ResponseEntity<List<MvIinDoc>> getMvFlDoc(@RequestParam String iin){
+        try {
+            if (iin == null || iin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<MvIinDoc> dto = flService.getMvDocs(iin);
+            if (dto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching MvIinDoc by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+    @GetMapping("/get-fl-address-iin")
+    public ResponseEntity<List<MvFlAddress>> getMvAddress(@RequestParam String iin){
+        try {
+            if (iin == null || iin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<MvFlAddress> dto = flService.getMvFlAddressByIIN(iin);
+            if (dto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching MvIinDoc by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+
+
+    @GetMapping("/get-fl-reg-address-iin")
+    public ResponseEntity<List<RegistrationTemp>> getRegAddressFl(@RequestParam String iin){
+        try {
+            if (iin == null || iin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<RegistrationTemp> dto = flService.getRegAddressByIIN(iin);
+            if (dto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching MvIinDoc by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+    @GetMapping("/get-fl-historicity-fio")
+    public ResponseEntity<List<ChangeFio>> getChangeFio(@RequestParam String iin){
+        try {
+            if(iin == null || iin.isEmpty()){
+                return ResponseEntity.badRequest().body(null);
+            }
+            List<ChangeFio> dto = flService.getChangeFioByIIN(iin);
+            if (dto == null){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(dto);
+        }catch (Exception e){
+            log.error("Error occurred while fetching MvIinDoc by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+    @GetMapping("/get-contacts-details")
+    public ResponseEntity<List<FlContacts>> getFlContacts(@RequestParam String iin){
+        try {
+            if(iin == null || iin.isEmpty()){
+                return ResponseEntity.badRequest().body(null);
+            }
+            List<FlContacts> dto = flService.getContactsByIIN(iin);
+            if (dto == null){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(dto);
+        }catch (Exception e){
+            log.error("Error occurred while fetching MvIinDoc by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+    @GetMapping("/fl-lawyers")
+    public ResponseEntity<List<AdvocateListEntity>> getAdvocate(@RequestParam String iin){
+        try {
+            if(iin == null || iin.isEmpty()){
+                return ResponseEntity.badRequest().body(null);
+            }
+            List<AdvocateListEntity> dto = flService.getAdvocateListEntity(iin);
+            if (dto == null){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(dto);
+        }catch (Exception e){
+            log.error("Error occurred while fetching MvIinDoc by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+    @GetMapping("/get-accountant")
+    public ResponseEntity<List<AccountantListEntity>> getAccountant(@RequestParam String iin){
+        try {
+            if(iin == null || iin.isEmpty()){
+                return ResponseEntity.badRequest().body(null);
+            }
+            List<AccountantListEntity> dto = flService.getAccountantListEntity(iin);
+            if (dto == null){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(dto);
+        }catch (Exception e){
+            log.error("Error occurred while fetching MvIinDoc by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+    @GetMapping("/get-fl-bailiff-iin")
+    public ResponseEntity<List<BailiffListEntity>> getBailiffListEntity(@RequestParam String iin){
+        try {
+            if(iin == null || iin.isEmpty()){
+                return ResponseEntity.badRequest().body(null);
+            }
+            List<BailiffListEntity> dto = flService.getBailiffListEntity(iin);
+            if (dto == null){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(dto);
+        }catch (Exception e){
+            log.error("Error occurred while fetching MvIinDoc by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+    @GetMapping("/get-fl-auditor-iin")
+    public ResponseEntity<List<AuditorsListEntity>> getAuditorsListEntity(@RequestParam String iin){
+        try {
+            if(iin == null || iin.isEmpty()){
+                return ResponseEntity.badRequest().body(null);
+            }
+            List<AuditorsListEntity> dto = flService.getAuditorsListEntity(iin);
+            if (dto == null){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(dto);
+        }catch (Exception e){
+            log.error("Error occurred while fetching MvIinDoc by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+    @GetMapping("/get-fl-ipgo-iin")
+    public ResponseEntity<List<IpgoEmailEntity>> getIpgoEmailEntity(@RequestParam String iin){
+        try {
+            if(iin == null || iin.isEmpty()){
+                return ResponseEntity.badRequest().body(null);
+            }
+            List<IpgoEmailEntity> dto = flService.getIpgoEmailEntity(iin);
+            if (dto == null){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(dto);
+        }catch (Exception e){
+            log.error("Error occurred while fetching MvIinDoc by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+
+    @GetMapping("/get-fl-ip-and-kx-iin")
+    public ResponseEntity<IpKxDto> getIpKxDto(@RequestParam String iin){
+        try {
+            if(iin == null || iin.isEmpty()){
+                return ResponseEntity.badRequest().body(null);
+            }
+            IpKxDto dto = flService.getIpKxDto(iin);
+            if (dto == null){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(dto);
+        }catch (Exception e){
+            log.error("Error occurred while fetching MvIinDoc by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+    @GetMapping("/get-equipments")
+    public ResponseEntity<List<Equipment>> getEquipment(@RequestParam String iin){
+        try {
+            if(iin == null || iin.isEmpty()){
+                return ResponseEntity.badRequest().body(null);
+            }
+            List<Equipment> dto = transportService.getEquipmentByIin(iin);
+            if (dto == null){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(dto);
+        }catch (Exception e){
+            log.error("Error occurred while fetching MvIinDoc by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+    @GetMapping("/get-education")
+    public ResponseEntity<EduDto> getEduDto(@RequestParam String iin){
+        try {
+            if(iin == null || iin.isEmpty()){
+                return ResponseEntity.badRequest().body(null);
+            }
+            EduDto dto = flService.getEduDto(iin);
+            if (dto == null){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(dto);
+        }catch (Exception e){
+            log.error("Error occurred while fetching MvIinDoc by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+    @GetMapping("/get-pension")
+    public ResponseEntity<PensionAllDto> getPensionAllDto(@RequestParam String iin){
+        try {
+            if(iin == null || iin.isEmpty()){
+                return ResponseEntity.badRequest().body(null);
+            }
+            PensionAllDto dto = flService.getPensionAllDto(iin);
+            if (dto == null){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(dto);
+        }catch (Exception e){
+            log.error("Error occurred while fetching MvIinDoc by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+    @GetMapping("/get-fl-military")
+    public ResponseEntity<List<MilitaryAccountingDTO>> getMilitaryAccountingDTO(@RequestParam String iin){
+        try {
+            if(iin == null || iin.isEmpty()){
+                return ResponseEntity.badRequest().body(null);
+            }
+            List<MilitaryAccountingDTO> dto = flService.getMilitaryAccountingDTO(iin);
+            if (dto == null){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(dto);
+        }catch (Exception e){
+            log.error("Error occurred while fetching MvIinDoc by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+    @GetMapping("/get-ul-participants")
+    public ResponseEntity<UlParticipantsDto> getUlParticipantsDto(@RequestParam String iin){
+        try {
+            if(iin == null || iin.isEmpty()){
+                return ResponseEntity.badRequest().body(null);
+            }
+            UlParticipantsDto dto = flService.getUlParticipantsDto(iin);
+            if (dto == null){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(dto);
+        }catch (Exception e){
+            log.error("Error occurred while fetching MvIinDoc by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+    @GetMapping("/get-fl-rn")
+    public ResponseEntity<List<MvRnOld>> getMvRnOld(@RequestParam String iin){
+        try {
+            if(iin == null || iin.isEmpty()){
+                return ResponseEntity.badRequest().body(null);
+            }
+            List<MvRnOld> dto = flService.getMvRnOlds(iin);
+            if (dto == null){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(dto);
+        }catch (Exception e){
+            log.error("Error occurred while fetching MvIinDoc by iin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+    @GetMapping("/get-fl-pdls")
+    public ResponseEntity<List<PdlDto>> getPdlByIin(@RequestParam String iin) {
+        try {
+            if (iin == null || iin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<PdlDto> dto = flService.getPdlByIin(iin);
+            if (dto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching PdlDto by bin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+    @GetMapping("/get-fl-transports")
+    public ResponseEntity<List<MvAutoDto>> getTransportByFl(@RequestParam String iin) {
+        try {
+            if (iin == null || iin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<MvAutoDto> dto = transportService.getTransportByBin(iin);
+            if (dto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching EquipmentDto by bin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+    @GetMapping("/sameAddressFl")
+    public ResponseEntity<RnFlSameAddressDto> sameAddressFls(@RequestParam String iin) {
+        try {
+            if (iin == null || iin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            RnFlSameAddressDto dto = myService.getByAddressUsingIin(iin);
+            if (dto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching EquipmentDto by bin: " + iin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+//    @GetMapping("/getRiskQuantity")
+//    public ResponseEntity<Integer> getRiskQuantity(@RequestParam  String iin){
+//        try {
+//            if (iin == null || iin.isEmpty()){
+//                return ResponseEntity.badRequest().body(null);
+//            }
+//            Integer dto = flRiskService.findFlRiskByIin(iin).getQuantity();
+//            if(dto == null){
+//                return ResponseEntity.notFound().build();
+//            }
+//            return ResponseEntity.ok(dto);
+//        }catch (Exception e){
+//            log.error("Error occurred while fetching getRiskQuantity by bin: " + iin, e);
+//
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body(null);
+//        }
+//    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @GetMapping("/sameAddressUl")
     public List<SearchResultModelUl> sameAddressUls(@RequestParam String bin) {
@@ -117,7 +639,7 @@ public class DoseirController {
     public List<PensionListDTO> getPesionDetails(@RequestParam String iin, @RequestParam String bin, @RequestParam String year) {
         return myService.getPensionDetails(iin, bin, year);
     }
-    
+
 
 //    @GetMapping("/relativesInfo")
 //    public List<FlRelatives> getRelativesInfo(@RequestParam String iin){
@@ -194,12 +716,12 @@ public class DoseirController {
     @GetMapping("/byphone")
     public List<SearchResultModelFL> getByPhone(@RequestParam String phone) {
         return myService.getByPhone(phone);
-    }   
+    }
     @GetMapping("/byemail")
     public List<SearchResultModelFL> getByEmail(@RequestParam String email) {
         return myService.getByEmail(email);
-    }   
-    
+    }
+
     @GetMapping("/byvinkuzov")
     public List<SearchResultModelFL> getByVinKuzov(@RequestParam String vin) {
         return myService.getByVinFl(vin.toUpperCase());

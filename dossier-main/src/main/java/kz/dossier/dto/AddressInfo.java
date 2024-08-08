@@ -5,10 +5,19 @@ public class AddressInfo {
     private String district;
     private String city;
     private String street;
+    private String rka;
     private String building;
     private String korpus;
     private String apartment_number;
     private String rnRegAddress;
+
+    public String getRka() {
+        return rka;
+    }
+
+    public void setRka(String rka) {
+        this.rka = rka;
+    }
 
     public String getRnRegAddress() {
         return rnRegAddress;

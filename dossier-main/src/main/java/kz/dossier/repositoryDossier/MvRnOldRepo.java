@@ -13,7 +13,8 @@ public interface MvRnOldRepo extends JpaRepository<MvRnOld, Long> {
     Integer countByBin(String iin);
     @Query(value= "select * from imp_rn.mv_rn where owner_iin_bin = ?1 limit ?3 offset ?2", nativeQuery = true)
     List<MvRnOld> getUsersByLike(String iin, Integer page, Integer size);
-
+    @Query(value= "select * from imp_rn.mv_rn where rka_code = ?1 and estate_characteristic_status_rus  = 'актуальная' and register_status_rus = 'актуальная' ", nativeQuery = true)
+    List<MvRnOld> getUsersByLikerka_code(String rka_code);
     @Query(value= "select * from imp_rn.mv_rn where (cadastral_number = ?1 and address_rus = ?2) or (cadastral_number = ?1 and address_kaz = ?2) ORDER BY register_reg_date desc", nativeQuery = true)
     List<MvRnOld> getRowsByCadAndAddress(String cad, String address);
 }
