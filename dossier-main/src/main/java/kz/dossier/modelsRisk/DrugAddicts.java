@@ -15,10 +15,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DrugAddicts {
-    @Id
     private Integer id;
     private String source;
     private String fio;
+    @Id
     private String iin;
     private String ishod;
 }

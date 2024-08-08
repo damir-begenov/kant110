@@ -21,7 +21,6 @@ public class Adm {
     private @Nullable String org_identify_crime;
     private @Nullable String authority_detected;
     private @Nullable String divisions_ovd;
-    @Id
     private @Nullable String material_num;
     private @Nullable String language_prod;
     private @Nullable String reg_date;
@@ -76,7 +75,7 @@ public class Adm {
     private @Nullable String state_auto_num;
     private @Nullable String qualification;
     private @Nullable String enforcement;
-    private @Nullable String id;
+    private @Nullable  @Id String id;
     private @Nullable String maim_measure;
     private @Nullable String end_date;
     private @Nullable String fine_amount;

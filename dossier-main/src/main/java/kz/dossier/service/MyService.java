@@ -180,7 +180,21 @@ public class MyService {
     private QoldauRepo qoldauRepo;
 
 
-
+    protected MvFlWithPhotoDto tryAddPhotoToDto(MvFlWithPhotoDto fl, String IIN) {
+        try {
+            List<PhotoDb> photos = new ArrayList<>();
+            photos = newPhotoRepo.findAllByIinv(IIN);
+            List<PhotoDb> photoDbs = new ArrayList<>();
+            for(PhotoDb photoDb1: photos){
+                photoDbs.add(photoDb1);
+                fl.setPhotoDbs(photoDbs);
+            }
+            return fl;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return fl;
+    }
 
     public ULGeneralInfoDTO getUlGeneral(String bin){
         int total = 6;
@@ -269,7 +283,55 @@ public class MyService {
     }
 
 
+    public RnFlSameAddressDto getByAddressUsingIin(String iin) {
+        List<MvFlAddress> address = mvFlAddressRepository.getMvFlAddressByIIN(iin);
+        System.out.println(address.size());
+        if(address != null) {
+            AddressInfo addressInfo = new AddressInfo();
+            if (address.size() > 0) {
+                addressInfo.setRka(address.get(0).getRka());
+                addressInfo.setRnRegAddress(address.get(0).getRnAddressRu());
+            }
+            List<MvFlAddress> mvFlAddresses = mvFlAddressRepository.getMvFlAddressByRnAddress(addressInfo.getRnRegAddress(), iin);
+            List<MvFl> fls = new ArrayList<>();
+            for (MvFlAddress ad : mvFlAddresses) {
+                try {
+                    Optional<MvFl> fl = mv_FlRepo.getByIin(ad.getIin());
+                    if (fl.isPresent()) {
+                        fls.add(fl.get());
+                    }
+                } catch (Exception e) {
+                    MvFl obj = new MvFl();
+                    obj.setIin(ad.getIin());
+                    obj.setLast_name(ad.getFio());
+                    fls.add(obj);
+                }
+            }
 
+            RnFlSameAddressDto rnFlSameAddressDto = new RnFlSameAddressDto();
+            List<SearchResultModelFL> result = findWithoutPhoto(fls);
+            List<MvRnOld> mvRnOlds = mv_rn_oldRepo.getUsersByLikerka_code(addressInfo.getRka());
+            List<RnOwnerDto> ownerDtos = new ArrayList<>();
+            for(MvRnOld mvRnOld: mvRnOlds){
+                RnOwnerDto rnOwnerDto = new RnOwnerDto();
+                rnOwnerDto.setOwner_info(mvRnOld.getOwner_iin_bin() + " - " + mvRnOld.getOwner_full_name() + ", " + mvRnOld.getRegister_emergence_rights_rus());
+                ownerDtos.add(rnOwnerDto);
+            }
+
+            if (!result.isEmpty()) {
+                rnFlSameAddressDto.setSearchResultModelFLList(result);
+            }
+            if (!mvRnOlds.isEmpty()) {
+                rnFlSameAddressDto.setRnOwnerDtos(ownerDtos);
+            }
+            if (rnFlSameAddressDto.getRnOwnerDtos() == null && rnFlSameAddressDto.getSearchResultModelFLList() == null) {
+                return null;
+            } else {
+                return rnFlSameAddressDto;
+            }
+        }
+        return null;
+    }
     private List<GosZakupDTO> transforToGosZakupDto(List<Goszakup> goszakups, Boolean countSupplier) {
         List<GosZakupDTO> result = new ArrayList<>();
         Map<Integer, List<Goszakup>> goszakupsGroupedByYear = goszakups.stream()
@@ -746,42 +808,6 @@ public class MyService {
 
 //    public FlRelatives getFlRelativesInfo()
 
-    public List<SearchResultModelFL> getByAddressUsingIin(String iin) {
-        List<MvFlAddress> address = mvFlAddressRepository.getMvFlAddressByIIN(iin);
-        System.out.println(address.size());
-        if(address != null) {
-            AddressInfo addressInfo = new AddressInfo();
-            if (address.size() > 0) {
-                addressInfo.setRegion(address.get(0).getRegion());
-                addressInfo.setDistrict(address.get(0).getDistrict());
-                addressInfo.setCity(address.get(0).getCity());
-                addressInfo.setStreet(address.get(0).getStreet());
-                addressInfo.setBuilding(address.get(0).getBuilding());
-                addressInfo.setKorpus(address.get(0).getCorpus());
-                addressInfo.setApartment_number(address.get(0).getFlat());
-                addressInfo.setRnRegAddress(address.get(0).getRnAddressRu());
-            }
-            System.out.println(addressInfo.getRnRegAddress());
-            List<MvFlAddress> mvFlAddresses = mvFlAddressRepository.getMvFlAddressByRnAddress(addressInfo.getRnRegAddress(), iin);
-            List<MvFl> fls = new ArrayList<>();
-            for (MvFlAddress ad : mvFlAddresses) {
-                try {
-                    Optional<MvFl> fl = mv_FlRepo.getByIin(ad.getIin());
-                    if (fl.isPresent()) {
-                        fls.add(fl.get());
-                    }
-                } catch (Exception e) {
-                    MvFl obj = new MvFl();
-                    obj.setIin(ad.getIin());
-                    obj.setLast_name(ad.getFio());
-                    fls.add(obj);
-                }
-            }
-            List<SearchResultModelFL> result = findWithoutPhoto(fls);
-            return result;
-        }
-        return new ArrayList<>();
-    }
 
     public List<SearchResultModelUl> getByAddress(String bin) {
         RegAddressUlEntity addressUlEntity = regAddressUlEntityRepo.findByBin(bin);
@@ -1196,7 +1222,7 @@ public class MyService {
         return pensions;
     }
 
-    private List<MvRnOld> setNamesByBin(List<MvRnOld> list) {
+    protected List<MvRnOld> setNamesByBin(List<MvRnOld> list) {
         for (MvRnOld a : list) {
             String name = mv_ul_repo.getNameByBin(a.getOwner_iin_bin());
             if (name != null) {

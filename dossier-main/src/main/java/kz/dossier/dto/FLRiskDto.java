@@ -44,11 +44,16 @@ public class FLRiskDto {
     private List<Unemployed> unemployeds;
     private Double percentage;
     private int quantity; //--количество
-
     public void setQuantity(int quantity) {
         int riskListCount = countRiskLists();
         this.percentage = (double) (quantity * 100 / riskListCount);
         this.quantity = quantity;
+    }
+    public Double setPercentage(int quantity){
+        int riskListCount = countRiskLists();
+        this.percentage = (double) (quantity * 100 / riskListCount);
+        this.quantity = quantity;
+        return this.percentage;
     }
     private int countRiskLists() {
         Field[] fields = FLRiskDto.class.getDeclaredFields();
@@ -60,4 +65,5 @@ public class FLRiskDto {
         }
         return count;
     }
+
 }

@@ -49,7 +49,15 @@ public class TransportService {
         return waterTransportRepo.countByBin(bin);
     }
 
+    public List<Equipment> getEquipmentByIin(String iin) {
+        List<Equipment> equipment = equipment_repo.getUsersByLike(iin);
 
+        if (!equipment.isEmpty()) {
+            return equipment;
+        } else {
+            return null;
+        }
+    }
     public List<EquipmentDto> getEquimpentByBin(String bin) {
         List<Equipment> equipments = equipment_repo.getUsersByLike(bin);
         List<EquipmentDto> result = new ArrayList<>();
