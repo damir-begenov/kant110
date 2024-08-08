@@ -1,0 +1,88 @@
+Время жизни токенов
+accessToken = 900000ms
+refreshToken = 7200000ms
+
+После истечения accessToken отправляете запрос в эндпоинт /auth/refreshtoken с refreshToken
+АПИшка вернет вам новые токены инвалидируя старые
+
+
+1. Login
+http://localhost:8081/api/pandora/auth/signin
+Request body
+{
+    "username": "derzeet@gmail.com",
+    "password": "40593319"
+}
+Response
+{
+    "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXJ6ZWV0QGdtYWlsLmNvbSIsImlhdCI6MTcyMzA2MzUyNiwiZXhwIjoxNzIzMDY0NDI2fQ.XhLrmGJyiLsfyHLPAD_vEDNa1gDD98Wk3dPahpCp50Y",
+    "refreshToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZXJ6ZWV0QGdtYWlsLmNvbSIsImlhdCI6MTcyMzA2MzUyNiwiZXhwIjoxNzIzMDcwNzI2fQ.hhK2zPVsmEGCC1SWe1rQZVUfX1U-etdiNrnva00Jc5095qQ575Hef_ANa_woFJdFIqbaziIKrEsZUhXSZOo6Hw",
+    "username": "derzeet@gmail.com",
+    "email": "Есенулы Темирлан",
+    "roles": [
+        "ADMIN"
+    ]
+}
+
+2. Refresh Tokens
+http://localhost:8081/api/pandora/auth/refreshtoken
+RequestParam String request (../refreshtoken?request=...)
+{
+    "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXJ6ZWV0QGdtYWlsLmNvbSIsInRva2VuVmVyc2lvbiI6NiwiaWF0IjoxNzIzMDY4MjY3LCJleHAiOjE3MjMwNjkxNjd9.GkVeHat-WZObFVkDUzcZALi6ohh__sVoWJKDEGLSU-A",
+    "refreshToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZXJ6ZWV0QGdtYWlsLmNvbSIsInRva2VuVmVyc2lvbiI6NiwiaWF0IjoxNzIzMDY4MjY3LCJleHAiOjE3MjMwNzU0Njd9.UoE9h5ZMMVBeNgZxlz8gafRIXhllBwMSyPJXw_pSPnIXhpcw2EV7Vmn0Eglb11GVgC1bm7P3CZqkU01LsiM3qQ"
+}
+
+3. Logout
+http://localhost:8081/api/pandora/auth/logout
+Header bearer acesstoken
+{
+    "message": "User logged out successfully!"
+}
+
+
+Время жизни токенов
+accessToken = 900000ms
+refreshToken = 7200000ms
+
+После истечения accessToken отправляете запрос в эндпоинт /auth/refreshtoken с refreshToken
+АПИшка вернет вам новые токены инвалидируя старые
+
+
+1. Login
+http://localhost:8081/api/pandora/auth/signin
+Request body
+{
+    "username": "derzeet@gmail.com",
+    "password": "40593319"
+}
+Response
+{
+    "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXJ6ZWV0QGdtYWlsLmNvbSIsImlhdCI6MTcyMzA2MzUyNiwiZXhwIjoxNzIzMDY0NDI2fQ.XhLrmGJyiLsfyHLPAD_vEDNa1gDD98Wk3dPahpCp50Y",
+    "refreshToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZXJ6ZWV0QGdtYWlsLmNvbSIsImlhdCI6MTcyMzA2MzUyNiwiZXhwIjoxNzIzMDcwNzI2fQ.hhK2zPVsmEGCC1SWe1rQZVUfX1U-etdiNrnva00Jc5095qQ575Hef_ANa_woFJdFIqbaziIKrEsZUhXSZOo6Hw",
+    "username": "derzeet@gmail.com",
+    "email": "Есенулы Темирлан",
+    "roles": [
+        "ADMIN"
+    ]
+}
+
+2. Refresh Tokens
+http://localhost:8081/api/pandora/auth/refreshtoken
+RequestParam String request (../refreshtoken?request=...)
+{
+    "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXJ6ZWV0QGdtYWlsLmNvbSIsInRva2VuVmVyc2lvbiI6NiwiaWF0IjoxNzIzMDY4MjY3LCJleHAiOjE3MjMwNjkxNjd9.GkVeHat-WZObFVkDUzcZALi6ohh__sVoWJKDEGLSU-A",
+    "refreshToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZXJ6ZWV0QGdtYWlsLmNvbSIsInRva2VuVmVyc2lvbiI6NiwiaWF0IjoxNzIzMDY4MjY3LCJleHAiOjE3MjMwNzU0Njd9.UoE9h5ZMMVBeNgZxlz8gafRIXhllBwMSyPJXw_pSPnIXhpcw2EV7Vmn0Eglb11GVgC1bm7P3CZqkU01LsiM3qQ"
+}
+
+3. Logout
+http://localhost:8081/api/pandora/auth/logout
+Header bearer acesstoken
+{
+    "message": "User logged out successfully!"
+}
+
+
+
+ALTER TABLE public.users ADD token_version bigint NULL;
+
+
