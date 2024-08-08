@@ -15,6 +15,29 @@ public interface FlPensionContrRepo extends JpaRepository<FlPensionContr, Long> 
 
     @Query(value = "select extract(year from \"PAY_DATE\") as year, count(distinct \"IIN\") as person_count from imp_kfm_fl.fl_pension_contr where \"P_RNN\" = ?1 group by extract(year from \"PAY_DATE\") order by extract(year from \"PAY_DATE\") desc", nativeQuery = true)
     List<Map<String, Object>> getYearGroupedForBin(String bin);
+
+    @Query(value = "SELECT DISTINCT extract(year from \"PAY_DATE\") as year, \"IIN\", \n" +
+            "\tcast(concat(\"SURNAME\" || ' ' || \"FIRSTNAME\" || ' ' || \"SECONDNAME\") as text) as fio, \n" +
+            "\tSUM(case when \"KNP\"='010' then \"AMOUNT\" else 0 END) AS zeroten,\n" +
+            "\tSUM(case when \"KNP\"='012' then \"AMOUNT\" else 0 END) AS zerotwelve\n" +
+            "\tFROM imp_kfm_fl.fl_pension_contr \n" +
+            "\tWHERE extract(year from \"PAY_DATE\") = ?2 and \"P_RNN\" = ?1 and \"FIRSTNAME\" notnull \n" +
+            "\tGROUP BY extract(year from \"PAY_DATE\"), concat(\"SURNAME\" || ' ' || \"FIRSTNAME\" || ' ' || \"SECONDNAME\"), \"IIN\" limit ?3 offset ?4", nativeQuery = true)
+    List<Map<String, Object>> getPensionByBinAndYear(String bin, Integer year, Integer limit, Integer offset);
+
+    @Query(value = "SELECT DISTINCT \"PERIOD\" as period, \"P_RNN\", \"P_NAME\",\n" +
+            "\tcast(concat(\"SURNAME\" || ' ' || \"FIRSTNAME\" || ' ' || \"SECONDNAME\") as text) as fio, \n" +
+            "\tSUM(case when \"KNP\"='010' then \"AMOUNT\" else 0 END) AS zeroten\n" +
+            "\tFROM imp_kfm_fl.fl_pension_contr \n" +
+            "\tWHERE extract(year from \"PAY_DATE\") = ?2 and \"P_RNN\" = ?1 and \"IIN\" = ?3 and \"FIRSTNAME\" notnull \n" +
+            "\tGROUP BY \"PERIOD\", \"P_RNN\", \"P_NAME\", concat(\"SURNAME\" || ' ' || \"FIRSTNAME\" || ' ' || \"SECONDNAME\")", nativeQuery = true)
+    List<Map<String, Object>> getPensionByBinAndYearAdnIin(String bin, Integer year, String iin);
+
+    @Query(value = "SELECT count(DISTINCT \"IIN\")  \n" +
+            "\tFROM imp_kfm_fl.fl_pension_contr \n" +
+            "\tWHERE extract(year from \"PAY_DATE\") = ?2 and \"P_RNN\" = ?1 and \"FIRSTNAME\" notnull", nativeQuery = true)
+    Integer countByBinAndYear(String bin, Integer year);
+
     @Query(value = "select count(distinct \"IIN\") from imp_kfm_fl.fl_pension_contr where \"P_RNN\" = ?1 limit 1", nativeQuery = true)
     Integer countByBin(String bin);
     @Query(value = "select distinct(extract (year from \"PAY_DATE\")) as year from imp_kfm_fl.fl_pension_contr where \"P_RNN\" = ?1 order BY year DESC", nativeQuery = true)

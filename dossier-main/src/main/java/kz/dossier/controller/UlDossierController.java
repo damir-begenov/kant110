@@ -23,7 +23,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "*", maxAge = 3000)
 @RestController
@@ -245,7 +247,61 @@ public class UlDossierController {
     }
 
     //Pension details by year and bin
+    @GetMapping("/ul/get-ul-pension-persons")
+    public ResponseEntity<Map<String, Object>> getPensionsByBinAndYear(@RequestParam String bin,
+                                                                       @RequestParam Integer year,
+                                                                       @RequestParam(required = false,defaultValue = "1") Integer page,
+                                                                       @RequestParam(required = false,defaultValue = "10") Integer size) {
+        try {
+            if (bin == null || bin.isEmpty() || year == null ) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
 
+            List<PensionListDTO> dto = ulService.getPensionByBinAndYear(bin, year, page, size);
+            Integer pages = ulService.countByBinAndYear(bin, year);
+            Integer res = (pages + size - 1) / size;
+            if (page > res) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            Map<String, Object> result = new HashMap<>();
+            result.put("list", dto);
+            if (page == 1) {
+                result.put("pages", res);
+            }
+            if (dto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching PensionListDTO by bin: " + bin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+    @GetMapping("/ul/pension-fl")
+    public ResponseEntity<Map<String, Object>> getPensionDetailsForFl(@RequestParam String bin,
+                                                                          @RequestParam Integer year,
+                                                                          @RequestParam String iin) {
+        try {
+            if (bin == null || bin.isEmpty() || year == null || iin == null) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+
+            Map<String, Object> dto = ulService.getPensionByBinAndYearAdnIin(bin, year, iin);
+            if (dto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching getPensionByBinAndYearAdnIin by bin: " + bin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
     //Contacts
     @GetMapping("/ul/get-ul-contacts")
     public ResponseEntity<List<ContactDetailDto>> getContactsByBin(@RequestParam String bin) {
@@ -411,16 +467,31 @@ public class UlDossierController {
         }
     }
     @GetMapping("/ul/get-tax-by-bin")
-    public ResponseEntity<List<MvTaxDto>> getTaxes(@RequestParam String bin,  @RequestParam Integer year,  @RequestParam Integer page) {
+    public ResponseEntity<Map<String, Object>> getTaxes(@RequestParam String bin,
+                                                   @RequestParam Integer year,
+                                                   @RequestParam(required = false,defaultValue = "1") Integer page,
+                                                   @RequestParam(required = false,defaultValue = "1") Integer size) {
         try {
             if (bin == null || bin.isEmpty() || year == null ) {
                 return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
             }
-            List<MvTaxDto> dto = taxService.getTaxesWithPages(bin, year, page);
+
+            List<MvTaxDto> dto = taxService.getTaxesWithPages(bin, year, page, size);
+            Map<String, Object> result = new HashMap<>();
+            Integer pages = taxService.getNumberOfTaxPages(bin, year);
+            Integer res = (pages + size - 1) / size;
+            result.put("list", dto);
+            if (page > res) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            if (page == 1) {
+                result.put("pages", res);
+            }
             if (dto == null) {
                 return ResponseEntity.notFound().build(); // Return 404 Not Found
             }
-            return ResponseEntity.ok(dto);
+
+            return ResponseEntity.ok(result);
         } catch (Exception e) {
             log.error("Error occurred while fetching MvTaxDto by bin: " + bin, e);
 
@@ -431,17 +502,28 @@ public class UlDossierController {
 
 
     @GetMapping("/ul/rn-pages")
-    public ResponseEntity<List<RnListDto>> getRnPages(@RequestParam String bin, @RequestParam Integer page) {
+    public ResponseEntity<Map<String, Object>> getRnPages(@RequestParam String bin,
+                                                          @RequestParam(required = false,defaultValue = "1") Integer page,
+                                                          @RequestParam(required = false,defaultValue = "10") Integer size) {
         try {
             if (bin == null || bin.isEmpty()) {
                 return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
             }
-            List<RnListDto> dto = rnService.getRnPages(bin, page);
+            List<RnListDto> dto = rnService.getRnPages(bin, page, size);
             if (dto == null) {
                 return ResponseEntity.notFound().build(); // Return 404 Not Found
-
             }
-            return ResponseEntity.ok(dto);
+            Integer pages = rnService.countRns(bin);
+            Integer res = (pages + size - 1) / size;
+            Map<String, Object> result = new HashMap<>();
+            result.put("list", dto);
+            if (page > res) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            if (page == 1) {
+                result.put("pages", res);
+            }
+            return ResponseEntity.ok(result);
         } catch (Exception e) {
             log.error("Error occurred while fetching AdmRightsBreakerDTO by bin: " + bin, e);
 

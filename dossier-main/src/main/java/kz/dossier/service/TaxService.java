@@ -139,14 +139,14 @@ public class TaxService {
         }
     }
 
-    public List<MvTaxDto> getTaxesWithPages(String bin, Integer year, Integer page) {
+    public List<MvTaxDto> getTaxesWithPages(String bin, Integer year, Integer page, Integer size) {
         if (page == null || page == 0) {
             return null;
         } else {
-            page = page * 10 - 10;
+            page = page * size - size;
         }
 
-        List<MvTaxByBin> list = mvTaxByBinRepo.findAllByBin(bin, year, page);
+        List<MvTaxByBin> list = mvTaxByBinRepo.findAllByBin(bin, year, page, size);
         List<MvTaxDto> result = new ArrayList<>();
 
         for (MvTaxByBin mvTaxByBin : list) {

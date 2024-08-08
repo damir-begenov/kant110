@@ -13,10 +13,7 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ULService {
@@ -533,6 +530,62 @@ public class ULService {
             result.add(obj);
         }
         return result;
+    }
+
+    public List<PensionListDTO> getPensionByBinAndYear(String bin, Integer year, Integer page, Integer size) {
+        page = page * size - size;
+        List<Map<String, Object>> list = flPensionContrRepo.getPensionByBinAndYear(bin, year, size, page);
+        List<PensionListDTO> result = new ArrayList<>();
+        DecimalFormat df = new DecimalFormat("#");
+        df.setMaximumFractionDigits(0);
+        for (Map<String, Object> a : list) {
+            PensionListDTO dto = new PensionListDTO();
+            dto.setPeriod(a.get("year") != null ? String.valueOf(df.format(a.get("year"))) : String.valueOf(year));
+            dto.setBin(a.get("IIN") != null ? String.valueOf(a.get("IIN")) : "");
+            dto.setName(a.get("fio") != null ? String.valueOf(a.get("fio")) : "");
+            Double zeroTen = a.get("zeroten") != null ? (Double) a.get("zeroten") : 0;
+            Double zeroTwelve = a.get("zerotwelve") != null ? (Double) a.get("zerotwelve") : 0;
+            zeroTen *= 8.5;
+            dto.setSum010(Double.parseDouble(df.format(zeroTen)));
+            dto.setSum012(Double.parseDouble(df.format(zeroTwelve)));
+            result.add(dto);
+        }
+
+        return result;
+    }
+    public Map<String, Object> getPensionByBinAndYearAdnIin(String bin, Integer year, String iin) {
+        List<Map<String, Object>> list = flPensionContrRepo.getPensionByBinAndYearAdnIin(bin, year, iin);
+        List<PensionDetailsDto> result = new ArrayList<>();
+        DecimalFormat df = new DecimalFormat("#");
+        df.setMaximumFractionDigits(0);
+        String fio = "";
+        for (Map<String, Object> a : list) {
+            PensionDetailsDto dto = new PensionDetailsDto();
+            dto.setPeriod(a.get("period") != null ? String.valueOf(a.get("period")) : String.valueOf(year));
+            dto.setBin(a.get("P_RNN") != null ? String.valueOf(a.get("P_RNN")) : "");
+            dto.setName(a.get("P_NAME") != null ? String.valueOf(a.get("P_NAME")) : "");
+            Double zeroTen = a.get("zeroten") != null ? (Double) a.get("zeroten") : 0;
+            fio = a.get("fio") != null ? String.valueOf(a.get("fio")) : "";
+            zeroTen *= 8.5;
+            dto.setSum(df.format(zeroTen));
+            result.add(dto);
+        }
+
+        String name = "Пенсионные отчисления по ИИН: " + iin;
+        if (!fio.equals(""))
+            name += ", " + fio;
+        Map<String, Object> res = new HashMap<>();
+        res.put("name", name);
+        res.put("list", result);
+        return res;
+    }
+    public Integer countByBinAndYear(String bin, Integer year) {
+        try {
+            Integer number = flPensionContrRepo.countByBinAndYear(bin, year);
+            return number;
+        } catch (Exception e) {
+            return 0;
+        }
     }
     public UlAddressInfo getUlAddresses(String bin) {
         RegAddressUlEntity address = regAddressUlEntityRepo.findByBin(bin);

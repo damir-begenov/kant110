@@ -65,13 +65,13 @@ public class RnService {
         return result;
     }
 
-    public List<RnListDto> getRnPages(String bin, Integer page) {
+    public List<RnListDto> getRnPages(String bin, Integer page, Integer size) {
         if (page == null || page == 0) {
             return null;
         } else {
-            page = page * 10 - 10;
+            page = page * size - size;
         }
-        List<MvRnOld> rns = mvRnOldRepo.getUsersByLike(bin, page);
+        List<MvRnOld> rns = mvRnOldRepo.getUsersByLike(bin, page, size);
         List<RnListDto> rnDTOs = new ArrayList<>();
         for (MvRnOld rn: rns) {
             if (rn  == null) {
@@ -120,7 +120,6 @@ public class RnService {
 
     public Integer countRns(String bin) {
         return mvRnOldRepo.countByBin(bin);
-
     }
     public List<RnDTO> getRns(String bin) {
         List<MvRnOld> rns = mvRnOldRepo.getUsersByLike(bin);

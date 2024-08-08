@@ -13,8 +13,8 @@ public interface MvTaxByBinRepo extends JpaRepository<MvTaxByBin, Integer> {
     @Query(value = "select * from imp_tax_out.taxes_out where bin = ?1", nativeQuery = true)
     List<MvTaxByBin> findAllByBin(String bin);
 
-    @Query(value = "select * from imp_tax_out.taxes_out where bin = ?1 and year = ?2 order by budget_enrollment_date desc limit 10 offset ?3", nativeQuery = true)
-    List<MvTaxByBin> findAllByBin(String bin, Integer year, Integer page);
+    @Query(value = "select * from imp_tax_out.taxes_out where bin = ?1 and year = ?2 order by budget_enrollment_date desc limit ?4 offset ?3", nativeQuery = true)
+    List<MvTaxByBin> findAllByBin(String bin, Integer year, Integer page, Integer size);
     @Query(value = "select count(*) from imp_tax_out.taxes_out where bin = ?1 and year = ?2", nativeQuery = true)
     Integer countByYearAndBin(String bin, Integer year);
     @Query(value = "select count(*) from imp_tax_out.taxes_out where bin = ?1 limit 1", nativeQuery = true)
