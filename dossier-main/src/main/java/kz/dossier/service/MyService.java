@@ -518,7 +518,7 @@ public class MyService {
                     .sum();
             obj.setSum(df.format(totalAmount));
             obj.setPeriod(year != null ? year.toString() : "");
-            if (countSupplier) {
+            if (!countSupplier) {
                 Long distinctCustomer = samrukList.stream()
                         .map(Samruk::getCustomer)
                         .distinct()
