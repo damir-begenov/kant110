@@ -54,6 +54,87 @@ public class UlDossierController {
     @Autowired
     TaxService taxService;
 
+    @GetMapping("/ul/find-by-bin")
+    public ResponseEntity<List<ULDto>> findULByBin(@RequestParam String bin) {
+        try {
+            if (bin == null || bin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<ULDto> ulDto = ulService.findUlByBin(bin);
+            if (ulDto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(ulDto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching ULDto by bin: " + bin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+    @GetMapping("/ul/find-by-phone")
+    public ResponseEntity<List<ULDto>> findULByPhone(@RequestParam String phone) {
+        try {
+            if (phone == null || phone.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<ULDto> ulDto = ulService.findUlByPhone(phone);
+            if (ulDto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(ulDto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching ULDto by phone: " + phone, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+    @GetMapping("/ul/find-by-email")
+    public ResponseEntity<List<ULDto>> findUlByEmail(@RequestParam String email) {
+        try {
+            if (email == null || email.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<ULDto> ulDto = ulService.findUlByEmail(email);
+            if (ulDto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(ulDto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching ULDto by email: " + email, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+    @GetMapping("/ul/find-by-name")
+    public ResponseEntity<List<ULDto>> findUlByEmail(@RequestParam(required = false, defaultValue = "") String name,
+                                                     @RequestParam String searchType,
+                                                     @RequestParam(required = false, defaultValue = "") String regNumber,
+                                                     @RequestParam(required = false, defaultValue = "") String vin,
+                                                     @RequestParam(required = false, defaultValue = "1") Integer page) {
+        try {
+            if (name.equals("") &&  regNumber.equals("") && vin.equals("")) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            if (page < 0) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<ULDto> ulDto = ulService.findUlByName(searchType, name, regNumber, vin, page);
+            if (ulDto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(ulDto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching ULDto by email: " + name, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
     //Сведения о ЮЛ надо посчитать проценты сведении и рисков
     @GetMapping("/ul/get-percentages")
     public ResponseEntity<Double> getUlPercentages(@RequestParam String bin) {

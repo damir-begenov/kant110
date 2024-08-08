@@ -298,7 +298,100 @@ public class ULService {
         return result;
     }
 
+    public List<ULDto> findUlByBin(String bin) {
+        Optional<MvUl> ul = mv_ul_repo.getUlByBin(bin);
+        List<ULDto> list = new ArrayList<>();
+        ULDto ulDto = new ULDto();
+        if (ul.isPresent()) {
+            MvUl ulEntity = ul.get();
+            ulDto.setBin(bin);
+            ulDto.setFullName(ulEntity.getFull_name_rus());
+            ulDto.setStatus(ulEntity.getUl_status());
+            ulDto.setRegDate(ulEntity.getOrg_reg_date());
+            ulDto.setResident(ulEntity.getIs_resident() != null ? ulEntity.getIs_resident().equals("1") ? true : false : false);
+//            ulDto.setInfoPercentage(getSvedenyaPercentage(bin));
+        } else {
+            return null;
+        }
+        list.add(ulDto);
 
+        return list;
+    }
+
+    public List<ULDto> findUlByPhone(String phone) {
+        Optional<String> bin = flContactsRepo.findByPhone(phone);
+        if (bin.isPresent()) {
+            Optional<MvUl> ul = mv_ul_repo.getUlByBin(bin.get());
+            List<ULDto> list = new ArrayList<>();
+            ULDto ulDto = new ULDto();
+            if (ul.isPresent()) {
+                MvUl ulEntity = ul.get();
+                ulDto.setBin(bin.get());
+                ulDto.setFullName(ulEntity.getFull_name_rus());
+                ulDto.setStatus(ulEntity.getUl_status());
+                ulDto.setRegDate(ulEntity.getOrg_reg_date());
+                ulDto.setResident(ulEntity.getIs_resident() != null ? ulEntity.getIs_resident().equals("1") ? true : false : false);
+            } else {
+                return null;
+            }
+            list.add(ulDto);
+            return list;
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    public List<ULDto> findUlByEmail(String phone) {
+        Optional<String> bin = flContactsRepo.findByEmail(phone);
+        if (bin.isPresent()) {
+            Optional<MvUl> ul = mv_ul_repo.getUlByBin(bin.get());
+            List<ULDto> list = new ArrayList<>();
+            ULDto ulDto = new ULDto();
+            if (ul.isPresent()) {
+                MvUl ulEntity = ul.get();
+                ulDto.setBin(bin.get());
+                ulDto.setFullName(ulEntity.getFull_name_rus());
+                ulDto.setStatus(ulEntity.getUl_status());
+                ulDto.setRegDate(ulEntity.getOrg_reg_date());
+                ulDto.setResident(ulEntity.getIs_resident() != null ? ulEntity.getIs_resident().equals("1") ? true : false : false);
+            } else {
+                return null;
+            }
+            list.add(ulDto);
+            return list;
+        } else {
+            return new ArrayList<>();
+        }
+    }
+    public List<ULDto> findUlByName(String searchType, String name, String regNumber, String vin, Integer page) {
+
+        if (!name.equals("") || !regNumber.equals("")) {
+            if (searchType.equals("includes")) {
+                name = "%" + name + "%";
+            } else if (searchType.equals("starts")) {
+                name = name + "%";
+            } else if (searchType.equals("ends")) {
+                name = "%" + name;
+            }
+            regNumber = "%" + regNumber + "%";
+
+            Integer offset = page * 5 - 5;
+            List<MvUl> uls = mv_ul_repo.getUlByNameAndRegNumber(name, regNumber, offset);
+            List<ULDto> list = new ArrayList<>();
+            for (MvUl ul : uls) {
+                ULDto ulDto = new ULDto();
+                ulDto.setBin(ul.getBin());
+                ulDto.setFullName(ul.getFull_name_rus());
+                ulDto.setStatus(ul.getUl_status());
+                ulDto.setRegDate(ul.getOrg_reg_date());
+                ulDto.setResident(ul.getIs_resident() != null ? ul.getIs_resident().equals("1") ? true : false : false);
+                list.add(ulDto);
+            }
+            return list;
+        } else {
+            return null;
+        }
+    }
 
     public ULDto getUlByBin(String bin) {
         Optional<MvUl> ul = mv_ul_repo.getUlByBin(bin);
