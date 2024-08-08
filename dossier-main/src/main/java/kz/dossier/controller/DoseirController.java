@@ -98,7 +98,8 @@ public class DoseirController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(null);
         }
-    } @GetMapping("/fl/get-fl-auto-transport")
+    }
+    @GetMapping("/fl/get-fl-auto-transport")
     public ResponseEntity<List<AutoTransportDto>> getAutoTransportByBinfl(@RequestParam String iin) {
         try {
             if (iin == null || iin.isEmpty()) {
