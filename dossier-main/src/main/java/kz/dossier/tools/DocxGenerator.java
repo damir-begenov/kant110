@@ -781,43 +781,43 @@ public class DocxGenerator {
             } catch (Exception e) {
                 System.out.println("MillitaryAccount table add exception: " + e.getMessage());
             }
-            try {
-                List<ConvictsJustified> convictsJustifieds = result.getConvictsJustifieds();
-                if (convictsJustifieds != null && !convictsJustifieds.isEmpty()) {
-                    // Create the title for the table
-                    creteTitle(doc, "Наименование риска: \"Осужденные\" Количество найденных инф: " + convictsJustifieds.size());
-
-                    // Create the table
-                    XWPFTable convictsTable = doc.createTable();
-
-                    // Set headers
-                    List<String> headers = Arrays.asList(
-                            "№",
-                            "Дата рассмотрения в суде 1 инстанции",
-                            "Суд 1 инстанции",
-                            "Решение по лицу",
-                            "Мера наказания по договору",
-                            "Квалификация"
-                    );
-                    makeTableByProperties(doc, convictsTable, "Наименование риска: \"Осужденные\" Количество найденных инф: " + convictsJustifieds.size(), headers);
-
-                    int number = 1;
-                    for (ConvictsJustified r : convictsJustifieds) {
-                        XWPFTableRow row = convictsTable.createRow();
-                        row.getCell(0).setText(String.valueOf(number));
-                        row.getCell(1).setText(r.getReg_date() != null ? r.getReg_date() : "");
-                        row.getCell(2).setText(r.getCourt_of_first_instance() != null ? r.getCourt_of_first_instance() : "");
-                        row.getCell(3).setText(r.getDecision_on_person() != null ? r.getDecision_on_person() : "");
-                        row.getCell(4).setText(r.getMeasure_punishment() != null ? r.getMeasure_punishment() : "");
-                        row.getCell(5).setText(r.getQualification() != null ? r.getQualification() : "");
-                        number++;
-                    }
-
-                    setMarginBetweenTables(doc);
-                }
-            } catch (Exception e) {
-                System.out.println("ConvictsJustified table add exception: " + e.getMessage());
-            }
+//            try {
+//                List<ConvictsJustified> convictsJustifieds = result.getConvictsJustifieds();
+//                if (convictsJustifieds != null && !convictsJustifieds.isEmpty()) {
+//                    // Create the title for the table
+//                    creteTitle(doc, "Наименование риска: \"Осужденные\" Количество найденных инф: " + convictsJustifieds.size());
+//
+//                    // Create the table
+//                    XWPFTable convictsTable = doc.createTable();
+//
+//                    // Set headers
+//                    List<String> headers = Arrays.asList(
+//                            "№",
+//                            "Дата рассмотрения в суде 1 инстанции",
+//                            "Суд 1 инстанции",
+//                            "Решение по лицу",
+//                            "Мера наказания по договору",
+//                            "Квалификация"
+//                    );
+//                    makeTableByProperties(doc, convictsTable, "Наименование риска: \"Осужденные\" Количество найденных инф: " + convictsJustifieds.size(), headers);
+//
+//                    int number = 1;
+//                    for (ConvictsJustified r : convictsJustifieds) {
+//                        XWPFTableRow row = convictsTable.createRow();
+//                        row.getCell(0).setText(String.valueOf(number));
+//                        row.getCell(1).setText(r.getReg_date() != null ? r.getReg_date() : "");
+//                        row.getCell(2).setText(r.getCourt_of_first_instance() != null ? r.getCourt_of_first_instance() : "");
+//                        row.getCell(3).setText(r.getDecision_on_person() != null ? r.getDecision_on_person() : "");
+//                        row.getCell(4).setText(r.getMeasure_punishment() != null ? r.getMeasure_punishment() : "");
+//                        row.getCell(5).setText(r.getQualification() != null ? r.getQualification() : "");
+//                        number++;
+//                    }
+//
+//                    setMarginBetweenTables(doc);
+//                }
+//            } catch (Exception e) {
+//                System.out.println("ConvictsJustified table add exception: " + e.getMessage());
+//            }
             try {
                 List<ConvictsTerminatedByRehab> convictsTerminatedByRehabs = result.getConvictsTerminatedByRehabs();
                 if (convictsTerminatedByRehabs != null && !convictsTerminatedByRehabs.isEmpty()) {
@@ -1736,43 +1736,43 @@ public class DocxGenerator {
         } catch (Exception e) {
             System.out.println("MillitaryAccount table add exception: " + e.getMessage());
         }
-        try {
-            List<ConvictsJustified> convictsJustifieds = result.getConvictsJustifieds();
-            if (convictsJustifieds != null && !convictsJustifieds.isEmpty()) {
-                // Create the title for the table
-                creteTitle(doc, "Наименование риска: \"Осужденные\" Количество найденных инф: " + convictsJustifieds.size());
-
-                // Create the table
-                XWPFTable convictsTable = doc.createTable();
-
-                // Set headers
-                List<String> headers = Arrays.asList(
-                        "№",
-                        "Дата рассмотрения в суде 1 инстанции",
-                        "Суд 1 инстанции",
-                        "Решение по лицу",
-                        "Мера наказания по договору",
-                        "Квалификация"
-                );
-                makeTableByProperties(doc, convictsTable, "Наименование риска: \"Осужденные\" Количество найденных инф: " + convictsJustifieds.size(), headers);
-
-                int number = 1;
-                for (ConvictsJustified r : convictsJustifieds) {
-                    XWPFTableRow row = convictsTable.createRow();
-                    row.getCell(0).setText(String.valueOf(number));
-                    row.getCell(1).setText(r.getReg_date() != null ? r.getReg_date() : "");
-                    row.getCell(2).setText(r.getCourt_of_first_instance() != null ? r.getCourt_of_first_instance() : "");
-                    row.getCell(3).setText(r.getDecision_on_person() != null ? r.getDecision_on_person() : "");
-                    row.getCell(4).setText(r.getMeasure_punishment() != null ? r.getMeasure_punishment() : "");
-                    row.getCell(5).setText(r.getQualification() != null ? r.getQualification() : "");
-                    number++;
-                }
-
-                setMarginBetweenTables(doc);
-            }
-        } catch (Exception e) {
-            System.out.println("ConvictsJustified table add exception: " + e.getMessage());
-        }
+//        try {
+//            List<ConvictsJustified> convictsJustifieds = result.getConvictsJustifieds();
+//            if (convictsJustifieds != null && !convictsJustifieds.isEmpty()) {
+//                // Create the title for the table
+//                creteTitle(doc, "Наименование риска: \"Осужденные\" Количество найденных инф: " + convictsJustifieds.size());
+//
+//                // Create the table
+//                XWPFTable convictsTable = doc.createTable();
+//
+//                // Set headers
+//                List<String> headers = Arrays.asList(
+//                        "№",
+//                        "Дата рассмотрения в суде 1 инстанции",
+//                        "Суд 1 инстанции",
+//                        "Решение по лицу",
+//                        "Мера наказания по договору",
+//                        "Квалификация"
+//                );
+//                makeTableByProperties(doc, convictsTable, "Наименование риска: \"Осужденные\" Количество найденных инф: " + convictsJustifieds.size(), headers);
+//
+//                int number = 1;
+//                for (ConvictsJustified r : convictsJustifieds) {
+//                    XWPFTableRow row = convictsTable.createRow();
+//                    row.getCell(0).setText(String.valueOf(number));
+//                    row.getCell(1).setText(r.getReg_date() != null ? r.getReg_date() : "");
+//                    row.getCell(2).setText(r.getCourt_of_first_instance() != null ? r.getCourt_of_first_instance() : "");
+//                    row.getCell(3).setText(r.getDecision_on_person() != null ? r.getDecision_on_person() : "");
+//                    row.getCell(4).setText(r.getMeasure_punishment() != null ? r.getMeasure_punishment() : "");
+//                    row.getCell(5).setText(r.getQualification() != null ? r.getQualification() : "");
+//                    number++;
+//                }
+//
+//                setMarginBetweenTables(doc);
+//            }
+//        } catch (Exception e) {
+//            System.out.println("ConvictsJustified table add exception: " + e.getMessage());
+//        }
         try {
             List<ConvictsTerminatedByRehab> convictsTerminatedByRehabs = result.getConvictsTerminatedByRehabs();
             if (convictsTerminatedByRehabs != null && !convictsTerminatedByRehabs.isEmpty()) {
