@@ -42,8 +42,10 @@ public class FLRiskDto {
     private List<DrugAddicts> drugAddicts;
     private List<Sudispol> sudispols;
     private List<Unemployed> unemployeds;
+    private List<Adm> adms;
     private Double percentage;
     private int quantity; //--количество
+
     public void setQuantity(int quantity) {
         int riskListCount = countRiskLists();
         this.percentage = (double) (quantity * 100 / riskListCount);
@@ -65,5 +67,4 @@ public class FLRiskDto {
         }
         return count;
     }
-
 }
