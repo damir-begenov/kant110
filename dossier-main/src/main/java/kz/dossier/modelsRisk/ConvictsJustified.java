@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 import org.jetbrains.annotations.Nullable;
 
 @Entity
-@Table(name = "convicts_justified", schema = "imp_risk")
+@Table(name = "convicts_justified_new", schema = "imp_risk")
 public class ConvictsJustified {
     @Nullable
     private String iin;
@@ -20,38 +20,80 @@ public class ConvictsJustified {
     private String patronomyc;
     @Nullable
     private String birth_date;
-    @Nullable
-    private String reg_date;
-    @Nullable
-    private String qualification;
-
-    @Nullable
-    private String severity_code_crime;
-    @Nullable
-    private String qualification_code;
-    @Nullable
-    private String measure_punishment;
-    @Nullable
-    private String code_desicion_by_person;
-    @Nullable
-    private String decision_on_person;
-    @Nullable
-    private String court_of_first_instance;
-    @Nullable
+    private String date_decision;
+    private String prigovor;
+    private String decision;
+    private String nomer_erdr;
+    private String name_of_organ;
+    private String sud;
+    private String code_statia;
+    private String insert_date;
     @Id
-    private String erdr_number;
-    @Nullable
-    private String consider_date_first_instance;
-    @Nullable
-    private String code_started_investiogation;
-    @Nullable
-    private String investigative_authority;
-    @Nullable
-    private boolean is_iin_upd;
-    @Nullable
-    private boolean is_rab;
-    @Nullable
     private Long id;
+
+    public String getDate_decision() {
+        return date_decision;
+    }
+
+    public void setDate_decision(String date_decision) {
+        this.date_decision = date_decision;
+    }
+
+    public String getPrigovor() {
+        return prigovor;
+    }
+
+    public void setPrigovor(String prigovor) {
+        this.prigovor = prigovor;
+    }
+
+    public String getDecision() {
+        return decision;
+    }
+
+    public void setDecision(String decision) {
+        this.decision = decision;
+    }
+
+    public String getNomer_erdr() {
+        return nomer_erdr;
+    }
+
+    public void setNomer_erdr(String nomer_erdr) {
+        this.nomer_erdr = nomer_erdr;
+    }
+
+    public String getName_of_organ() {
+        return name_of_organ;
+    }
+
+    public void setName_of_organ(String name_of_organ) {
+        this.name_of_organ = name_of_organ;
+    }
+
+    public String getSud() {
+        return sud;
+    }
+
+    public void setSud(String sud) {
+        this.sud = sud;
+    }
+
+    public String getCode_statia() {
+        return code_statia;
+    }
+
+    public void setCode_statia(String code_statia) {
+        this.code_statia = code_statia;
+    }
+
+    public String getInsert_date() {
+        return insert_date;
+    }
+
+    public void setInsert_date(String insert_date) {
+        this.insert_date = insert_date;
+    }
 
     @Nullable
     public String getIin() {
@@ -98,129 +140,8 @@ public class ConvictsJustified {
         this.birth_date = birth_date;
     }
 
-    @Nullable
-    public String getReg_date() {
-        return reg_date;
-    }
 
-    public void setReg_date(@Nullable String reg_date) {
-        this.reg_date = reg_date;
-    }
 
-    @Nullable
-    public String getQualification() {
-        return qualification;
-    }
-
-    public void setQualification(@Nullable String qualification) {
-        this.qualification = qualification;
-    }
-
-    @Nullable
-    public String getSeverity_code_crime() {
-        return severity_code_crime;
-    }
-
-    public void setSeverity_code_crime(@Nullable String severity_code_crime) {
-        this.severity_code_crime = severity_code_crime;
-    }
-
-    @Nullable
-    public String getQualification_code() {
-        return qualification_code;
-    }
-
-    public void setQualification_code(@Nullable String qualification_code) {
-        this.qualification_code = qualification_code;
-    }
-
-    @Nullable
-    public String getMeasure_punishment() {
-        return measure_punishment;
-    }
-
-    public void setMeasure_punishment(@Nullable String measure_punishment) {
-        this.measure_punishment = measure_punishment;
-    }
-
-    @Nullable
-    public String getCode_desicion_by_person() {
-        return code_desicion_by_person;
-    }
-
-    public void setCode_desicion_by_person(@Nullable String code_desicion_by_person) {
-        this.code_desicion_by_person = code_desicion_by_person;
-    }
-
-    @Nullable
-    public String getDecision_on_person() {
-        return decision_on_person;
-    }
-
-    public void setDecision_on_person(@Nullable String decision_on_person) {
-        this.decision_on_person = decision_on_person;
-    }
-
-    @Nullable
-    public String getCourt_of_first_instance() {
-        return court_of_first_instance;
-    }
-
-    public void setCourt_of_first_instance(@Nullable String court_of_first_instance) {
-        this.court_of_first_instance = court_of_first_instance;
-    }
-
-    @Nullable
-    public String getErdr_number() {
-        return erdr_number;
-    }
-
-    public void setErdr_number(@Nullable String erdr_number) {
-        this.erdr_number = erdr_number;
-    }
-
-    @Nullable
-    public String getConsider_date_first_instance() {
-        return consider_date_first_instance;
-    }
-
-    public void setConsider_date_first_instance(@Nullable String consider_date_first_instance) {
-        this.consider_date_first_instance = consider_date_first_instance;
-    }
-
-    @Nullable
-    public String getCode_started_investiogation() {
-        return code_started_investiogation;
-    }
-
-    public void setCode_started_investiogation(@Nullable String code_started_investiogation) {
-        this.code_started_investiogation = code_started_investiogation;
-    }
-
-    @Nullable
-    public String getInvestigative_authority() {
-        return investigative_authority;
-    }
-
-    public void setInvestigative_authority(@Nullable String investigative_authority) {
-        this.investigative_authority = investigative_authority;
-    }
-
-    public boolean isIs_iin_upd() {
-        return is_iin_upd;
-    }
-
-    public void setIs_iin_upd(boolean is_iin_upd) {
-        this.is_iin_upd = is_iin_upd;
-    }
-
-    public boolean isIs_rab() {
-        return is_rab;
-    }
-
-    public void setIs_rab(boolean is_rab) {
-        this.is_rab = is_rab;
-    }
 
     @Nullable
     public Long getId() {

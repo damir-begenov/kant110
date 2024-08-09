@@ -844,52 +844,52 @@ public class PdfGenerator {
             document.add(MATable);
         }
         //ОПРАВДАННЫЕ ПРЕСТУПЛЕНИЯ
-        List<ConvictsJustified> convictsJustifieds = result.getConvictsJustifieds();
-        if (convictsJustifieds != null && convictsJustifieds.size() != 0) {
-            PdfPTable convicts = new PdfPTable(6);
-            convicts.setWidthPercentage(100f);
-            convicts.setWidths(new float[] {0.4f, 1, 1, 1, 1, 1});
-            convicts.setSpacingBefore(5);
-            heading.setColspan(6);
-            heading.setPhrase(new Phrase("Наименование риска: \"Осужденные\" Количество найденных инф: " + convictsJustifieds.size(), font));
-            convicts.addCell(heading);
-            cell.setPhrase(new Phrase("№", font));
-            convicts.addCell(cell);
-            cell.setPhrase(new Phrase("Дата рассмотрения в суде 1 инстанции", font));
-            convicts.addCell(cell);
-            cell.setPhrase(new Phrase("Суд 1 инстанции", font));
-            convicts.addCell(cell);
-            cell.setPhrase(new Phrase("Решение по лицу", font));
-            convicts.addCell(cell);
-            cell.setPhrase(new Phrase("Мера наказания по договору", font));
-            convicts.addCell(cell);
-            cell.setPhrase(new Phrase("Квалификация", font));
-            convicts.addCell(cell);
-            int number = 1;
-            for (ConvictsJustified r : convictsJustifieds) {
-                convicts.addCell(new Phrase(number + "", font));
-                convicts.addCell(new Phrase(r.getReg_date(), font));
-                convicts.addCell(new Phrase(r.getCourt_of_first_instance(), font));
-
-                if (r.getDecision_on_person() != null) {
-                    convicts.addCell(new Phrase(r.getDecision_on_person(), font));
-                } else {
-                    convicts.addCell(new Phrase("", font));
-                }
-
-                if (r.getMeasure_punishment() != null) {
-                    convicts.addCell(new Phrase(r.getMeasure_punishment(), font));
-                } else {
-                    convicts.addCell(new Phrase("", font));
-                }
-
-                convicts.addCell(new Phrase(r.getQualification(), font));
-
-                number++;
-            }
-
-            document.add(convicts);
-        }
+//        List<ConvictsJustified> convictsJustifieds = result.getConvictsJustifieds();
+//        if (convictsJustifieds != null && convictsJustifieds.size() != 0) {
+//            PdfPTable convicts = new PdfPTable(6);
+//            convicts.setWidthPercentage(100f);
+//            convicts.setWidths(new float[] {0.4f, 1, 1, 1, 1, 1});
+//            convicts.setSpacingBefore(5);
+//            heading.setColspan(6);
+//            heading.setPhrase(new Phrase("Наименование риска: \"Осужденные\" Количество найденных инф: " + convictsJustifieds.size(), font));
+//            convicts.addCell(heading);
+//            cell.setPhrase(new Phrase("№", font));
+//            convicts.addCell(cell);
+//            cell.setPhrase(new Phrase("Дата рассмотрения в суде 1 инстанции", font));
+//            convicts.addCell(cell);
+//            cell.setPhrase(new Phrase("Суд 1 инстанции", font));
+//            convicts.addCell(cell);
+//            cell.setPhrase(new Phrase("Решение по лицу", font));
+//            convicts.addCell(cell);
+//            cell.setPhrase(new Phrase("Мера наказания по договору", font));
+//            convicts.addCell(cell);
+//            cell.setPhrase(new Phrase("Квалификация", font));
+//            convicts.addCell(cell);
+//            int number = 1;
+//            for (ConvictsJustified r : convictsJustifieds) {
+//                convicts.addCell(new Phrase(number + "", font));
+//                convicts.addCell(new Phrase(r.getR(), font));
+//                convicts.addCell(new Phrase(r.getCourt_of_first_instance(), font));
+//
+//                if (r.getDecision_on_person() != null) {
+//                    convicts.addCell(new Phrase(r.getDecision_on_person(), font));
+//                } else {
+//                    convicts.addCell(new Phrase("", font));
+//                }
+//
+//                if (r.getMeasure_punishment() != null) {
+//                    convicts.addCell(new Phrase(r.getMeasure_punishment(), font));
+//                } else {
+//                    convicts.addCell(new Phrase("", font));
+//                }
+//
+//                convicts.addCell(new Phrase(r.getQualification(), font));
+//
+//                number++;
+//            }
+//
+//            document.add(convicts);
+//        }
         //ЕЩЕ КАКИЕТО ПРЕСТУЛПЛЕНИЯ
         List<ConvictsTerminatedByRehab> convictsTerminatedByRehabs = result.getConvictsTerminatedByRehabs();
         if (convictsTerminatedByRehabs != null && convictsTerminatedByRehabs.size()!=0) {
@@ -1839,53 +1839,53 @@ public class PdfGenerator {
             }
             document.add(MATable);
         }
-        //ОПРАВДАННЫЕ ПРЕСТУПЛЕНИЯ
-        List<ConvictsJustified> convictsJustifieds = result.getConvictsJustifieds();
-        if (convictsJustifieds != null && !convictsJustifieds.isEmpty()) {
-            PdfPTable convicts = new PdfPTable(6);
-            convicts.setWidthPercentage(100f);
-            convicts.setWidths(new float[] {0.4f, 1, 1, 1, 1, 1});
-            convicts.setSpacingBefore(5);
-            heading.setColspan(6);
-            heading.setPhrase(new Phrase("Наименование риска: \"Осужденные\" Количество найденных инф: " + convictsJustifieds.size(), font));
-            convicts.addCell(heading);
-            cell.setPhrase(new Phrase("№", font));
-            convicts.addCell(cell);
-            cell.setPhrase(new Phrase("Дата рассмотрения в суде 1 инстанции", font));
-            convicts.addCell(cell);
-            cell.setPhrase(new Phrase("Суд 1 инстанции", font));
-            convicts.addCell(cell);
-            cell.setPhrase(new Phrase("Решение по лицу", font));
-            convicts.addCell(cell);
-            cell.setPhrase(new Phrase("Мера наказания по договору", font));
-            convicts.addCell(cell);
-            cell.setPhrase(new Phrase("Квалификация", font));
-            convicts.addCell(cell);
-            int number = 1;
-            for (ConvictsJustified r : convictsJustifieds) {
-                convicts.addCell(new Phrase(number + "", font));
-                convicts.addCell(new Phrase(r.getReg_date(), font));
-                convicts.addCell(new Phrase(r.getCourt_of_first_instance(), font));
-
-                if (r.getDecision_on_person() != null) {
-                    convicts.addCell(new Phrase(r.getDecision_on_person(), font));
-                } else {
-                    convicts.addCell(new Phrase("", font));
-                }
-
-                if (r.getMeasure_punishment() != null) {
-                    convicts.addCell(new Phrase(r.getMeasure_punishment(), font));
-                } else {
-                    convicts.addCell(new Phrase("", font));
-                }
-
-                convicts.addCell(new Phrase(r.getQualification(), font));
-
-                number++;
-            }
-
-            document.add(convicts);
-        }
+//        //ОПРАВДАННЫЕ ПРЕСТУПЛЕНИЯ
+//        List<ConvictsJustified> convictsJustifieds = result.getConvictsJustifieds();
+//        if (convictsJustifieds != null && !convictsJustifieds.isEmpty()) {
+//            PdfPTable convicts = new PdfPTable(6);
+//            convicts.setWidthPercentage(100f);
+//            convicts.setWidths(new float[] {0.4f, 1, 1, 1, 1, 1});
+//            convicts.setSpacingBefore(5);
+//            heading.setColspan(6);
+//            heading.setPhrase(new Phrase("Наименование риска: \"Осужденные\" Количество найденных инф: " + convictsJustifieds.size(), font));
+//            convicts.addCell(heading);
+//            cell.setPhrase(new Phrase("№", font));
+//            convicts.addCell(cell);
+//            cell.setPhrase(new Phrase("Дата рассмотрения в суде 1 инстанции", font));
+//            convicts.addCell(cell);
+//            cell.setPhrase(new Phrase("Суд 1 инстанции", font));
+//            convicts.addCell(cell);
+//            cell.setPhrase(new Phrase("Решение по лицу", font));
+//            convicts.addCell(cell);
+//            cell.setPhrase(new Phrase("Мера наказания по договору", font));
+//            convicts.addCell(cell);
+//            cell.setPhrase(new Phrase("Квалификация", font));
+//            convicts.addCell(cell);
+//            int number = 1;
+//            for (ConvictsJustified r : convictsJustifieds) {
+//                convicts.addCell(new Phrase(number + "", font));
+//                convicts.addCell(new Phrase(r.getReg_date(), font));
+//                convicts.addCell(new Phrase(r.getCourt_of_first_instance(), font));
+//
+//                if (r.getDecision_on_person() != null) {
+//                    convicts.addCell(new Phrase(r.getDecision_on_person(), font));
+//                } else {
+//                    convicts.addCell(new Phrase("", font));
+//                }
+//
+//                if (r.getMeasure_punishment() != null) {
+//                    convicts.addCell(new Phrase(r.getMeasure_punishment(), font));
+//                } else {
+//                    convicts.addCell(new Phrase("", font));
+//                }
+//
+//                convicts.addCell(new Phrase(r.getQualification(), font));
+//
+//                number++;
+//            }
+//
+//            document.add(convicts);
+//        }
         //ЕЩЕ КАКИЕТО ПРЕСТУЛПЛЕНИЯ
         List<ConvictsTerminatedByRehab> convictsTerminatedByRehabs = result.getConvictsTerminatedByRehabs();
         if (convictsTerminatedByRehabs != null && convictsTerminatedByRehabs.size()!=0) {
@@ -2441,52 +2441,52 @@ public class PdfGenerator {
             document.add(MATable);
         }
         //ОПРАВДАННЫЕ ПРЕСТУПЛЕНИЯ
-        List<ConvictsJustified> convictsJustifieds = result.getConvictsJustifieds();
-        if (convictsJustifieds.size() != 0 && convictsJustifieds != null) {
-            PdfPTable convicts = new PdfPTable(6);
-            convicts.setWidthPercentage(100f);
-            convicts.setWidths(new float[] {0.4f, 1, 1, 1, 1, 1});
-            convicts.setSpacingBefore(5);
-            heading.setColspan(6);
-            heading.setPhrase(new Phrase("Наименование риска: \"Осужденные\" Количество найденных инф: " + convictsJustifieds.size(), font));
-            convicts.addCell(heading);
-            cell.setPhrase(new Phrase("№", font));
-            convicts.addCell(cell);
-            cell.setPhrase(new Phrase("Дата рассмотрения в суде 1 инстанции", font));
-            convicts.addCell(cell);
-            cell.setPhrase(new Phrase("Суд 1 инстанции", font));
-            convicts.addCell(cell);
-            cell.setPhrase(new Phrase("Решение по лицу", font));
-            convicts.addCell(cell);
-            cell.setPhrase(new Phrase("Мера наказания по договору", font));
-            convicts.addCell(cell);
-            cell.setPhrase(new Phrase("Квалификация", font));
-            convicts.addCell(cell);
-            int number = 1;
-            for (ConvictsJustified r : convictsJustifieds) {
-                convicts.addCell(new Phrase(number + "", font));
-                convicts.addCell(new Phrase(r.getReg_date(), font));
-                convicts.addCell(new Phrase(r.getCourt_of_first_instance(), font));
-
-                if (r.getDecision_on_person() != null) {
-                    convicts.addCell(new Phrase(r.getDecision_on_person(), font));
-                } else {
-                    convicts.addCell(new Phrase("", font));
-                }
-
-                if (r.getMeasure_punishment() != null) {
-                    convicts.addCell(new Phrase(r.getMeasure_punishment(), font));
-                } else {
-                    convicts.addCell(new Phrase("", font));
-                }
-
-                convicts.addCell(new Phrase(r.getQualification(), font));
-
-                number++;
-            }
-
-            document.add(convicts);
-        }
+//        List<ConvictsJustified> convictsJustifieds = result.getConvictsJustifieds();
+//        if (convictsJustifieds.size() != 0 && convictsJustifieds != null) {
+//            PdfPTable convicts = new PdfPTable(6);
+//            convicts.setWidthPercentage(100f);
+//            convicts.setWidths(new float[] {0.4f, 1, 1, 1, 1, 1});
+//            convicts.setSpacingBefore(5);
+//            heading.setColspan(6);
+//            heading.setPhrase(new Phrase("Наименование риска: \"Осужденные\" Количество найденных инф: " + convictsJustifieds.size(), font));
+//            convicts.addCell(heading);
+//            cell.setPhrase(new Phrase("№", font));
+//            convicts.addCell(cell);
+//            cell.setPhrase(new Phrase("Дата рассмотрения в суде 1 инстанции", font));
+//            convicts.addCell(cell);
+//            cell.setPhrase(new Phrase("Суд 1 инстанции", font));
+//            convicts.addCell(cell);
+//            cell.setPhrase(new Phrase("Решение по лицу", font));
+//            convicts.addCell(cell);
+//            cell.setPhrase(new Phrase("Мера наказания по договору", font));
+//            convicts.addCell(cell);
+//            cell.setPhrase(new Phrase("Квалификация", font));
+//            convicts.addCell(cell);
+//            int number = 1;
+//            for (ConvictsJustified r : convictsJustifieds) {
+//                convicts.addCell(new Phrase(number + "", font));
+//                convicts.addCell(new Phrase(r.getReg_date(), font));
+//                convicts.addCell(new Phrase(r.getCourt_of_first_instance(), font));
+//
+//                if (r.getDecision_on_person() != null) {
+//                    convicts.addCell(new Phrase(r.getDecision_on_person(), font));
+//                } else {
+//                    convicts.addCell(new Phrase("", font));
+//                }
+//
+//                if (r.getMeasure_punishment() != null) {
+//                    convicts.addCell(new Phrase(r.getMeasure_punishment(), font));
+//                } else {
+//                    convicts.addCell(new Phrase("", font));
+//                }
+//
+//                convicts.addCell(new Phrase(r.getQualification(), font));
+//
+//                number++;
+//            }
+//
+//            document.add(convicts);
+//        }
         //ЕЩЕ КАКИЕТО ПРЕСТУЛПЛЕНИЯ
         List<ConvictsTerminatedByRehab> convictsTerminatedByRehabs = result.getConvictsTerminatedByRehabs();
         if (convictsTerminatedByRehabs.size()!=0 && convictsTerminatedByRehabs != null) {

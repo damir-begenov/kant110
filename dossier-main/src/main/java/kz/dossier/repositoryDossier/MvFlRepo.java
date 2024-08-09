@@ -25,13 +25,13 @@ public interface MvFlRepo extends JpaRepository<MvFl, Long> {
     Boolean getGender(String iin);
 
     @Query(
-            value = "select * from imp_kfm_fl.mv_fl mv_fl0_ where mv_fl0_.iin = ?1 limit 1",
+            value = "select mv_fl0_.* , \n               nat.\"RU_NAME\" AS nationality_ru_name\n \n               FROM imp_kfm_fl.mv_fl mv_fl0_ INNER JOIN \n                dictionary.d_nationality_new as nat ON nat.\"ID\"::text = mv_fl0_.nationality_id \n where mv_fl0_.iin = ?1 limit 1",
             nativeQuery = true
     )
     MvFl getUserByIin(String iin);
 
     @Query(
-            value = "select * from imp_kfm_fl.mv_fl mv_fl0_ where mv_fl0_.iin = ?1 limit 1",
+            value = "select mv_fl0_.* , \n               nat.\"RU_NAME\" AS nationality_ru_name\n \n               FROM imp_kfm_fl.mv_fl mv_fl0_ INNER JOIN \n                dictionary.d_nationality_new as nat ON nat.\"ID\"::text = mv_fl0_.nationality_id \n where mv_fl0_.iin = ?1 limit 1",
             nativeQuery = true
     )
     Optional<MvFl> getByIin(String iin);
