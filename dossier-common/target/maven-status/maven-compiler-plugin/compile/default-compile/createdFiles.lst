@@ -1,6 +1,7 @@
 kz/dossier/security/models/Role.class
 kz/dossier/security/models/log.class
 kz/dossier/security/services/LogsService.class
+kz/dossier/security/SessionTimeoutFilter.class
 kz/dossier/payload/response/JwtResponse.class
 kz/dossier/security/models/ERole.class
 kz/dossier/security/models/user_roles.class

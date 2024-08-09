@@ -48,12 +48,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/tmp_1_UlDossierController.class" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/tmp_2092_MyService.class" root0="SKIP_INSPECTION" />
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/tmp_2615_MyService.class" root0="SKIP_INSPECTION" />
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/tmp_2_UlDossierController.class" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/tmp_4926_MyService.class" root0="SKIP_INSPECTION" />
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/tmp__UlDossierController.class" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file:///private/var/folders/20/pcmlcl7d11q59zjvv8tg0x8w0000gn/T/tmp_1_DoseirController.class" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file:///private/var/folders/20/pcmlcl7d11q59zjvv8tg0x8w0000gn/T/tmp_2_DoseirController.class" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file:///private/var/folders/20/pcmlcl7d11q59zjvv8tg0x8w0000gn/T/tmp__DoseirController.class" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
@@ -72,30 +69,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/derzeet/Desktop/kant110&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Merging main",
+    "jdk.selected.JAVA_MODULE": "21",
+    "last_opened_file_path": "/Users/derzeet/Desktop/kant110",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "terminal",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -209,7 +206,7 @@
       <workItem from="1722946919372" duration="120000" />
       <workItem from="1723003827724" duration="11853000" />
       <workItem from="1723020619719" duration="13848000" />
-      <workItem from="1723038302588" duration="1431000" />
+      <workItem from="1723038302588" duration="2681000" />
     </task>
     <task id="LOCAL-00001" summary="jk">
       <option name="closed" value="true" />
