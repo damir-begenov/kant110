@@ -98,7 +98,8 @@ public class DoseirController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(null);
         }
-    } @GetMapping("/fl/get-fl-auto-transport")
+    }
+    @GetMapping("/fl/get-fl-auto-transport")
     public ResponseEntity<List<AutoTransportDto>> getAutoTransportByBinfl(@RequestParam String iin) {
         try {
             if (iin == null || iin.isEmpty()) {
@@ -739,37 +740,6 @@ public class DoseirController {
 //        log.setUsername(email);
         logRepo.save(log);
         return myService.getByFIO_photo(i.replace('$', '%'), o.replace('$', '%'), f.replace('$', '%'));
-    }
-
-    @GetMapping("/get-subsidiy")
-    public List<SubsidiyDTO> getSubsidiy(String bin) {
-        return myService.getSubsidies(bin);
-    }
-    @GetMapping("/goszakup-sum-by-year")
-    public GosZakupForAll getGosZakupByBin(@RequestParam String bin) {
-        return myService.gosZakupByBin(bin);
-    }
-
-    @GetMapping("/goszakup-page")
-    public List<GosZakupDetailsDTO> getGoszakupDetails(@RequestParam String bin, @RequestParam Integer year, @RequestParam String isSupplier, @RequestParam Integer page) {
-        if (isSupplier.equals("true")) {
-            return myService.getGosZakupDetails(bin, year, true, page);
-        } else {
-            return myService.getGosZakupDetails(bin, year, false, page);
-        }
-    }
-    @GetMapping("/samruk-sum-by-year")
-    public SamrukKazynaForAll getSamrukByBin(@RequestParam String bin) {
-        return myService.samrukByBin(bin);
-    }
-
-    @GetMapping("/samruk-page")
-    public List<SamrukDetailsDTO> getSamrukDetails(@RequestParam String bin, @RequestParam Integer year, @RequestParam String isSupplier, @RequestParam Integer page) {
-        if (isSupplier.equals("true")) {
-            return myService.getSamrukDetailsBySupplier(bin, year, page);
-        } else {
-            return myService.getSamrukDetailsByCustomer(bin, year, page);
-        }
     }
 
     @GetMapping(value = "/downloadFlPdf/{iin}", produces = MediaType.APPLICATION_PDF_VALUE)

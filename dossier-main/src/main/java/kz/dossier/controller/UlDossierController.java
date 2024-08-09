@@ -34,6 +34,8 @@ public class UlDossierController {
     @Autowired
     ULService ulService;
     @Autowired
+    MyService myService;
+    @Autowired
     LogRepo logRepo;
     @Autowired
     RnService rnService;
@@ -51,6 +53,87 @@ public class UlDossierController {
     TransportService transportService;
     @Autowired
     TaxService taxService;
+
+    @GetMapping("/ul/find-by-bin")
+    public ResponseEntity<List<ULDto>> findULByBin(@RequestParam String bin) {
+        try {
+            if (bin == null || bin.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<ULDto> ulDto = ulService.findUlByBin(bin);
+            if (ulDto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(ulDto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching ULDto by bin: " + bin, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+    @GetMapping("/ul/find-by-phone")
+    public ResponseEntity<List<ULDto>> findULByPhone(@RequestParam String phone) {
+        try {
+            if (phone == null || phone.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<ULDto> ulDto = ulService.findUlByPhone(phone);
+            if (ulDto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(ulDto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching ULDto by phone: " + phone, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+    @GetMapping("/ul/find-by-email")
+    public ResponseEntity<List<ULDto>> findUlByEmail(@RequestParam String email) {
+        try {
+            if (email == null || email.isEmpty()) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<ULDto> ulDto = ulService.findUlByEmail(email);
+            if (ulDto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(ulDto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching ULDto by email: " + email, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+    @GetMapping("/ul/find-by-name")
+    public ResponseEntity<List<ULDto>> findUlByEmail(@RequestParam(required = false, defaultValue = "") String name,
+                                                     @RequestParam String searchType,
+                                                     @RequestParam(required = false, defaultValue = "") String regNumber,
+                                                     @RequestParam(required = false, defaultValue = "") String vin,
+                                                     @RequestParam(required = false, defaultValue = "1") Integer page) {
+        try {
+            if (name.equals("") &&  regNumber.equals("") && vin.equals("")) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            if (page < 0) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            List<ULDto> ulDto = ulService.findUlByName(searchType, name, regNumber, vin, page);
+            if (ulDto == null) {
+                return ResponseEntity.notFound().build(); // Return 404 Not Found
+            }
+            return ResponseEntity.ok(ulDto);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching ULDto by email: " + name, e);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
 
     //Сведения о ЮЛ надо посчитать проценты сведении и рисков
     @GetMapping("/ul/get-percentages")
@@ -470,9 +553,9 @@ public class UlDossierController {
     public ResponseEntity<Map<String, Object>> getTaxes(@RequestParam String bin,
                                                    @RequestParam Integer year,
                                                    @RequestParam(required = false,defaultValue = "1") Integer page,
-                                                   @RequestParam(required = false,defaultValue = "1") Integer size) {
+                                                   @RequestParam(required = false,defaultValue = "10") Integer size) {
         try {
-            if (bin == null || bin.isEmpty() || year == null ) {
+            if (bin == null || bin.isEmpty() || year == null || page < 0 || size < 0 ) {
                 return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
             }
 
@@ -506,7 +589,7 @@ public class UlDossierController {
                                                           @RequestParam(required = false,defaultValue = "1") Integer page,
                                                           @RequestParam(required = false,defaultValue = "10") Integer size) {
         try {
-            if (bin == null || bin.isEmpty()) {
+            if (bin == null || bin.isEmpty() || page < 0 || size < 0) {
                 return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
             }
             List<RnListDto> dto = rnService.getRnPages(bin, page, size);
@@ -531,7 +614,73 @@ public class UlDossierController {
                     .body(null);
         }
     }
+    @GetMapping("/get-subsidiy")
+    public List<SubsidiyDTO> getSubsidiy(String bin) {
+        return myService.getSubsidies(bin);
+    }
+    @GetMapping("/goszakup-sum-by-year")
+    public GosZakupForAll getGosZakupByBin(@RequestParam String bin) {
+        return myService.gosZakupByBin(bin);
+    }
 
+    @GetMapping("/goszakup-page")
+    public ResponseEntity<Map<String, Object>> getGoszakupDetails(@RequestParam String bin, @RequestParam Integer year, @RequestParam String isSupplier, @RequestParam Integer page) {
+        if (bin == null || bin.isEmpty() || page < 0 || isSupplier.isEmpty()) {
+            return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+        }
+        Integer pages = myService.countGoszakupDetails(bin, year, true, page);
+        Integer res = (pages + 10 - 1) / 10;
+        if (page < 0 || page > res) {
+            return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+        }
+        Map<String, Object> result = new HashMap<>();
+        result.put("pages", res);
+        if (isSupplier.equals("true")) {
+            List<GosZakupDetailsDTO> dto = myService.getGosZakupDetails(bin, year, true, page);
+            result.put("list", dto);
+            return ResponseEntity.ok(result);
+        } else {
+            List<GosZakupDetailsDTO> dto = myService.getGosZakupDetails(bin, year, false, page);
+            result.put("list", dto);
+            return ResponseEntity.ok(result);
+        }
+    }
+    @GetMapping("/samruk-sum-by-year")
+    public SamrukKazynaForAll getSamrukByBin(@RequestParam String bin) {
+        if (bin == null) {
+            return null;
+        }
+        return myService.samrukByBin(bin);
+    }
+
+    @GetMapping("/samruk-page")
+    public ResponseEntity<Map<String, Object>> getSamrukDetails(@RequestParam String bin, @RequestParam Integer year, @RequestParam String isSupplier, @RequestParam Integer page) {
+        if (bin == null || bin.isEmpty() || page < 0 || isSupplier.isEmpty()) {
+            return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+        }
+        Map<String, Object> result = new HashMap<>();
+        if (isSupplier.equals("true")) {
+            List<SamrukDetailsDTO> dto = myService.getSamrukDetailsBySupplier(bin, year, page);
+            Integer pages = myService.countSamrukDetails(bin, year, true, page);
+            Integer res = (pages + 10 - 1) / 10;
+            if (page < 0 || page > res) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            result.put("pages", res);
+            result.put("list", dto);
+            return ResponseEntity.ok(result);
+        } else {
+            List<SamrukDetailsDTO> dto = myService.getSamrukDetailsByCustomer(bin, year, page);
+            Integer pages = myService.countSamrukDetails(bin, year, false, page);
+            Integer res = (pages + 10 - 1) / 10;
+            if (page < 0 || page > res) {
+                return ResponseEntity.badRequest().body(null); // Return 400 Bad Request
+            }
+            result.put("pages", res);
+            result.put("list", dto);
+            return ResponseEntity.ok(result);
+        }
+    }
 
 
 

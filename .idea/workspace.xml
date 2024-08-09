@@ -5,54 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d850808-ce4f-49b1-890f-5cdffe4168fe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/dto/PensionDetailsDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-app/target/classes/kz/dossier/config/WebSecurity.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-app/target/classes/kz/dossier/config/WebSecurity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/src/main/java/kz/dossier/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/src/main/java/kz/dossier/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/controller/AuthController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/controller/LogController.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/controller/LogController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/payload/request/LoginRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/payload/request/LoginRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/payload/request/SignupRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/payload/request/SignupRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/payload/response/JwtResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/payload/response/JwtResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/payload/response/MessageResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/payload/response/MessageResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/SessionTimeoutFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/SessionTimeoutFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/jwt/AuthEntryPointJwt.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/jwt/AuthEntryPointJwt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/jwt/AuthTokenFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/jwt/AuthTokenFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/jwt/JwtUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/jwt/JwtUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/models/ERole.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/models/ERole.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/models/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/models/Role.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/models/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/models/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/models/log.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/models/log.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/models/user_roles.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/models/user_roles.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/repository/LogRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/repository/LogRepo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/repository/RoleRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/repository/RoleRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/repository/UserRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/repository/UserRolesRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/repository/UserRolesRepo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/services/LogsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/services/LogsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/services/UserDetailsImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/services/UserDetailsImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/services/UserDetailsServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-common/target/classes/kz/dossier/security/services/UserDetailsServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/controller/DoseirController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/controller/DoseirController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/controller/UlDossierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/controller/UlDossierController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/FlPensionContrRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/FlPensionContrRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/MvRnOldRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/MvRnOldRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/MvTaxByBinRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/MvTaxByBinRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/RnService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/RnService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/TaxService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/TaxService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/FlContactsRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/FlContactsRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/MvUlRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/repositoryDossier/MvUlRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/ULService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/ULService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/controller/DoseirController.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/controller/DoseirController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/controller/RiskController.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/controller/RiskController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/controller/UlDossierController.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/controller/UlDossierController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/repositoryDossier/FlPensionContrRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/repositoryDossier/FlPensionContrRepo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/repositoryDossier/MvRnOldRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/repositoryDossier/MvRnOldRepo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/repositoryDossier/MvTaxByBinRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/repositoryDossier/MvTaxByBinRepo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/MyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/MyService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/RiskService.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/RiskService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/RnService.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/RnService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/TaxService.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/TaxService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/repositoryDossier/FlContactsRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/repositoryDossier/FlContactsRepo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/repositoryDossier/MvUlRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/repositoryDossier/MvUlRepo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/ULService.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/service/ULService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/tools/DocxGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/tools/DocxGenerator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/tools/PdfGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/tools/PdfGenerator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/tools/ULExportPDFService.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/tools/ULExportPDFService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/tools/UlDocxGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-main/target/classes/kz/dossier/tools/UlDocxGenerator.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -323,17 +286,6 @@
     <MESSAGE value="aadx" />
     <MESSAGE value="Pdf and Docx got ul are made" />
     <option name="LAST_COMMIT_MESSAGE" value="" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dossier-main/src/main/java/kz/dossier/service/ULService.java</url>
-          <line>562</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
